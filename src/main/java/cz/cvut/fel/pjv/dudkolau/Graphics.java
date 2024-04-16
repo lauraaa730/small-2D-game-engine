@@ -1,8 +1,9 @@
 package cz.cvut.fel.pjv.dudkolau;
 
-import cz.cvut.fel.pjv.Model.GameObject;
-import cz.cvut.fel.pjv.Model.Player;
-import cz.cvut.fel.pjv.Model.Level;
+
+import cz.cvut.fel.pjv.dudkolau.Model.GameObject;
+import cz.cvut.fel.pjv.dudkolau.Model.Level;
+import cz.cvut.fel.pjv.dudkolau.Model.Player;
 
 public class Graphics {
     public int renderLevel(Level level) { return 0; }
