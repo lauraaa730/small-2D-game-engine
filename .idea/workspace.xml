@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Directions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Directions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +96,30 @@
       <workItem from="1713714298087" duration="45000" />
       <workItem from="1713714370607" duration="25000" />
       <workItem from="1713714454188" duration="763000" />
-      <workItem from="1713879692002" duration="74000" />
+      <workItem from="1713879692002" duration="310000" />
+      <workItem from="1713880118682" duration="106000" />
+      <workItem from="1713880280116" duration="143000" />
+      <workItem from="1713880448731" duration="127000" />
+      <workItem from="1713880599663" duration="507000" />
+      <workItem from="1713881123548" duration="659000" />
+      <workItem from="1713881833281" duration="107000" />
+      <workItem from="1713881962617" duration="246000" />
+      <workItem from="1713882226644" duration="201000" />
+      <workItem from="1713882497763" duration="58000" />
+      <workItem from="1713882586678" duration="338000" />
+      <workItem from="1713882951872" duration="622000" />
+      <workItem from="1713883676442" duration="415000" />
+      <workItem from="1714032855000" duration="1000" />
+      <workItem from="1714032973355" duration="25000" />
+      <workItem from="1714034033248" duration="206000" />
+      <workItem from="1714034291895" duration="18000" />
+      <workItem from="1714034321124" duration="316000" />
+      <workItem from="1714035333095" duration="318000" />
+      <workItem from="1714035660503" duration="6000" />
+      <workItem from="1714035713456" duration="405000" />
+      <workItem from="1714036156917" duration="121000" />
+      <workItem from="1714036286930" duration="882000" />
+      <workItem from="1714037190138" duration="87000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -139,11 +169,30 @@
       <option name="project" value="LOCAL" />
       <updated>1713291770331</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="commit">
+      <option name="closed" value="true" />
+      <created>1713879803404</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713879803404</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />

@@ -8,6 +8,7 @@ public class Level {
     public List<InteractableObject> interactableObjects = new ArrayList<>();
     public List<BackgroundObject> backgroundObjects = new ArrayList<>();
     public List<Enemy> enemies = new ArrayList<>();
+    public List<GameObject> objectsInLevel = new ArrayList<>();
 
-    public boolean loadLevel(){return false;}
+    public boolean loadLevelFromJson(int levelType){return false;}
 }
