@@ -6,7 +6,7 @@ public interface Entity {
     public int getYCoord();
     public Directions getCurrDirection();
     public void setCurrDirection(Directions d);
-    public void move(Directions d, int w, int h);
+    public void move(Directions d, int w, int h, int tileDimension);
     public void attack(Directions d);
 
     public void setXCoord(int x);

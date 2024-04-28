@@ -12,7 +12,7 @@ public class Enemy extends InteractableObject implements Entity{
     }
 
     @Override
-    public void move(Directions d, int w, int h){
+    public void move(Directions d, int w, int h, int tileDimension){
     }
 
 

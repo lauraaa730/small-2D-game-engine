@@ -9,16 +9,16 @@ public class Player implements Entity {
     private Directions currDirection = Directions.NONE;
 
     @Override
-    public void move(Directions d, int w, int h){
+    public void move(Directions d, int w, int h, int tileDimension){
         currDirection = d;
 
-        if (currDirection==Directions.LEFT && xCoord*20>0) {
+        if (currDirection==Directions.LEFT && xCoord*tileDimension>0) {
             xCoord--;
-        } else if (currDirection==Directions.RIGHT && xCoord*20<w-100) {
+        } else if (currDirection==Directions.RIGHT && xCoord*tileDimension<w-100) {
             xCoord++;
-        } else if (currDirection==Directions.UP && yCoord*20>0) {
+        } else if (currDirection==Directions.UP && yCoord*tileDimension>0) {
             yCoord--;
-        } else if (currDirection==Directions.DOWN && yCoord*20<h-100) {
+        } else if (currDirection==Directions.DOWN && yCoord*tileDimension<h-100) {
             yCoord++;
         }
     }

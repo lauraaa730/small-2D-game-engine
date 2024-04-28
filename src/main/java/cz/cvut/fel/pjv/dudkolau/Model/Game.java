@@ -43,7 +43,7 @@ public class Game {
     }
 
     public void update() {
-        player.move(player.getCurrDirection(), Width, Height);
+        player.move(player.getCurrDirection(), Width, Height, tileDimension);
     }
 
     private boolean isThereObstacle(Directions d) {

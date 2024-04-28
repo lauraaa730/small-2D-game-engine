@@ -15,15 +15,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.animation.Transition;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application {
-    private Image playerImage =  new Image("playerImage.jpg");
-    private Image backgroundImage = new Image("background.jpg");
+    private Constants constants = new Constants();
+    private Graphics graphics = new Graphics();
+    //private Image playerImage =  new Image("playerImage.png");
+
+    private Image backgroundImage = new Image("background.png");
     private Player player = new Player();
-    private Game game = new Game(player, 600,800);
+    private Game game = new Game(player, constants.height,constants.width);
     @Override
     public void start(Stage stage) throws Exception {
-        game.setTileDimension(20);
+        game.setTileDimension(constants.tileDimension);
         Canvas canvas = new Canvas(game.getWidth(), game.getHeight());
         Pane pane = new StackPane(canvas);
         Scene scene = new Scene(pane, game.getWidth(), game.getHeight());
@@ -67,6 +75,7 @@ public class Main extends Application {
                 if ((l - lastCall) >= 50_000_000) {
                     game.update();
                     render(canvas);
+                    graphics.animate();
                     lastCall = l;
                 }
             }
@@ -81,7 +90,7 @@ public class Main extends Application {
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
-        gc.drawImage(playerImage, player.getXCoord() * game.getTileDimension(),
+        gc.drawImage(graphics.playerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
                 player.getYCoord() * game.getTileDimension());
     }
 
