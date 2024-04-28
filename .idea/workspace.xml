@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added first basic gui, only can move the characte">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/SpriteAnimation.java" afterDir="false" />
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="added animation - walk cycle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/playerImage.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animRIGHT.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT6.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +122,7 @@
       <workItem from="1714037190138" duration="1054000" />
       <workItem from="1714041703297" duration="111000" />
       <workItem from="1714132206231" duration="4540000" />
-      <workItem from="1714319915729" duration="1900000" />
+      <workItem from="1714319915729" duration="2977000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -189,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714037326806</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added animation - walk cycle">
+      <option name="closed" value="true" />
+      <created>1714321915721</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714321915721</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +217,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="commit" />
     <MESSAGE value="Added first basic gui, only can move the characte" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added first basic gui, only can move the characte" />
+    <MESSAGE value="added animation - walk cycle" />
+    <option name="LAST_COMMIT_MESSAGE" value="added animation - walk cycle" />
   </component>
 </project>

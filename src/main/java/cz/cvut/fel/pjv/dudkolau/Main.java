@@ -29,6 +29,8 @@ public class Main extends Application {
     private Image backgroundImage = new Image("background.png");
     private Player player = new Player();
     private Game game = new Game(player, constants.height,constants.width);
+
+    private Image[] currPlayerImages = graphics.animSTAND_RIGHT;
     @Override
     public void start(Stage stage) throws Exception {
         game.setTileDimension(constants.tileDimension);
@@ -64,6 +66,9 @@ public class Main extends Application {
                         keyEvent.getCode() == KeyCode.RIGHT ||keyEvent.getCode() == KeyCode.UP ||
                         keyEvent.getCode() == KeyCode.DOWN) {
                     player.setCurrDirection(Directions.NONE);
+                    currPlayerImages = graphics.animSTAND_RIGHT;
+                } else {
+                    currPlayerImages = graphics.animRIGHT;
                 }
             }
         });
@@ -74,8 +79,9 @@ public class Main extends Application {
             public void handle(long l) {
                 if ((l - lastCall) >= 50_000_000) {
                     game.update();
+                    setCurrPlayerImages();
                     render(canvas);
-                    graphics.animate();
+                    animate();
                     lastCall = l;
                 }
             }
@@ -87,11 +93,22 @@ public class Main extends Application {
 
     }
 
+    private void setCurrPlayerImages() {
+        if (player.getCurrDirection()==Directions.NONE) {
+            currPlayerImages = graphics.animSTAND_RIGHT;
+        } else if (player.getCurrDirection()==Directions.RIGHT) {
+            currPlayerImages = graphics.animRIGHT;
+        }
+    }
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
-        gc.drawImage(graphics.playerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
+        gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
                 player.getYCoord() * game.getTileDimension());
+    }
+
+    public void animate() {
+        graphics.imageIndex = (graphics.imageIndex + 1) % currPlayerImages.length;
     }
 
     public static void main(String[] args) { launch(args); }
