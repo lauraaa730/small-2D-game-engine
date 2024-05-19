@@ -14,5 +14,15 @@ public class InteractableObject implements GameObject {
         return yCoord;
     }
 
+    @Override
+    public void setXCoord(int x) {
+
+    }
+
+    @Override
+    public void setYCoord(int y) {
+
+    }
+
     public void interactAction(){}
 }

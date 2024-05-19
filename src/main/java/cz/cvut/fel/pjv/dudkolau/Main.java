@@ -27,12 +27,15 @@ public class Main extends Application {
     //private Image playerImage =  new Image("playerImage.png");
 
     private Image backgroundImage = new Image("background.png");
+    private Image bushImage = new Image ("bush.png");
     private Player player = new Player();
     private Game game = new Game(player, constants.height,constants.width);
 
     private Image[] currPlayerImages = graphics.animSTAND_RIGHT;
+    private  Directions lastDirection = Directions.NONE;
     @Override
     public void start(Stage stage) throws Exception {
+
         game.setTileDimension(constants.tileDimension);
         Canvas canvas = new Canvas(game.getWidth(), game.getHeight());
         Pane pane = new StackPane(canvas);
@@ -96,8 +99,17 @@ public class Main extends Application {
     private void setCurrPlayerImages() {
         if (player.getCurrDirection()==Directions.NONE) {
             currPlayerImages = graphics.animSTAND_RIGHT;
+            if (lastDirection!=Directions.NONE) {
+                graphics.imageIndex = 0;
+            }
+            lastDirection = Directions.NONE;
+
         } else if (player.getCurrDirection()==Directions.RIGHT) {
             currPlayerImages = graphics.animRIGHT;
+            if (lastDirection!=Directions.RIGHT) {
+                graphics.imageIndex = 0;
+            }
+            lastDirection = Directions.RIGHT;
         }
     }
     private void render(Canvas canvas) {
@@ -105,6 +117,8 @@ public class Main extends Application {
         gc.drawImage(backgroundImage, 0, 0);
         gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
                 player.getYCoord() * game.getTileDimension());
+        //for (int i = 0; i<game.getGameObjects().length; i++) {
+        gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(), game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
     }
 
     public void animate() {

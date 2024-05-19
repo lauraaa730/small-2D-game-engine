@@ -19,4 +19,14 @@ public class BackgroundObject implements GameObject{
     public int getYCoord() {
         return yCoord;
     }
+
+    @Override
+    public void setXCoord(int x) {
+        this.xCoord = x;
+    }
+
+    @Override
+    public void setYCoord(int y) {
+        this.yCoord = y;
+    }
 }
