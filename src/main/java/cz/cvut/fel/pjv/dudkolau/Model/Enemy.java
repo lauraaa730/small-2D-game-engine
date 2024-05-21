@@ -15,6 +15,10 @@ public class Enemy extends InteractableObject implements Entity{
     public void move(Directions d, int w, int h, int tileDimension){
     }
 
+    @Override
+    public void setHitBox() {
+
+    }
 
     @Override
     public void attack(Directions d){}

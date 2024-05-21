@@ -1,4 +1,6 @@
 konzultace:
-    - jak upravit rychlost? Aby se postavicka hybala rychleji ale ne teleportovala
-    -v Game, mela bych si drzet pole levelu? a nebo vzdycky jen jeden level najednou?
-    - je lepsi zpusob jak implementovat isThereObstacle?
+    - jak upravit rychlost? Aby se postavicka hybala rychleji ale ne teleportovala - snizit timer a pridat counter pro animation
+    -v Game, mela bych si drzet pole levelu? a nebo vzdycky jen jeden level najednou? - pole levelu
+    - je lepsi zpusob jak implementovat isThereObstacle? - ne, resp hitboxy
+
+    -

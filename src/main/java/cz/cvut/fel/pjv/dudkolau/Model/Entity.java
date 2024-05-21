@@ -12,4 +12,7 @@ public interface Entity {
     public void setXCoord(int x);
     public void setYCoord(int y);
 
+    public HitBox getHitBox();
+    public void setHitBox();
+
 }
