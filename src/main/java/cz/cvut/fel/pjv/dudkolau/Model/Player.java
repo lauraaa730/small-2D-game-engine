@@ -5,9 +5,15 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 public class Player implements Entity {
     private int health;
     private int xCoord;
+
     private int yCoord;
     private int height;
     private int width;
+
+    //for JSON
+    public Player() {
+    }
+
     private HitBox hitBox = new HitBox();
 
     public int getHeight() {
@@ -20,6 +26,26 @@ public class Player implements Entity {
 
     public int getWidth() {
         return width;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
+    }
+
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
     }
 
     public void setWidth(int width) {
@@ -69,11 +95,6 @@ public class Player implements Entity {
     @Override
     public int getHealth(){ return health; }
 
-    @Override
-    public int getXCoord() { return xCoord; }
-
-    @Override
-    public int getYCoord() { return yCoord; }
 
     public Directions getCurrDirection() {
         return currDirection;
@@ -84,13 +105,4 @@ public class Player implements Entity {
         currDirection = d;
     }
 
-    @Override
-    public void setXCoord(int x) {
-        xCoord = x;
-    }
-
-    @Override
-    public void setYCoord(int y) {
-        yCoord = y;
-    }
 }

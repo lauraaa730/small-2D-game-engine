@@ -140,14 +140,14 @@ public class Main extends Application {
         gc.drawImage(backgroundImage, 0, 0);
 
         //concept: player shows behind or infront of bushes
-        if (player.getYCoord()>game.getGameObjects().get(0).getYCoord()+10) {
+        if (player.getyCoord()>game.getGameObjects().get(0).getYCoord()+10) {
             gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(),
                     game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
-            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
-                    player.getYCoord() * game.getTileDimension());
+            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
+                    player.getyCoord() * game.getTileDimension());
         } else {
-            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
-                    player.getYCoord() * game.getTileDimension());
+            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
+                    player.getyCoord() * game.getTileDimension());
             //for (int i = 0; i<game.getGameObjects().length; i++) {
             gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(),
                     game.getGameObjects().get(0).getYCoord()*game.getTileDimension());

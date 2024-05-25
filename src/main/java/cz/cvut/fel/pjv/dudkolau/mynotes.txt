@@ -4,3 +4,9 @@ konzultace:
     - je lepsi zpusob jak implementovat isThereObstacle? - ne, resp hitboxy
 
     -TODO pridat jeden json file na jmena spritu okolnich objektu a nebo taky ne xd
+
+
+  otazky:
+    -maji byt konfiguracni soubory herniho enginu nezavisle na save game? to jako jestli
+    current stavem vsceh levelu muzu prepisovat konfiguracni soubory, a nebo jestli ty maji poskytovat jen info
+    o hre na zacatecnim stavu, a hra samotna je nema jak menit?

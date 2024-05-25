@@ -1,5 +1,9 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
+import java.io.File;
+import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +55,8 @@ public class Game {
 
     public Game(Player player, int h, int w) {
         this.player = player;
-        player.setXCoord(0);
-        player.setYCoord(0);
+        player.setxCoord(0);
+        player.setyCoord(0);
         player.setWidth(playerWidth);
         player.setHeight(playerHeight);
         player.setHitBox(playerXOffset, playerYOffset);
@@ -67,7 +71,29 @@ public class Game {
         bush.setHeight(151);
         bush.setHitBox(bushXOffset, bushYOffset);
         currLevel.objectsInLevel.add(bush);
-        currLevel.loadLevelFromJson(1);
+        currLevel.setEnemiesNum(0);
+        currLevel.setLevelType(1);
+        currLevel.setEnemies(new ArrayList<>());
+        currLevel.setObjectsInLevel(currLevel.getObjectsInLevel());
+        currLevel.setBackgroundObjects(new ArrayList<>());
+        currLevel.setInteractableObjects(new ArrayList<>());
+        currLevel.setBackgroundObjectsNum(0);
+        currLevel.setInteractableObjectsNum(0);
+
+
+        //TODO
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(
+                    new File("level.json"), currLevel
+            );
+            Level levelToRead = objectMapper.readValue(
+                    new File("level.json"), Level.class
+            );
+            System.out.println(levelToRead);
+        } catch (IOException ex) {
+            System.out.println("Something went wrong with json");
+        }
     }
 
     public void update() {

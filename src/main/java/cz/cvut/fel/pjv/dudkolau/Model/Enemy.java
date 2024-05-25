@@ -27,10 +27,10 @@ public class Enemy extends InteractableObject implements Entity{
     public int getHealth(){ return health; }
 
     @Override
-    public int getXCoord() { return xCoord; }
+    public int getxCoord() { return xCoord; }
 
     @Override
-    public int getYCoord() { return yCoord; }
+    public int getyCoord() { return yCoord; }
 
     @Override
     public Directions getCurrDirection() {
@@ -42,12 +42,12 @@ public class Enemy extends InteractableObject implements Entity{
     }
 
     @Override
-    public void setXCoord(int x) {
+    public void setxCoord(int x) {
 
     }
 
     @Override
-    public void setYCoord(int y) {
+    public void setyCoord(int y) {
 
     }
 }

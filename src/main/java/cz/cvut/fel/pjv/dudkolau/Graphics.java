@@ -26,6 +26,27 @@ public class Graphics {
             new Image("animSTAND_RIGHT-5.png"),
             new Image("animSTAND_RIGHT-6.png"),
     };
+    public Image[] animSTAND_UP = {
+            new Image("animSTAND_UP-1.png"),
+            new Image("animSTAND_UP-2.png"),
+            new Image("animSTAND_UP-3.png"),
+            new Image("animSTAND_UP-4.png"),
+            new Image("animSTAND_UP-5.png"),
+            new Image("animSTAND_UP-6.png"),
+            new Image("animSTAND_UP-7.png"),
+            new Image("animSTAND_UP-8.png"),
+    };
+    /*public Image[] animSTAND_DOWN = {
+            new Image("animSTAND_DOWN-1.png"),
+            new Image("animSTAND_DOWN-2.png"),
+            new Image("animSTAND_DOWN-3.png"),
+            new Image("animSTAND_DOWN-4.png"),
+            new Image("animSTAND_DOWN-5.png"),
+            new Image("animSTAND_DOWN-6.png"),
+            new Image("animSTAND_DOWN-7.png"),
+            new Image("animSTAND_DOWN-8.png"),
+    };*/
+
 
     public int imageIndex = 0;
 
