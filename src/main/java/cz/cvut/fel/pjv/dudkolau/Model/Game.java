@@ -13,7 +13,15 @@ public class Game {
     private int Width;
     private int Height;
     private int tileDimension;
+    private boolean isPaused;
 
+    public boolean getIsPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
 
     public void setTileDimension(int tileDimension) {
         this.tileDimension = tileDimension;

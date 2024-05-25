@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Level {
     private int levelType;
+    private int backgroundObjectsNum;
+    private int interactableObjectsNum;
+    private int enemiesNum;
     public List<InteractableObject> interactableObjects = new ArrayList<>();
     public List<BackgroundObject> backgroundObjects = new ArrayList<>();
     public List<Enemy> enemies = new ArrayList<>();

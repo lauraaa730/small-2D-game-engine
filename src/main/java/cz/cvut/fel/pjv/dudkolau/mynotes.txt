@@ -3,4 +3,4 @@ konzultace:
     -v Game, mela bych si drzet pole levelu? a nebo vzdycky jen jeden level najednou? - pole levelu
     - je lepsi zpusob jak implementovat isThereObstacle? - ne, resp hitboxy
 
-    -
+    -TODO pridat jeden json file na jmena spritu okolnich objektu a nebo taky ne xd

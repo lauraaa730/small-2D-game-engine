@@ -19,8 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-import static cz.cvut.fel.pjv.dudkolau.Constants.playerXOffset;
-import static cz.cvut.fel.pjv.dudkolau.Constants.playerYOffset;
+import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
 public class Main extends Application {
     private Constants constants = new Constants();
@@ -29,6 +28,7 @@ public class Main extends Application {
 
     private Image backgroundImage = new Image("background.png");
     private Image bushImage = new Image ("bush.png");
+    private Image pausedImage = new Image("paused.png");
     private Player player = new Player();
     private Game game = new Game(player, constants.height,constants.width);
 
@@ -38,6 +38,7 @@ public class Main extends Application {
     public int animationCounter = 0;
 
     private boolean showHitBoxes = false;
+    private boolean isPaused = false;
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -54,6 +55,9 @@ public class Main extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                    if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                        isPaused = !isPaused;
+                    }
                     if (keyEvent.getCode() == KeyCode.LEFT) {
                         player.setCurrDirection(Directions.LEFT);
                     } else if (keyEvent.getCode() == KeyCode.RIGHT) {
@@ -85,14 +89,20 @@ public class Main extends Application {
             @Override
             public void handle(long l) {
                 if ((l - lastCall) >= 30_000_000) {
-                    game.update();
-                    setCurrPlayerImages();
-                    render(canvas);
-                    if (animationCounter%3==0) {
-                        animate();
+                    if (!isPaused) {
+                        game.update();
+                        setCurrPlayerImages();
+                        render(canvas);
+                        if (animationCounter%3==0) {
+                            animate();
+                        }
+                        animationCounter++;
+                    } else {
+                        GraphicsContext gc = canvas.getGraphicsContext2D();
+                        gc.drawImage(pausedImage, 300,200);
                     }
+
                     lastCall = l;
-                    animationCounter++;
                     if (animationCounter>= 2147483640) { //so the counter doesnt overflow
                         animationCounter=0;
                     }
@@ -123,6 +133,8 @@ public class Main extends Application {
         }
         //add these for all directions - rn causing problem when going left - index out of bound
     }
+
+
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
