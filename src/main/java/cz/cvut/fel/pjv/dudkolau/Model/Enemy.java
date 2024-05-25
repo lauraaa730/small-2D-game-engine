@@ -16,7 +16,7 @@ public class Enemy extends InteractableObject implements Entity{
     }
 
     @Override
-    public void setHitBox() {
+    public void setHitBox(int xOffset, int yOffset) {
 
     }
 

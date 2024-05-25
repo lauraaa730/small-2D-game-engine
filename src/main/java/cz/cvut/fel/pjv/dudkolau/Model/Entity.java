@@ -13,6 +13,6 @@ public interface Entity {
     public void setYCoord(int y);
 
     public HitBox getHitBox();
-    public void setHitBox();
+    public void setHitBox(int xOffset, int yOffset);
 
 }

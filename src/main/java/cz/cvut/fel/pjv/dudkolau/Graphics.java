@@ -28,11 +28,7 @@ public class Graphics {
     };
 
     public int imageIndex = 0;
-    public int renderLevel(Level level) { return 0; }
 
-    public int renderObject(GameObject gameObject) { return 0;}
-
-    public int renderPlayer(Player player) { return 0;}
 
 
 }

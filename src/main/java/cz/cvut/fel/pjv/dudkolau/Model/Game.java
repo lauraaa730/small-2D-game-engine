@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.willCollideWithObject;
 
 public class Game {
@@ -42,7 +43,11 @@ public class Game {
 
     public Game(Player player, int h, int w) {
         this.player = player;
-        this.player.setHitBox();
+        player.setXCoord(0);
+        player.setYCoord(0);
+        player.setWidth(playerWidth);
+        player.setHeight(playerHeight);
+        player.setHitBox(playerXOffset, playerYOffset);
         Height = h;
         Width = w;
         this.currLevel = new Level();
@@ -52,17 +57,15 @@ public class Game {
         bush.setYCoord(50);
         bush.setWidth(228);
         bush.setHeight(151);
-        bush.setHitBox();
+        bush.setHitBox(bushXOffset, bushYOffset);
         currLevel.objectsInLevel.add(bush);
         currLevel.loadLevelFromJson(1);
     }
 
     public void update() {
-        //TODO fix this
         if (!willCollideWithObject(player, this.currLevel.objectsInLevel.getFirst() , player.getCurrDirection())) {
             player.move(player.getCurrDirection(), Width, Height, tileDimension);
         }
-
 
         /*//if collision happens, jump back**********
         if (checkCollisionWithObject(player,this.currLevel.objectsInLevel.getFirst() , player.getCurrDirection())) {

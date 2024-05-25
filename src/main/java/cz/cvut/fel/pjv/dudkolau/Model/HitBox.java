@@ -15,12 +15,12 @@ public class HitBox {
         return this.rectangle;
     }
 
-    public void setRectangle(int x, int y, int width, int height) {
+    public void setRectangle(int x, int y, int width, int height, int xOffset, int yOffset) {
         this.rectangle = new Rectangle();
-        this.rectangle.setY(y);
-        this.rectangle.setX(x);
-        this.rectangle.setWidth(width);
-        this.rectangle.setHeight(height);
+        this.rectangle.setY(y+yOffset);
+        this.rectangle.setX(x+xOffset);
+        this.rectangle.setWidth(width-2*xOffset);
+        this.rectangle.setHeight(height-2*yOffset);
         this.rectangle.setFill(Color.TRANSPARENT);
         this.rectangle.setStroke(Color.RED); //maybe add to constants
         this.rectangle.setStrokeWidth(1);
@@ -28,21 +28,14 @@ public class HitBox {
 
 
     public void changexCoord(int x) {
-        this.rectangle.setX(x*tileDimension);
+        this.rectangle.setX(this.rectangle.getX()+x*tileDimension);
 
     }
 
     public void changeYCoord(int y) {
-        this.rectangle.setY(y*tileDimension);
+        this.rectangle.setY(this.rectangle.getY()+y*tileDimension);
     }
 
-    private boolean willCollide(HitBox a, HitBox b) {
-        /*if (a.getCoords()[1]>= b.getCoords()[0] && a.getCoords()[3]>=b.getCoords()[2] &&
-        a.getCoords()[0]<= b.getCoords()[1] && a.getCoords()[2]<=b.getCoords()[3]) {
-            return true;
-        }*/
-        return false;
-    }
 
     public static boolean willCollideWithObject(Entity entity, GameObject object, Directions d) {
         testR1.setX(entity.getHitBox().getRectangle().getX());

@@ -8,5 +8,5 @@ public interface GameObject {
     public void setYCoord(int y);
 
     public HitBox getHitBox();
-    public void setHitBox();
+    public void setHitBox(int xOffset, int yOffset);
 }

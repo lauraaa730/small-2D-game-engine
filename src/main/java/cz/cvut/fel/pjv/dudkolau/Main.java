@@ -19,6 +19,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+import static cz.cvut.fel.pjv.dudkolau.Constants.playerXOffset;
+import static cz.cvut.fel.pjv.dudkolau.Constants.playerYOffset;
+
 public class Main extends Application {
     private Constants constants = new Constants();
     private Graphics graphics = new Graphics();
@@ -34,7 +37,7 @@ public class Main extends Application {
 
     public int animationCounter = 0;
 
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -46,16 +49,7 @@ public class Main extends Application {
         stage.setTitle("Beyond the Forest");
         stage.setResizable(true);
 
-        player.setXCoord(0);
-        player.setYCoord(0);
-        player.setWidth(constants.playerWidth);
-        player.setHeight(constants.playerHeight);
 
-        if (showHitBoxes) {
-            //https://stackoverflow.com/questions/40729967/drawing-shapes-on-javafx-canvas
-            player.setHitBox();
-
-        }
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -132,10 +126,21 @@ public class Main extends Application {
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
-        gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
-                player.getYCoord() * game.getTileDimension());
-        //for (int i = 0; i<game.getGameObjects().length; i++) {
-        gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(), game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
+
+        //concept: player shows behind or infront of bushes
+        if (player.getYCoord()>game.getGameObjects().get(0).getYCoord()+10) {
+            gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(),
+                    game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
+            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
+                    player.getYCoord() * game.getTileDimension());
+        } else {
+            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getXCoord() * game.getTileDimension(),
+                    player.getYCoord() * game.getTileDimension());
+            //for (int i = 0; i<game.getGameObjects().length; i++) {
+            gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(),
+                    game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
+        }
+
 
         if (showHitBoxes) {
             drawRectangle(gc, player.getHitBox().getRectangle());

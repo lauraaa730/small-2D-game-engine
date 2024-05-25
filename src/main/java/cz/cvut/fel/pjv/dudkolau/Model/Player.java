@@ -1,6 +1,6 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
-import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
+import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
 public class Player implements Entity {
     private int health;
@@ -32,10 +32,10 @@ public class Player implements Entity {
     }
 
     @Override
-    public void setHitBox() {
+    public void setHitBox(int xOffset, int yOffset) {
         //int hitBoxCoords[] =  {xCoord*tileDimension-width/2, xCoord*tileDimension+width/2, yCoord*tileDimension-height/2, yCoord*tileDimension+height/2};
         //System.out.printf("hitBoxCoords: %d %d %d %d\n", hitBoxCoords[0], hitBoxCoords[1], hitBoxCoords[2], hitBoxCoords[3]);
-        this.hitBox.setRectangle(xCoord*tileDimension, yCoord*tileDimension, this.width, this.height);
+        this.hitBox.setRectangle(xCoord*tileDimension, yCoord*tileDimension, this.width, this.height, xOffset, yOffset);
     }
 
     private int piecesCollected[];
@@ -48,16 +48,16 @@ public class Player implements Entity {
 
         if (currDirection==Directions.LEFT && xCoord*tileDimension>0) {
             xCoord--;
-            this.hitBox.changexCoord(xCoord);
+            this.hitBox.changexCoord(-1);
         } else if (currDirection==Directions.RIGHT && xCoord*tileDimension<w-100) {
             xCoord++;
-            this.hitBox.changexCoord(xCoord);
+            this.hitBox.changexCoord(1);
         } else if (currDirection==Directions.UP && yCoord*tileDimension>0) {
             yCoord--;
-            this.hitBox.changeYCoord(yCoord);
+            this.hitBox.changeYCoord(-1);
         } else if (currDirection==Directions.DOWN && yCoord*tileDimension<h-100) {
             yCoord++;
-            this.hitBox.changeYCoord(yCoord);
+            this.hitBox.changeYCoord(1);
         }
     }
 
