@@ -77,9 +77,6 @@ public class Main extends Application {
                         keyEvent.getCode() == KeyCode.RIGHT ||keyEvent.getCode() == KeyCode.UP ||
                         keyEvent.getCode() == KeyCode.DOWN) {
                     player.setCurrDirection(Directions.NONE);
-                    currPlayerImages = graphics.animSTAND_RIGHT;
-                } else {
-                    currPlayerImages = graphics.animRIGHT;
                 }
             }
         });
@@ -88,7 +85,7 @@ public class Main extends Application {
             long lastCall;
             @Override
             public void handle(long l) {
-                if ((l - lastCall) >= 30_000_000) {
+                if ((l - lastCall) >= 25_000_000) {
                     if (!isPaused) {
                         game.update();
                         setCurrPlayerImages();
@@ -117,21 +114,44 @@ public class Main extends Application {
     }
 
     private void setCurrPlayerImages() {
-        if (player.getCurrDirection()==Directions.NONE) {
+        if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.RIGHT) {
             currPlayerImages = graphics.animSTAND_RIGHT;
-            if (lastDirection!=Directions.NONE) {
-                graphics.imageIndex = 0;
-            }
+            lastDirection = Directions.NONE;
+
+        } else if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.LEFT) {
+            currPlayerImages = graphics.animSTAND_LEFT;
+            lastDirection = Directions.NONE;
+
+        }  else if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.UP) {
+            currPlayerImages = graphics.animSTAND_UP;
+            lastDirection = Directions.NONE;
+
+        }  else if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.DOWN) {
+            currPlayerImages = graphics.animSTAND_DOWN;
             lastDirection = Directions.NONE;
 
         } else if (player.getCurrDirection()==Directions.RIGHT) {
             currPlayerImages = graphics.animRIGHT;
-            if (lastDirection!=Directions.RIGHT) {
+            /*if (lastDirection!=Directions.RIGHT) {
                 graphics.imageIndex = 0;
-            }
+            }*/
             lastDirection = Directions.RIGHT;
+        } else if (player.getCurrDirection()==Directions.UP) {
+            currPlayerImages = graphics.animSTAND_UP;
+            /*if (lastDirection!=Directions.UP) {
+                graphics.imageIndex = 0;
+            }*/
+            lastDirection = Directions.UP;
+        } else if (player.getCurrDirection()==Directions.DOWN) {
+            currPlayerImages = graphics.animSTAND_DOWN;
+            /*if (lastDirection!=Directions.DOWN) {
+                graphics.imageIndex = 0;
+            }*/
+            lastDirection = Directions.DOWN;
+        } else if (player.getCurrDirection()==Directions.LEFT) {
+            currPlayerImages = graphics.animLEFT;
+            lastDirection = Directions.LEFT;
         }
-        //add these for all directions - rn causing problem when going left - index out of bound
     }
 
 

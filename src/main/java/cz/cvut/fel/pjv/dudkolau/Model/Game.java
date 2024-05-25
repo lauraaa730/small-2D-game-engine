@@ -74,24 +74,28 @@ public class Game {
         currLevel.setEnemiesNum(0);
         currLevel.setLevelType(1);
         currLevel.setEnemies(new ArrayList<>());
-        currLevel.setObjectsInLevel(currLevel.getObjectsInLevel());
         currLevel.setBackgroundObjects(new ArrayList<>());
         currLevel.setInteractableObjects(new ArrayList<>());
         currLevel.setBackgroundObjectsNum(0);
         currLevel.setInteractableObjectsNum(0);
+
+        GameData gameData = new GameData();
+        gameData.setTotalLevelNum(4);
 
 
         //TODO
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writeValue(
-                    new File("level.json"), currLevel
+                    new File("level.json"), gameData
             );
-            Level levelToRead = objectMapper.readValue(
-                    new File("level.json"), Level.class
+            GameData levelToRead = objectMapper.readValue(
+                    new File("level.json"), GameData.class
             );
             System.out.println(levelToRead);
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
             System.out.println("Something went wrong with json");
         }
     }

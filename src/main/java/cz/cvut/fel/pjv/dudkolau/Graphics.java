@@ -25,6 +25,8 @@ public class Graphics {
             new Image("animSTAND_RIGHT-4.png"),
             new Image("animSTAND_RIGHT-5.png"),
             new Image("animSTAND_RIGHT-6.png"),
+            new Image("animSTAND_RIGHT-7.png"),
+            new Image("animSTAND_RIGHT-8.png"),
     };
     public Image[] animSTAND_UP = {
             new Image("animSTAND_UP-1.png"),
@@ -36,7 +38,7 @@ public class Graphics {
             new Image("animSTAND_UP-7.png"),
             new Image("animSTAND_UP-8.png"),
     };
-    /*public Image[] animSTAND_DOWN = {
+    public Image[] animSTAND_DOWN = {
             new Image("animSTAND_DOWN-1.png"),
             new Image("animSTAND_DOWN-2.png"),
             new Image("animSTAND_DOWN-3.png"),
@@ -45,7 +47,28 @@ public class Graphics {
             new Image("animSTAND_DOWN-6.png"),
             new Image("animSTAND_DOWN-7.png"),
             new Image("animSTAND_DOWN-8.png"),
-    };*/
+    };
+
+    public Image[] animSTAND_LEFT = {
+            new Image("animSTAND_LEFT-1.png"),
+            new Image("animSTAND_LEFT-2.png"),
+            new Image("animSTAND_LEFT-3.png"),
+            new Image("animSTAND_LEFT-4.png"),
+            new Image("animSTAND_LEFT-5.png"),
+            new Image("animSTAND_LEFT-6.png"),
+            new Image("animSTAND_LEFT-7.png"),
+            new Image("animSTAND_LEFT-8.png"),
+    };
+    public Image[] animLEFT = {
+            new Image("animLEFT-1.png"),
+            new Image("animLEFT-2.png"),
+            new Image("animLEFT-3.png"),
+            new Image("animLEFT-4.png"),
+            new Image("animLEFT-5.png"),
+            new Image("animLEFT-6.png"),
+            new Image("animLEFT-7.png"),
+            new Image("animLEFT-8.png"),
+    };
 
 
     public int imageIndex = 0;

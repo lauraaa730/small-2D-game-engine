@@ -7,7 +7,17 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 * puzzles completed etc..
 */
 public class GameData {
-    public int saveGameToFile() {return 0;}
-    public int loadGameFromFile() { return 0;}
+    private int totalLevelNum;
 
+    public GameData() {
+    }
+
+
+    public int getTotalLevelNum() {
+        return totalLevelNum;
+    }
+
+    public void setTotalLevelNum(int totalLevelNum) {
+        this.totalLevelNum = totalLevelNum;
+    }
 }

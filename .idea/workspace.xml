@@ -4,22 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added pausing.">
-      <change afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/saves/game-world-info.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="added objectmapper, added more animations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/unittesty.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/unittesty.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/animSTAND_RIGHT-6.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +26,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="package.json" />
+        <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -145,7 +143,13 @@
       <workItem from="1716662310670" duration="1342000" />
       <workItem from="1716664234384" duration="1419000" />
       <workItem from="1716665667315" duration="758000" />
-      <workItem from="1716666458730" duration="159000" />
+      <workItem from="1716666458730" duration="2504000" />
+      <workItem from="1716669052425" duration="59000" />
+      <workItem from="1716669251204" duration="153000" />
+      <workItem from="1716669451663" duration="103000" />
+      <workItem from="1716669590856" duration="13000" />
+      <workItem from="1716669612773" duration="81000" />
+      <workItem from="1716669727256" duration="2115000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -267,7 +271,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716661161424</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added objectmapper, added more animations">
+      <option name="closed" value="true" />
+      <created>1716666644062</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1716666644063</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,6 +306,7 @@
     <MESSAGE value="Fixed hitboxes, if showHitboxes == true, the hitboxes of every object is now shown, even when moving. Added collision check with objects when player moves." />
     <MESSAGE value="Added 3D effect when player stands behind or infront of bush. Changed some hitbox methods." />
     <MESSAGE value="Added pausing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pausing." />
+    <MESSAGE value="added objectmapper, added more animations" />
+    <option name="LAST_COMMIT_MESSAGE" value="added objectmapper, added more animations" />
   </component>
 </project>

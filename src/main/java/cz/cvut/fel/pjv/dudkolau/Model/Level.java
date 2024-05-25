@@ -8,6 +8,8 @@ public class Level {
     private int backgroundObjectsNum;
     private int interactableObjectsNum;
     private int enemiesNum;
+    public Level() {
+    }
 
     public int getLevelType() {
         return levelType;
@@ -73,13 +75,9 @@ public class Level {
         this.objectsInLevel = objectsInLevel;
     }
 
-    public Level() {
-    }
-
     public List<InteractableObject> interactableObjects = new ArrayList<>();
     public List<BackgroundObject> backgroundObjects = new ArrayList<>();
     public List<Enemy> enemies = new ArrayList<>();
     public List<GameObject> objectsInLevel = new ArrayList<>();
 
-    public boolean loadLevelFromJson(int levelType){return false;}
 }

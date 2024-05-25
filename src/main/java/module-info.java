@@ -12,4 +12,5 @@ module cz.cvut.fel.pjv.dudkolau {
 
     opens cz.cvut.fel.pjv.dudkolau to javafx.fxml;
     exports cz.cvut.fel.pjv.dudkolau;
+    exports cz.cvut.fel.pjv.dudkolau.Model;
 }
