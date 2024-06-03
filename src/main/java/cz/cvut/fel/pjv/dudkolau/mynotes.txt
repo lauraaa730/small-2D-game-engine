@@ -10,3 +10,4 @@ konzultace:
     -maji byt konfiguracni soubory herniho enginu nezavisle na save game? to jako jestli
     current stavem vsceh levelu muzu prepisovat konfiguracni soubory, a nebo jestli ty maji poskytovat jen info
     o hre na zacatecnim stavu, a hra samotna je nema jak menit?
+    - je v pohode ze soucasti modelu jsou napr nazvy obrazku/spritu? Neni uz to GUI?

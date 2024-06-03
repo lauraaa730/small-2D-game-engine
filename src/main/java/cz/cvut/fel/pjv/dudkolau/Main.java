@@ -37,7 +37,7 @@ public class Main extends Application {
 
     public int animationCounter = 0;
 
-    private boolean showHitBoxes = false;
+    private boolean showHitBoxes = true;
     private boolean isPaused = false;
     @Override
     public void start(Stage stage) throws Exception {
@@ -160,17 +160,17 @@ public class Main extends Application {
         gc.drawImage(backgroundImage, 0, 0);
 
         //concept: player shows behind or infront of bushes
-        if (player.getyCoord()>game.getGameObjects().get(0).getYCoord()+10) {
-            gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(),
-                    game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
+        if (player.getyCoord()>game.getGameObjects().get(0).getyCoord()+10) {
+            gc.drawImage(bushImage, game.getGameObjects().get(0).getxCoord()*game.getTileDimension(),
+                    game.getGameObjects().get(0).getyCoord()*game.getTileDimension());
             gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
                     player.getyCoord() * game.getTileDimension());
         } else {
             gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
                     player.getyCoord() * game.getTileDimension());
             //for (int i = 0; i<game.getGameObjects().length; i++) {
-            gc.drawImage(bushImage, game.getGameObjects().get(0).getXCoord()*game.getTileDimension(),
-                    game.getGameObjects().get(0).getYCoord()*game.getTileDimension());
+            gc.drawImage(bushImage, game.getGameObjects().get(0).getxCoord()*game.getTileDimension(),
+                    game.getGameObjects().get(0).getyCoord()*game.getTileDimension());
         }
 
 

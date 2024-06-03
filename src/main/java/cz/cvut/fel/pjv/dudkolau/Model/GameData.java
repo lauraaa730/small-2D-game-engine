@@ -1,5 +1,8 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 * This will save current game data
 * to a json file.
@@ -8,6 +11,7 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 */
 public class GameData {
     private int totalLevelNum;
+    private List<Level> levels = new ArrayList<>();
 
     public GameData() {
     }

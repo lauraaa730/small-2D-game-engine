@@ -21,17 +21,17 @@ public class InteractableObject implements GameObject {
     }
 
     @Override
-    public int getXCoord() {
+    public int getxCoord() {
         return xCoord;
     }
 
     @Override
-    public int getYCoord() {
+    public int getyCoord() {
         return yCoord;
     }
 
     @Override
-    public void setXCoord(int x) {
+    public void setxCoord(int x) {
         this.xCoord = x;
     }
 
@@ -53,7 +53,7 @@ public class InteractableObject implements GameObject {
     }
 
     @Override
-    public void setYCoord(int y) {
+    public void setyCoord(int y) {
         this.yCoord = y;
     }
 

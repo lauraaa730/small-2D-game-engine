@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
 
 public class HitBox {

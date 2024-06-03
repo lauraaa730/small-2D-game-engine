@@ -11,10 +11,36 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
 public class BackgroundObject implements GameObject{
     private int xCoord;
     private int yCoord;
-    private HitBox hitBox = new HitBox();
-
+    private String imageName;
     private int width;
     private int height;
+    private HitBox hitBox = new HitBox();
+
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
+    }
+
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+
 
     public int getWidth() {
         return width;
@@ -32,20 +58,9 @@ public class BackgroundObject implements GameObject{
         this.height = height;
     }
 
-
-    @Override
-    public int getXCoord() {
-        return xCoord;
-    }
-
-    @Override
-    public int getYCoord() {
-        return yCoord;
-    }
-
     @Override
     public HitBox getHitBox() {
-        return this.hitBox;
+        return hitBox;
     }
 
     @Override
@@ -53,13 +68,5 @@ public class BackgroundObject implements GameObject{
         this.hitBox.setRectangle(xCoord*tileDimension, yCoord*tileDimension, this.width, this.height, xOffset, yOffset);
     }
 
-    @Override
-    public void setXCoord(int x) {
-        this.xCoord = x;
-    }
 
-    @Override
-    public void setYCoord(int y) {
-        this.yCoord = y;
-    }
 }

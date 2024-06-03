@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
@@ -62,11 +61,18 @@ public class Game {
         player.setHitBox(playerXOffset, playerYOffset);
         Height = h;
         Width = w;
-        this.currLevel = new Level();
-        //next couple lines only for testing
+        this.currLevel = loadLevelFromJson();
+        if (currLevel==null) {
+            System.out.println("Level1 is null!");
+            System.exit(1);
+        }
+
+
+        /*//CODE BELOW FOR TESTING - generating level NOT from JSON, it works
+
         BackgroundObject bush = new BackgroundObject();
-        bush.setXCoord(50);
-        bush.setYCoord(50);
+        bush.setxCoord(50);
+        bush.setyCoord(50);
         bush.setWidth(228);
         bush.setHeight(151);
         bush.setHitBox(bushXOffset, bushYOffset);
@@ -77,34 +83,18 @@ public class Game {
         currLevel.setBackgroundObjects(new ArrayList<>());
         currLevel.setInteractableObjects(new ArrayList<>());
         currLevel.setBackgroundObjectsNum(0);
-        currLevel.setInteractableObjectsNum(0);
+        currLevel.setInteractableObjectsNum(0);*/
 
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
 
-
-        //TODO
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(
-                    new File("level.json"), gameData
-            );
-            GameData levelToRead = objectMapper.readValue(
-                    new File("level.json"), GameData.class
-            );
-            System.out.println(levelToRead);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-
-            System.out.println("Something went wrong with json");
-        }
     }
 
     public void update() {
         if (!willCollideWithObject(player, this.currLevel.objectsInLevel.getFirst() , player.getCurrDirection())) {
             player.move(player.getCurrDirection(), Width, Height, tileDimension);
         }
-
+        //DOESNT WORK BUT STILL MIGHT TRY TO FIX IT - KEEP
         /*//if collision happens, jump back**********
         if (checkCollisionWithObject(player,this.currLevel.objectsInLevel.getFirst() , player.getCurrDirection())) {
             if (player.getCurrDirection() == Directions.LEFT) {
@@ -134,5 +124,22 @@ public class Game {
 
     public List<GameObject> getGameObjects() {
         return currLevel.objectsInLevel;
+    }
+
+    private Level loadLevelFromJson(){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            Level levelToRead = objectMapper.readValue(
+                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/level1.json"), Level.class
+            );
+            System.out.println(levelToRead);
+            return levelToRead;
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+            System.out.println("Something went wrong with json");
+        }
+        return null;
     }
 }

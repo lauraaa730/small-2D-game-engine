@@ -11,6 +11,8 @@ module cz.cvut.fel.pjv.dudkolau {
     requires com.fasterxml.jackson.databind;
 
     opens cz.cvut.fel.pjv.dudkolau to javafx.fxml;
+    opens cz.cvut.fel.pjv.dudkolau.Model to com.fasterxml.jackson.databind;
+
     exports cz.cvut.fel.pjv.dudkolau;
     exports cz.cvut.fel.pjv.dudkolau.Model;
 }
