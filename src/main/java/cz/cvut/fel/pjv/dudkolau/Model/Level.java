@@ -6,13 +6,22 @@ import java.util.List;
 public class Level {
     private int levelType;
     private String backgroundName;
+
+    public String getBackgroundName() {
+        return backgroundName;
+    }
+
+    public void setBackgroundName(String backgroundName) {
+        this.backgroundName = backgroundName;
+    }
+
     private int backgroundObjectsNum;
     private int interactableObjectsNum;
     private int enemiesNum;
-    public List<InteractableObject> interactableObjects = new ArrayList<>();
-    public List<BackgroundObject> backgroundObjects = new ArrayList<>();
-    public List<Enemy> enemies = new ArrayList<>();
-    public List<GameObject> objectsInLevel = new ArrayList<>();
+    private List<InteractableObject> interactableObjects = new ArrayList<>();
+    private List<BackgroundObject> backgroundObjects = new ArrayList<>();
+    private List<Enemy> enemies = new ArrayList<>();
+
     public Level() {
     }
 
@@ -71,14 +80,5 @@ public class Level {
     public void setEnemies(List<Enemy> enemies) {
         this.enemies = enemies;
     }
-
-    public List<GameObject> getObjectsInLevel() {
-        return objectsInLevel;
-    }
-
-    public void setObjectsInLevel(List<GameObject> objectsInLevel) {
-        this.objectsInLevel = objectsInLevel;
-    }
-
 
 }

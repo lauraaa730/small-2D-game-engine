@@ -1,7 +1,7 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+//import javafx.scene.shape.Rectangle;
+import java.awt.*;
 
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
@@ -9,8 +9,44 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
 public class HitBox {
 
     private Rectangle  rectangle;
-    private static Rectangle testR1 = new Rectangle();
-    private static Rectangle testR2 = new Rectangle();
+    private int xCoord;
+    private int yCoord;
+    private int width;
+    private int height;
+
+
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
+    }
+
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
 
     public Rectangle getRectangle() {
         return this.rectangle;
@@ -18,48 +54,37 @@ public class HitBox {
 
     public void setRectangle(int x, int y, int width, int height, int xOffset, int yOffset) {
         this.rectangle = new Rectangle();
-        this.rectangle.setY(y+yOffset);
-        this.rectangle.setX(x+xOffset);
-        this.rectangle.setWidth(width-2*xOffset);
-        this.rectangle.setHeight(height-2*yOffset);
-        this.rectangle.setFill(Color.TRANSPARENT);
-        this.rectangle.setStroke(Color.RED); //maybe add to constants
-        this.rectangle.setStrokeWidth(1);
+        this.xCoord = x+(xOffset/tileDimension);
+        this.yCoord = y+(yOffset/tileDimension);
+        this.width = width-2*xOffset;
+        this.height = height-2*yOffset;
+        this.rectangle.setLocation(x*tileDimension,y*tileDimension);
+        this.rectangle.setSize(this.width,this.height);
+        this.rectangle.setBounds(xCoord*tileDimension,yCoord*tileDimension, this.width, this.height);
     }
 
 
     public void changexCoord(int x) {
-        this.rectangle.setX(this.rectangle.getX()+x*tileDimension);
-
+        this.xCoord+= x;
+        this.rectangle.setLocation(xCoord*tileDimension, yCoord*tileDimension);
+        this.rectangle.setBounds(this.rectangle);
     }
 
     public void changeYCoord(int y) {
-        this.rectangle.setY(this.rectangle.getY()+y*tileDimension);
+        this.yCoord+=y;
+        this.rectangle.setLocation( xCoord*tileDimension, yCoord*tileDimension);
+        this.rectangle.setBounds(this.rectangle);
     }
 
 
-    public static boolean willCollideWithObject(Entity entity, GameObject object, Directions d) {
-        testR1.setX(entity.getHitBox().getRectangle().getX());
-        testR1.setY(entity.getHitBox().getRectangle().getY());
-        testR1.setWidth(entity.getHitBox().getRectangle().getWidth());
-        testR1.setHeight(entity.getHitBox().getRectangle().getHeight());
-
-        if (d == Directions.RIGHT) {
-            testR1.setX(testR1.getX()+tileDimension);
-        } else if (d == Directions.LEFT) {
-            testR1.setX(testR1.getX()-tileDimension);
-        } else if (d == Directions.UP) {
-            testR1.setY(testR1.getY()-tileDimension);
-        } else if (d == Directions.DOWN) {
-            testR1.setY(testR1.getY()+tileDimension);
-        }
-        if (testR1.getBoundsInParent().intersects(object.getHitBox().getRectangle().getBoundsInParent())) {
+    public static boolean checkCollisionWithObject(Entity entity, GameObject object) {
+        if (entity.getHitBox().getRectangle().intersects(object.getHitBox().getRectangle())) {
             return true;
         }
         return false;
     }
-    public static boolean willCollideWithEntity(Entity entity1, Entity entity2, Directions d1, Directions d2) {
-        if (entity1.getHitBox().getRectangle().getBoundsInParent().intersects(entity2.getHitBox().getRectangle().getBoundsInParent())) {
+    public static boolean checkCollisionWithEntity(Entity entity1, Entity entity2) {
+        if (entity1.getHitBox().getRectangle().intersects(entity2.getHitBox().getRectangle())) {
             return true;
         }
         return false;

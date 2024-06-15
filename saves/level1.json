@@ -1,7 +1,7 @@
 {
   "levelType" : 1,
-  "backgroundPicture" : "background.png",
-  "backgroudObjectsNum": 1,
+  "backgroundName" : "background.png",
+  "backgroundObjectsNum": 1,
   "interactableObjectsNum": 0,
   "enemiesNum" : 0,
   "backgroundObjects": [{
@@ -9,10 +9,8 @@
     "yCoord" : 50,
     "imageName" : "bush.png",
     "width" : 228,
-    "height" : 151,
-    "hitBox" : null
+    "height" : 151
   }],
   "interactableObjects": [],
-  "enemies": [],
-  "objectsInLevel": []
+  "enemies": []
 }

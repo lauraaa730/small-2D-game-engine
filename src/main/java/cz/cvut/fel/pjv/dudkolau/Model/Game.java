@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
-import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.willCollideWithObject;
+import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 
 public class Game {
     private Player player;
@@ -61,16 +62,20 @@ public class Game {
         player.setHitBox(playerXOffset, playerYOffset);
         Height = h;
         Width = w;
+        //this.currLevel = new Level();
         this.currLevel = loadLevelFromJson();
         if (currLevel==null) {
             System.out.println("Level1 is null!");
             System.exit(1);
         }
+        for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
+            this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
+        }
 
 
-        /*//CODE BELOW FOR TESTING - generating level NOT from JSON, it works
+        //CODE BELOW FOR TESTING - generating level NOT from JSON, it works
 
-        BackgroundObject bush = new BackgroundObject();
+       /* BackgroundObject bush = new BackgroundObject();
         bush.setxCoord(50);
         bush.setyCoord(50);
         bush.setWidth(228);
@@ -91,12 +96,9 @@ public class Game {
     }
 
     public void update() {
-        if (!willCollideWithObject(player, this.currLevel.objectsInLevel.getFirst() , player.getCurrDirection())) {
-            player.move(player.getCurrDirection(), Width, Height, tileDimension);
-        }
-        //DOESNT WORK BUT STILL MIGHT TRY TO FIX IT - KEEP
-        /*//if collision happens, jump back**********
-        if (checkCollisionWithObject(player,this.currLevel.objectsInLevel.getFirst() , player.getCurrDirection())) {
+        player.move(player.getCurrDirection(), Width, Height, tileDimension);
+        //if collision happens, jump back**********
+        if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().getFirst())) {
             if (player.getCurrDirection() == Directions.LEFT) {
                 player.move(Directions.RIGHT, Width, Height, tileDimension);
             } else if (player.getCurrDirection() == Directions.RIGHT) {
@@ -107,12 +109,8 @@ public class Game {
                 player.move(Directions.UP, Width, Height, tileDimension);
             }
         }//******************************************/
-
     }
 
-    private boolean isThereObstacle(Directions d, int x, int y) {
-        return false;
-    }
 
     public Level getCurrLevel() {
         return currLevel;
@@ -123,7 +121,11 @@ public class Game {
     }
 
     public List<GameObject> getGameObjects() {
-        return currLevel.objectsInLevel;
+        List<GameObject> gameObjects = new ArrayList<>();
+        gameObjects.addAll(this.currLevel.getBackgroundObjects());
+        gameObjects.addAll(this.currLevel.getInteractableObjects());
+        gameObjects.addAll(this.currLevel.getEnemies());
+        return gameObjects;
     }
 
     private Level loadLevelFromJson(){
@@ -137,7 +139,6 @@ public class Game {
             return levelToRead;
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-
             System.out.println("Something went wrong with json");
         }
         return null;

@@ -9,6 +9,7 @@ module cz.cvut.fel.pjv.dudkolau {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires com.fasterxml.jackson.databind;
+    requires java.desktop;
 
     opens cz.cvut.fel.pjv.dudkolau to javafx.fxml;
     opens cz.cvut.fel.pjv.dudkolau.Model to com.fasterxml.jackson.databind;

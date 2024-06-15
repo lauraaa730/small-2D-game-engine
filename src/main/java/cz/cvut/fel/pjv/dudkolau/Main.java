@@ -22,7 +22,6 @@ import javafx.scene.Scene;
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
 public class Main extends Application {
-    private Constants constants = new Constants();
     private Graphics graphics = new Graphics();
     //private Image playerImage =  new Image("playerImage.png");
 
@@ -30,7 +29,7 @@ public class Main extends Application {
     private Image bushImage = new Image ("bush.png");
     private Image pausedImage = new Image("paused.png");
     private Player player = new Player();
-    private Game game = new Game(player, constants.height,constants.width);
+    private Game game = new Game(player, height, width);
 
     private Image[] currPlayerImages = graphics.animSTAND_RIGHT;
     private  Directions lastDirection = Directions.NONE;
@@ -42,7 +41,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        game.setTileDimension(constants.tileDimension);
+        game.setTileDimension(tileDimension);
         Canvas canvas = new Canvas(game.getWidth(), game.getHeight());
         Pane pane = new StackPane(canvas);
         Scene scene = new Scene(pane, game.getWidth(), game.getHeight());
@@ -100,7 +99,7 @@ public class Main extends Application {
                     }
 
                     lastCall = l;
-                    if (animationCounter>= 2147483640) { //so the counter doesnt overflow
+                    if (animationCounter>= 2147483600) { //so the counter doesnt overflow
                         animationCounter=0;
                     }
                 }
@@ -132,22 +131,16 @@ public class Main extends Application {
 
         } else if (player.getCurrDirection()==Directions.RIGHT) {
             currPlayerImages = graphics.animRIGHT;
-            /*if (lastDirection!=Directions.RIGHT) {
-                graphics.imageIndex = 0;
-            }*/
             lastDirection = Directions.RIGHT;
+
         } else if (player.getCurrDirection()==Directions.UP) {
             currPlayerImages = graphics.animSTAND_UP;
-            /*if (lastDirection!=Directions.UP) {
-                graphics.imageIndex = 0;
-            }*/
             lastDirection = Directions.UP;
+
         } else if (player.getCurrDirection()==Directions.DOWN) {
             currPlayerImages = graphics.animSTAND_DOWN;
-            /*if (lastDirection!=Directions.DOWN) {
-                graphics.imageIndex = 0;
-            }*/
             lastDirection = Directions.DOWN;
+
         } else if (player.getCurrDirection()==Directions.LEFT) {
             currPlayerImages = graphics.animLEFT;
             lastDirection = Directions.LEFT;
@@ -175,10 +168,10 @@ public class Main extends Application {
 
 
         if (showHitBoxes) {
-            drawRectangle(gc, player.getHitBox().getRectangle());
+            drawRectangle(gc, player.getHitBox().getxCoord(), player.getHitBox().getyCoord(), player.getHitBox().getWidth(), player.getHitBox().getHeight());
             //drawRectangle(gc, game.getGameObjects().getFirst().getHitBox().getRectangle());
             for (GameObject gameObject : game.getGameObjects()) {
-                drawRectangle(gc, gameObject.getHitBox().getRectangle());
+                drawRectangle(gc, gameObject.getHitBox().getxCoord(), gameObject.getHitBox().getyCoord(), gameObject.getHitBox().getWidth(), gameObject.getHitBox().getHeight());
             }
         }
     }
@@ -187,15 +180,13 @@ public class Main extends Application {
         graphics.imageIndex = (graphics.imageIndex + 1) % currPlayerImages.length;
     }
 
-    private void drawRectangle(GraphicsContext gc,Rectangle rect){
+    private void drawRectangle(GraphicsContext gc, int x, int y, int w, int h){
         gc.setStroke(Color.RED);
+        Rectangle rect = new Rectangle();
         rect.setFill(Color.TRANSPARENT);
         rect.setStroke(Color.RED);
         rect.setStrokeWidth(2);
-        gc.strokeRect(rect.getX(),
-                rect.getY(),
-                rect.getWidth(),
-                rect.getHeight());
+        gc.strokeRect(x*tileDimension, y*tileDimension, w, h);
     }
 
     public static void main(String[] args) { launch(args); }
