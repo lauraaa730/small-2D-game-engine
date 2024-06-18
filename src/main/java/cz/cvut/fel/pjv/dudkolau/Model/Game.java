@@ -98,16 +98,19 @@ public class Game {
     public void update() {
         player.move(player.getCurrDirection(), Width, Height, tileDimension);
         //if collision happens, jump back**********
-        if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().getFirst())) {
-            if (player.getCurrDirection() == Directions.LEFT) {
-                player.move(Directions.RIGHT, Width, Height, tileDimension);
-            } else if (player.getCurrDirection() == Directions.RIGHT) {
-                player.move(Directions.LEFT, Width, Height, tileDimension);
-            } else if (player.getCurrDirection() == Directions.UP) {
-                player.move(Directions.DOWN, Width, Height, tileDimension);
-            } else if (player.getCurrDirection() == Directions.DOWN) {
-                player.move(Directions.UP, Width, Height, tileDimension);
-            }
+        for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
+            if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().get(i))) {
+                if (player.getCurrDirection() == Directions.LEFT) {
+                    player.move(Directions.RIGHT, Width, Height, tileDimension);
+                } else if (player.getCurrDirection() == Directions.RIGHT) {
+                    player.move(Directions.LEFT, Width, Height, tileDimension);
+                } else if (player.getCurrDirection() == Directions.UP) {
+                    player.move(Directions.DOWN, Width, Height, tileDimension);
+                } else if (player.getCurrDirection() == Directions.DOWN) {
+                    player.move(Directions.UP, Width, Height, tileDimension);
+                }
+        }
+
         }//******************************************/
     }
 

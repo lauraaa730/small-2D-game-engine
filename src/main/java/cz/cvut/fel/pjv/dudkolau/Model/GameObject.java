@@ -9,4 +9,8 @@ public interface GameObject {
 
     public HitBox getHitBox();
     public void setHitBox(int xOffset, int yOffset);
+
+    int getWidth();
+    int getHeight();
+
 }

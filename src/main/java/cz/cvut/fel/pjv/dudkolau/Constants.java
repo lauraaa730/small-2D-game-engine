@@ -12,7 +12,7 @@ public class Constants {
     public static final int playerXOffset = 10;
     public static final int playerYOffset = 15;
 
-    public static final int bushXOffset = 25;
+    public static final int bushXOffset = 10;
     public static final int bushYOffset = 30;
 
 

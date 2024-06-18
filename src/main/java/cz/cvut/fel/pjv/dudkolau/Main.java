@@ -25,7 +25,6 @@ public class Main extends Application {
     private Graphics graphics = new Graphics();
     //private Image playerImage =  new Image("playerImage.png");
 
-    private Image backgroundImage = new Image("background.png");
     private Image bushImage = new Image ("bush.png");
     private Image pausedImage = new Image("paused.png");
     private Player player = new Player();
@@ -36,10 +35,12 @@ public class Main extends Application {
 
     public int animationCounter = 0;
 
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
     private boolean isPaused = false;
+    private Image backgroundImage = new Image("background.png");
     @Override
     public void start(Stage stage) throws Exception {
+
 
         game.setTileDimension(tileDimension);
         Canvas canvas = new Canvas(game.getWidth(), game.getHeight());
@@ -94,8 +95,10 @@ public class Main extends Application {
                         }
                         animationCounter++;
                     } else {
+                        render(canvas);
                         GraphicsContext gc = canvas.getGraphicsContext2D();
-                        gc.drawImage(pausedImage, 300,200);
+                        gc.drawImage(graphics.backgroundPaused,0,0);
+                        gc.drawImage(pausedImage, 155,110);
                     }
 
                     lastCall = l;
@@ -151,20 +154,39 @@ public class Main extends Application {
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
-
+        boolean drewPlayer = false;
+        int playerY = player.getHitBox().getyCoord();
+        int objectY;
+        int objectX;
         //concept: player shows behind or infront of bushes
-        if (player.getyCoord()>game.getGameObjects().get(0).getyCoord()+10) {
-            gc.drawImage(bushImage, game.getGameObjects().get(0).getxCoord()*game.getTileDimension(),
-                    game.getGameObjects().get(0).getyCoord()*game.getTileDimension());
-            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
-                    player.getyCoord() * game.getTileDimension());
-        } else {
-            gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
-                    player.getyCoord() * game.getTileDimension());
-            //for (int i = 0; i<game.getGameObjects().length; i++) {
-            gc.drawImage(bushImage, game.getGameObjects().get(0).getxCoord()*game.getTileDimension(),
-                    game.getGameObjects().get(0).getyCoord()*game.getTileDimension());
+        for (int i = 0; i < game.getGameObjects().size(); i++) {
+            objectY = game.getGameObjects().get(i).getyCoord();
+            objectX = game.getGameObjects().get(i).getxCoord();
+            if (playerY-tileDimension>objectY && playerY< objectY+game.getGameObjects().get(i).getHeight()/tileDimension) {
+                //System.out.println("Hrac pred kerem, kre cislo: " + i);
+                gc.drawImage(bushImage,objectX*game.getTileDimension(),
+                        objectY*game.getTileDimension());
+
+                gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
+                        player.getyCoord() * game.getTileDimension());
+                drewPlayer = true;
+
+            } else {
+                if (!drewPlayer) {
+                    gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
+                            player.getyCoord() * game.getTileDimension());
+                    drewPlayer=true;
+                }
+                //for (int i = 0; i<game.getGameObjects().length; i++) {
+                gc.drawImage(bushImage, objectX*game.getTileDimension(),
+                        objectY*game.getTileDimension());
+            }
+            if (!drewPlayer) {
+                gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
+                        player.getyCoord() * game.getTileDimension());
+            }
         }
+
 
 
         if (showHitBoxes) {

@@ -71,16 +71,16 @@ public class Player implements Entity {
     @Override
     public void move(Directions d, int w, int h, int tileDimension){;
 
-        if (d==Directions.LEFT && xCoord*tileDimension>0) {
+        if (d==Directions.LEFT && this.hitBox.getxCoord()*tileDimension>0) {
             xCoord--;
             this.hitBox.changexCoord(-1);
-        } else if (d==Directions.RIGHT && xCoord*tileDimension<w-100) {
+        } else if (d==Directions.RIGHT && this.hitBox.getxCoord()*tileDimension<w-100) {
             xCoord++;
             this.hitBox.changexCoord(1);
-        } else if (d==Directions.UP && yCoord*tileDimension>0) {
+        } else if (d==Directions.UP && this.hitBox.getyCoord()*tileDimension>0) {
             yCoord--;
             this.hitBox.changeYCoord(-1);
-        } else if (d==Directions.DOWN && yCoord*tileDimension<h-100) {
+        } else if (d==Directions.DOWN && this.hitBox.getyCoord()*tileDimension<h-100) {
             yCoord++;
             this.hitBox.changeYCoord(1);
         }
