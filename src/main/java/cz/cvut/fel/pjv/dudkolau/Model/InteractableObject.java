@@ -7,6 +7,16 @@ public class InteractableObject implements GameObject {
     private int yCoord;
     private HitBox hitBox = new HitBox();
 
+    @Override
+    public String getImageName() {
+        return null;
+    }
+
+    @Override
+    public void setImageName(String imageName) {
+
+    }
+
     private int width;
     private int height;
 

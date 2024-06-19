@@ -2,7 +2,9 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 public interface GameObject {
     public int getxCoord();
-    public int getyCoord(); //
+    public int getyCoord();
+    public String getImageName();
+    public void setImageName(String imageName);
 
     public void setxCoord(int x);
     public void setyCoord(int y);

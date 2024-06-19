@@ -30,7 +30,6 @@ public class Main extends Application {
     private Graphics graphics = new Graphics();
     //private Image playerImage =  new Image("playerImage.png");
 
-    private Image bushImage = new Image ("bushHorizontal.png");
     private Image pausedImage = new Image("paused.png");
     private Player player = new Player();
     private Game game = new Game(player, height, width);
@@ -40,7 +39,7 @@ public class Main extends Application {
 
     public int animationCounter = 0;
 
-    private boolean showHitBoxes = false;
+    private boolean showHitBoxes = true;
     private Image backgroundImage = new Image("background.png");
     @Override
     public void start(Stage stage) throws Exception {
@@ -174,11 +173,12 @@ public class Main extends Application {
         int objectX;
         //concept: player shows behind or infront of bushes
         for (int i = 0; i < game.getGameObjects().size(); i++) {
+
             objectY = game.getGameObjects().get(i).getyCoord();
             objectX = game.getGameObjects().get(i).getxCoord();
             if (playerY-tileDimension>objectY && playerY< objectY+game.getGameObjects().get(i).getHeight()/tileDimension) {
                 //System.out.println("Hrac pred kerem, kre cislo: " + i);
-                gc.drawImage(bushImage,objectX*game.getTileDimension(),
+                gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()),objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
 
                 gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
@@ -192,7 +192,7 @@ public class Main extends Application {
                     drewPlayer=true;
                 }
                 //for (int i = 0; i<game.getGameObjects().length; i++) {
-                gc.drawImage(bushImage, objectX*game.getTileDimension(),
+                gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()), objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
             }
             if (!drewPlayer) {

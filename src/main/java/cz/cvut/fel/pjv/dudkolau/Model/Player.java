@@ -59,8 +59,6 @@ public class Player implements Entity {
 
     @Override
     public void setHitBox(int xOffset, int yOffset) {
-        //int hitBoxCoords[] =  {xCoord*tileDimension-width/2, xCoord*tileDimension+width/2, yCoord*tileDimension-height/2, yCoord*tileDimension+height/2};
-        //System.out.printf("hitBoxCoords: %d %d %d %d\n", hitBoxCoords[0], hitBoxCoords[1], hitBoxCoords[2], hitBoxCoords[3]);
         this.hitBox.setRectangle(xCoord*tileDimension, yCoord*tileDimension, this.width, this.height, xOffset, yOffset);
     }
 
@@ -102,6 +100,18 @@ public class Player implements Entity {
     @Override
     public void setCurrDirection(Directions d) {
         currDirection = d;
+    }
+
+    public void jumpBack(int w, int h) {
+        if (currDirection == Directions.LEFT) {
+            move(Directions.RIGHT, w, h, tileDimension);
+        } else if (currDirection == Directions.RIGHT) {
+            move(Directions.LEFT, w, h, tileDimension);
+        } else if (currDirection == Directions.UP) {
+            move(Directions.DOWN, w, h, tileDimension);
+        } else if (currDirection == Directions.DOWN) {
+            move(Directions.UP, w, h, tileDimension);
+        }
     }
 
 }

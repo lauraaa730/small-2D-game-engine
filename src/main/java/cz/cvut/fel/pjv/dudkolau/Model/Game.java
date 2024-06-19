@@ -18,6 +18,10 @@ public class Game {
     private int Height;
     private int tileDimension;
     private boolean isPaused;
+    private int levelsNum = 0;
+
+    private List<Level> levels = new ArrayList<>();
+
 
     public boolean getIsPaused() {
         return isPaused;
@@ -51,7 +55,10 @@ public class Game {
         return tileDimension;
     }
 
-    private boolean didLevelChange = false;
+    public List<Level> getLevels() {
+        return levels;
+    }
+
 
     public Game(Player player, int h, int w) {
         this.player = player;
@@ -62,8 +69,8 @@ public class Game {
         player.setHitBox(playerXOffset, playerYOffset);
         Height = h;
         Width = w;
-        //this.currLevel = new Level();
-        this.currLevel = loadLevelFromJson();
+        loadAllLevels();
+        currLevel = levels.getFirst();
         if (currLevel==null) {
             System.out.println("Level1 is null!");
             System.exit(1);
@@ -72,46 +79,25 @@ public class Game {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
         }
 
-
-        //CODE BELOW FOR TESTING - generating level NOT from JSON, it works
-
-       /* BackgroundObject bush = new BackgroundObject();
-        bush.setxCoord(50);
-        bush.setyCoord(50);
-        bush.setWidth(228);
-        bush.setHeight(151);
-        bush.setHitBox(bushXOffset, bushYOffset);
-        currLevel.objectsInLevel.add(bush);
-        currLevel.setEnemiesNum(0);
-        currLevel.setLevelType(1);
-        currLevel.setEnemies(new ArrayList<>());
-        currLevel.setBackgroundObjects(new ArrayList<>());
-        currLevel.setInteractableObjects(new ArrayList<>());
-        currLevel.setBackgroundObjectsNum(0);
-        currLevel.setInteractableObjectsNum(0);*/
-
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
 
     }
 
     public void update() {
+
+        //move the player***************************************************
         player.move(player.getCurrDirection(), Width, Height, tileDimension);
-        //if collision happens, jump back**********
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
             if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().get(i))) {
-                if (player.getCurrDirection() == Directions.LEFT) {
-                    player.move(Directions.RIGHT, Width, Height, tileDimension);
-                } else if (player.getCurrDirection() == Directions.RIGHT) {
-                    player.move(Directions.LEFT, Width, Height, tileDimension);
-                } else if (player.getCurrDirection() == Directions.UP) {
-                    player.move(Directions.DOWN, Width, Height, tileDimension);
-                } else if (player.getCurrDirection() == Directions.DOWN) {
-                    player.move(Directions.UP, Width, Height, tileDimension);
-                }
+                player.jumpBack(Width, Height);
+            }
         }
-
-        }//******************************************/
+        for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
+            if (checkCollisionWithObject(player,this.currLevel.getEnemies().get(i))) {
+                player.jumpBack(Width, Height);
+            }
+        }//*****************************************************************
     }
 
 
@@ -131,12 +117,12 @@ public class Game {
         return gameObjects;
     }
 
-    private Level loadLevelFromJson(){
+    private Level loadLevelFromJson(String levelName){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
             Level levelToRead = objectMapper.readValue(
-                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/level1.json"), Level.class
+                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/" + levelName), Level.class
             );
             System.out.println(levelToRead);
             return levelToRead;
@@ -146,4 +132,19 @@ public class Game {
         }
         return null;
     }
+
+    private void loadAllLevels() {
+        Level l = new Level();
+        for (int i = 0; i < maxLevelNum; i++) {
+            l = loadLevelFromJson("level"+(i+1)+".json");
+            if (l!=null) {
+                levels.add(l);
+                levelsNum++;
+            } else {
+                System.out.println("Level number " +(i+1) + " is empty!");
+            }
+
+        }
+    }
+
 }
