@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Changed Rectangle in HitBox to different data class using java.awt. Level loading from JSON is now functional.">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/PlayMusic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bush.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bush.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/paused.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/paused.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bush.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bushHorizontal.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="Class" />
         <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -154,7 +148,8 @@
       <workItem from="1717407363412" duration="2210000" />
       <workItem from="1718376772888" duration="8514000" />
       <workItem from="1718446432021" duration="2532000" />
-      <workItem from="1718712325192" duration="9784000" />
+      <workItem from="1718712325192" duration="12479000" />
+      <workItem from="1718794550125" duration="162000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -308,7 +303,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718466483700</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush.">
+      <option name="closed" value="true" />
+      <created>1718728758697</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1718728758697</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush.">
+      <option name="closed" value="true" />
+      <created>1718728793094</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1718728793094</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,7 +350,8 @@
     <MESSAGE value="added even more animations" />
     <MESSAGE value="loading level from JSON - temporary not functional version" />
     <MESSAGE value="Changed Rectangle in HitBox to different data class using java.awt. Level loading from JSON is now functional." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed Rectangle in HitBox to different data class using java.awt. Level loading from JSON is now functional." />
+    <MESSAGE value="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

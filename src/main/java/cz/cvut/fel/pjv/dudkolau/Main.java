@@ -19,13 +19,18 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
 public class Main extends Application {
     private Graphics graphics = new Graphics();
     //private Image playerImage =  new Image("playerImage.png");
 
-    private Image bushImage = new Image ("bush.png");
+    private Image bushImage = new Image ("bushHorizontal.png");
     private Image pausedImage = new Image("paused.png");
     private Player player = new Player();
     private Game game = new Game(player, height, width);
@@ -36,7 +41,6 @@ public class Main extends Application {
     public int animationCounter = 0;
 
     private boolean showHitBoxes = false;
-    private boolean isPaused = false;
     private Image backgroundImage = new Image("background.png");
     @Override
     public void start(Stage stage) throws Exception {
@@ -49,6 +53,16 @@ public class Main extends Application {
 
         stage.setTitle("Beyond the Forest");
         stage.setResizable(true);
+    /*    File musicPath = new File("music.wav");
+        //maybe add whether program can find this file
+        try {
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            clip.start();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }*/
 
 
 
@@ -56,7 +70,7 @@ public class Main extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                     if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                        isPaused = !isPaused;
+                        game.setPaused(!game.getIsPaused());
                     }
                     if (keyEvent.getCode() == KeyCode.LEFT) {
                         player.setCurrDirection(Directions.LEFT);
@@ -86,7 +100,7 @@ public class Main extends Application {
             @Override
             public void handle(long l) {
                 if ((l - lastCall) >= 25_000_000) {
-                    if (!isPaused) {
+                    if (!game.getIsPaused()) {
                         game.update();
                         setCurrPlayerImages();
                         render(canvas);
