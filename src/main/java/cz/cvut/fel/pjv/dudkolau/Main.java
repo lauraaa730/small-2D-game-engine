@@ -36,7 +36,7 @@ public class Main extends Application {
 
     public int animationCounter = 0;
 
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
     private Image backgroundImage = new Image("background.png");
     @Override
     public void start(Stage stage) throws Exception {
@@ -199,7 +199,7 @@ public class Main extends Application {
         }
 
         for (Enemy enemy : game.getCurrLevel().getEnemies()) {
-            gc.drawImage(graphics.ghostImage, enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
+            gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
         }
 
 
@@ -209,6 +209,9 @@ public class Main extends Application {
             //drawRectangle(gc, game.getGameObjects().getFirst().getHitBox().getRectangle());
             for (GameObject gameObject : game.getGameObjects()) {
                 drawRectangle(gc, gameObject.getHitBox().getxCoord(), gameObject.getHitBox().getyCoord(), gameObject.getHitBox().getWidth(), gameObject.getHitBox().getHeight());
+            }
+            for (Enemy enemy : game.getCurrLevel().getEnemies()) {
+                drawRectangle(gc, enemy.getHitBox().getxCoord(), enemy.getHitBox().getyCoord(), enemy.getHitBox().getWidth(), enemy.getHitBox().getHeight());
             }
         }
     }

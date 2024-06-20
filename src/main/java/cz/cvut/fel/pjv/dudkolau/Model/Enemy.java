@@ -8,9 +8,19 @@ public class Enemy extends InteractableObject implements Entity{
     private int yCoord;
     private int height;
     private int width;
+    private String imageName;
     private HitBox hitBox = new HitBox();
     private int selfMovementPosition = 0;
-    private Directions currDirection = Directions.LEFT;
+    private Directions currDirection = Directions.RIGHT;
+    @Override
+    public String getImageName() {
+        return imageName;
+    }
+
+    @Override
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
     //for JSON
     public Enemy() {
@@ -21,7 +31,7 @@ public class Enemy extends InteractableObject implements Entity{
     }
 
     public void setHitBox(int xOffset, int yOffset) {
-        this.hitBox.setRectangle(xCoord*tileDimension, yCoord*tileDimension, this.width, this.height, xOffset, yOffset);
+        this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
     }
 
     @Override
@@ -57,28 +67,42 @@ public class Enemy extends InteractableObject implements Entity{
         this.selfMovementPosition = selfMovementPosition;
     }
     public void updateSelfMovementPosition() {
-        if (currDirection == Directions.LEFT) {
-            selfMovementPosition--;
-        } else if (currDirection==Directions.RIGHT) {
-            selfMovementPosition++;
+        if (this.currDirection == Directions.LEFT) {
+            this.selfMovementPosition--;
+        } else if (this.currDirection==Directions.RIGHT) {
+            this.selfMovementPosition++;
         }
     }
 
 
     @Override
     public void move(Directions d, int w, int h, int tileDimension){
+        //NOTE Enemies DO NOT collide with game objects, but can collidewith player
+        //if the feature is turned on
         if (d==Directions.LEFT && this.hitBox.getxCoord()*tileDimension>0) {
             xCoord--;
             this.hitBox.changexCoord(-1);
-        } else if (d==Directions.RIGHT && this.hitBox.getxCoord()*tileDimension<w-100) {
+        } else if (d==Directions.RIGHT && this.hitBox.getxCoord()*tileDimension<w- hitBox.getWidth()) {
             xCoord++;
             this.hitBox.changexCoord(1);
         } else if (d==Directions.UP && this.hitBox.getyCoord()*tileDimension>0) {
             yCoord--;
             this.hitBox.changeYCoord(-1);
-        } else if (d==Directions.DOWN && this.hitBox.getyCoord()*tileDimension<h-100) {
+        } else if (d==Directions.DOWN && this.hitBox.getyCoord()*tileDimension<h- hitBox.getHeight()) {
             yCoord++;
             this.hitBox.changeYCoord(1);
+        }
+    }
+
+    public void jumpBack(int w, int h) {
+        if (currDirection == Directions.LEFT) {
+            move(Directions.RIGHT, w, h, tileDimension);
+        } else if (currDirection == Directions.RIGHT) {
+            move(Directions.LEFT, w, h, tileDimension);
+        } else if (currDirection == Directions.UP) {
+            move(Directions.DOWN, w, h, tileDimension);
+        } else if (currDirection == Directions.DOWN) {
+            move(Directions.UP, w, h, tileDimension);
         }
     }
 
@@ -96,21 +120,22 @@ public class Enemy extends InteractableObject implements Entity{
 
     @Override
     public Directions getCurrDirection() {
-        return null;
+        return currDirection;
     }
 
     @Override
     public void setCurrDirection(Directions d) {
+        currDirection = d;
     }
 
     @Override
     public void setxCoord(int x) {
-
+        xCoord=x;
     }
 
     @Override
     public void setyCoord(int y) {
-
+        yCoord=y;
     }
 }
 

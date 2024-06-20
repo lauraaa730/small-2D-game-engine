@@ -72,13 +72,13 @@ public class Player implements Entity {
         if (d==Directions.LEFT && this.hitBox.getxCoord()*tileDimension>0) {
             xCoord--;
             this.hitBox.changexCoord(-1);
-        } else if (d==Directions.RIGHT && this.hitBox.getxCoord()*tileDimension<w-100) {
+        } else if (d==Directions.RIGHT && this.hitBox.getxCoord()*tileDimension<w- hitBox.getWidth()) {
             xCoord++;
             this.hitBox.changexCoord(1);
         } else if (d==Directions.UP && this.hitBox.getyCoord()*tileDimension>0) {
             yCoord--;
             this.hitBox.changeYCoord(-1);
-        } else if (d==Directions.DOWN && this.hitBox.getyCoord()*tileDimension<h-100) {
+        } else if (d==Directions.DOWN && this.hitBox.getyCoord()*tileDimension<h- hitBox.getHeight()) {
             yCoord++;
             this.hitBox.changeYCoord(1);
         }

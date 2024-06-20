@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 public class Graphics {
 
     public Image backgroundPaused = new Image("backgroundPaused.png");
-    public Image ghostImage = new Image("ghost.png");
+
     public Image[] animRIGHT = {
             new Image("animRIGHT-1.png"),
             new Image("animRIGHT-2.png"),

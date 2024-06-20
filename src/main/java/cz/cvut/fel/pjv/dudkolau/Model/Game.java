@@ -20,6 +20,9 @@ public class Game {
     private int tileDimension;
     private boolean isPaused;
     private int levelsNum = 0;
+    private int enemieMoveCounter = 0;
+
+    private boolean playerCollidesWithEnemy = false; //add to game data
 
     private List<Level> levels = new ArrayList<>();
 
@@ -79,6 +82,10 @@ public class Game {
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
         }
+        for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
+            System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
+            this.currLevel.getEnemies().get(i).setHitBox(0, 0);
+        }
 
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
@@ -86,7 +93,6 @@ public class Game {
     }
 
     public void update() {
-
         //move the player***************************************************
         player.move(player.getCurrDirection(), Width, Height, tileDimension);
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
@@ -99,16 +105,29 @@ public class Game {
         Enemy e;
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
-            if (checkCollisionWithEntity(player,e)) {
+            if (playerCollidesWithEnemy) {
+
+            }
+            if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
                 player.jumpBack(Width, Height);
             }
-            if (e.getSelfMovementPosition()>=enemyMovementLength) {
-                e.setCurrDirection(Directions.LEFT);
-            } else if (e.getSelfMovementPosition()<=0) {
-                e.setCurrDirection(Directions.RIGHT);
+            if (enemieMoveCounter == 0 || enemieMoveCounter == 1) {
+                if (e.getSelfMovementPosition()>=enemyMovementLength) {
+                    System.out.println("Turning left");
+                    e.setCurrDirection(Directions.LEFT);
+                } else if (e.getSelfMovementPosition()<=0) {
+                    System.out.println("Turning right");
+                    e.setCurrDirection(Directions.RIGHT);
+                }
+                e.updateSelfMovementPosition();
+                //System.out.println("SM Position: "+ e.getSelfMovementPosition() +", Hitbox xCoord: "+ e.getHitBox().getxCoord());
+                e.move(e.getCurrDirection(), Width, Height, tileDimension);
+                if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
+                    e.jumpBack(Width, Height);
+                }
             }
-            e.updateSelfMovementPosition();
-            e.move(e.getCurrDirection(),Width, Height, tileDimension);
+            enemieMoveCounter = (enemieMoveCounter+1)%3;
+
         }//*****************************************************************
 
     }
@@ -126,7 +145,6 @@ public class Game {
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects.addAll(this.currLevel.getBackgroundObjects());
         gameObjects.addAll(this.currLevel.getInteractableObjects());
-        gameObjects.addAll(this.currLevel.getEnemies());
         return gameObjects;
     }
 
