@@ -9,6 +9,8 @@ public class Enemy extends InteractableObject implements Entity{
     private int height;
     private int width;
     private HitBox hitBox = new HitBox();
+    private int selfMovementPosition = 0;
+    private Directions currDirection = Directions.LEFT;
 
     //for JSON
     public Enemy() {
@@ -54,9 +56,13 @@ public class Enemy extends InteractableObject implements Entity{
     public void setSelfMovementPosition(int selfMovementPosition) {
         this.selfMovementPosition = selfMovementPosition;
     }
-
-    private int selfMovementPosition = 0; //0 in the middle, and then to -or + enemymovementlength
-    private Directions currDirection = Directions.LEFT;
+    public void updateSelfMovementPosition() {
+        if (currDirection == Directions.LEFT) {
+            selfMovementPosition--;
+        } else if (currDirection==Directions.RIGHT) {
+            selfMovementPosition++;
+        }
+    }
 
 
     @Override

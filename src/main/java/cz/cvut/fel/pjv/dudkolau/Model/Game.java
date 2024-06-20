@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
+import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 
 public class Game {
@@ -93,11 +94,23 @@ public class Game {
                 player.jumpBack(Width, Height);
             }
         }
+
+        //Enemies movement and collision *********************************
+        Enemy e;
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
-            if (checkCollisionWithObject(player,this.currLevel.getEnemies().get(i))) {
+            e=currLevel.getEnemies().get(i);
+            if (checkCollisionWithEntity(player,e)) {
                 player.jumpBack(Width, Height);
             }
+            if (e.getSelfMovementPosition()>=enemyMovementLength) {
+                e.setCurrDirection(Directions.LEFT);
+            } else if (e.getSelfMovementPosition()<=0) {
+                e.setCurrDirection(Directions.RIGHT);
+            }
+            e.updateSelfMovementPosition();
+            e.move(e.getCurrDirection(),Width, Height, tileDimension);
         }//*****************************************************************
+
     }
 
 
@@ -134,7 +147,7 @@ public class Game {
     }
 
     private void loadAllLevels() {
-        Level l = new Level();
+        Level l;
         for (int i = 0; i < maxLevelNum; i++) {
             l = loadLevelFromJson("level"+(i+1)+".json");
             if (l!=null) {

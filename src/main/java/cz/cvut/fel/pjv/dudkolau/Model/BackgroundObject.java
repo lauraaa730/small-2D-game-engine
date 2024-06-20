@@ -40,8 +40,6 @@ public class BackgroundObject implements GameObject{
         this.imageName = imageName;
     }
 
-
-
     public int getWidth() {
         return width;
     }

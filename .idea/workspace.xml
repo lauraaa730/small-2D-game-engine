@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="added vertical bush sprite">
-      <change afterPath="$PROJECT_DIR$/saves/level2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/saves/level3.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/saves/level4.json" afterDir="false" />
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/BackgroundObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/BackgroundObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/InteractableObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/InteractableObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +151,8 @@
       <workItem from="1718446432021" duration="2532000" />
       <workItem from="1718712325192" duration="12479000" />
       <workItem from="1718794550125" duration="907000" />
-      <workItem from="1718830644772" duration="2686000" />
+      <workItem from="1718830644772" duration="2781000" />
+      <workItem from="1718881420249" duration="2768000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -342,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718794754185</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy.">
+      <option name="closed" value="true" />
+      <created>1718833380352</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1718833380352</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +379,8 @@
     <MESSAGE value="Changed Rectangle in HitBox to different data class using java.awt. Level loading from JSON is now functional." />
     <MESSAGE value="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush." />
     <MESSAGE value="added vertical bush sprite" />
-    <option name="LAST_COMMIT_MESSAGE" value="added vertical bush sprite" />
+    <MESSAGE value="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy." />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

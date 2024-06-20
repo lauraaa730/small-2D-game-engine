@@ -1,9 +1,6 @@
 package cz.cvut.fel.pjv.dudkolau;
 
-import cz.cvut.fel.pjv.dudkolau.Model.Directions;
-import cz.cvut.fel.pjv.dudkolau.Model.Game;
-import cz.cvut.fel.pjv.dudkolau.Model.GameObject;
-import cz.cvut.fel.pjv.dudkolau.Model.Player;
+import cz.cvut.fel.pjv.dudkolau.Model.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -199,6 +196,10 @@ public class Main extends Application {
                 gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
                         player.getyCoord() * game.getTileDimension());
             }
+        }
+
+        for (Enemy enemy : game.getCurrLevel().getEnemies()) {
+            gc.drawImage(graphics.ghostImage, enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
         }
 
 
