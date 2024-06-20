@@ -3,16 +3,20 @@ package cz.cvut.fel.pjv.dudkolau;
 import cz.cvut.fel.pjv.dudkolau.Model.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -28,13 +32,14 @@ public class Main extends Application {
     //private Image playerImage =  new Image("playerImage.png");
 
     private Image pausedImage = new Image("paused.png");
-    private Player player = new Player();
-    private Game game = new Game(player, height, width);
+    private Game game = new Game();
 
     private Image[] currPlayerImages = graphics.animSTAND_RIGHT;
     private  Directions lastDirection = Directions.NONE;
 
     public int animationCounter = 0;
+
+    public boolean mainMenuButtonsAdded = false;
 
     private boolean showHitBoxes = false;
     private Image backgroundImage = new Image("background.png");
@@ -44,12 +49,28 @@ public class Main extends Application {
 
         game.setTileDimension(tileDimension);
         Canvas canvas = new Canvas(game.getWidth(), game.getHeight());
-        Pane pane = new StackPane(canvas);
+        AnchorPane pane = new AnchorPane(canvas);
+        //using anchorpane instead of stackpane allows moving buttons more freely
         Scene scene = new Scene(pane, game.getWidth(), game.getHeight());
+
+
+        Button continueButton = new Button("Continue");
+        continueButton.setLayoutX(600);
+        continueButton.setLayoutY(200);
+        continueButton.setFocusTraversable(false);
+
+        Button newGameButton = new Button("Start New Game");
+        newGameButton.setGraphic(new ImageView(new Image("bushHorizontal.png")));
+        newGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        newGameButton.setLayoutX(100);
+        newGameButton.setLayoutY(200);
+        newGameButton.setFocusTraversable(false);
+
+        game.setPaused(true);
 
         stage.setTitle("Beyond the Forest");
         stage.setResizable(true);
-    /*    File musicPath = new File("music.wav");
+        /*    File musicPath = new File("music.wav");
         //maybe add whether program can find this file
         try {
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
@@ -69,13 +90,13 @@ public class Main extends Application {
                         game.setPaused(!game.getIsPaused());
                     }
                     if (keyEvent.getCode() == KeyCode.LEFT) {
-                        player.setCurrDirection(Directions.LEFT);
+                        game.getPlayer().setCurrDirection(Directions.LEFT);
                     } else if (keyEvent.getCode() == KeyCode.RIGHT) {
-                        player.setCurrDirection(Directions.RIGHT);
+                        game.getPlayer().setCurrDirection(Directions.RIGHT);
                     } else if (keyEvent.getCode() == KeyCode.DOWN) {
-                        player.setCurrDirection(Directions.DOWN);
+                        game.getPlayer().setCurrDirection(Directions.DOWN);
                     } else if (keyEvent.getCode() == KeyCode.UP) {
-                        player.setCurrDirection(Directions.UP);
+                        game.getPlayer().setCurrDirection(Directions.UP);
                     }
             }
         });
@@ -86,8 +107,14 @@ public class Main extends Application {
                 if (keyEvent.getCode() == KeyCode.LEFT ||
                         keyEvent.getCode() == KeyCode.RIGHT ||keyEvent.getCode() == KeyCode.UP ||
                         keyEvent.getCode() == KeyCode.DOWN) {
-                    player.setCurrDirection(Directions.NONE);
+                    game.getPlayer().setCurrDirection(Directions.NONE);
                 }
+            }
+        });
+
+        newGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                game.setPaused(!game.getIsPaused());
             }
         });
 
@@ -99,12 +126,22 @@ public class Main extends Application {
                     if (!game.getIsPaused()) {
                         game.update();
                         setCurrPlayerImages();
+                        if (mainMenuButtonsAdded) {
+                            pane.getChildren().removeAll(newGameButton, continueButton);
+                            mainMenuButtonsAdded = false;
+                            System.out.println("Deleted button");
+                        }
                         render(canvas);
                         if (animationCounter%3==0) {
                             animate();
                         }
                         animationCounter++;
                     } else {
+                        if (!mainMenuButtonsAdded) {
+                            pane.getChildren().addAll(newGameButton, continueButton);
+                            mainMenuButtonsAdded = true;
+                            System.out.println("Added button");
+                        }
                         render(canvas);
                         GraphicsContext gc = canvas.getGraphicsContext2D();
                         gc.drawImage(graphics.backgroundPaused,0,0);
@@ -126,35 +163,35 @@ public class Main extends Application {
     }
 
     private void setCurrPlayerImages() {
-        if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.RIGHT) {
+        if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.RIGHT) {
             currPlayerImages = graphics.animSTAND_RIGHT;
             lastDirection = Directions.NONE;
 
-        } else if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.LEFT) {
+        } else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.LEFT) {
             currPlayerImages = graphics.animSTAND_LEFT;
             lastDirection = Directions.NONE;
 
-        }  else if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.UP) {
+        }  else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.UP) {
             currPlayerImages = graphics.animSTAND_UP;
             lastDirection = Directions.NONE;
 
-        }  else if (player.getCurrDirection()==Directions.NONE && lastDirection == Directions.DOWN) {
+        }  else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.DOWN) {
             currPlayerImages = graphics.animSTAND_DOWN;
             lastDirection = Directions.NONE;
 
-        } else if (player.getCurrDirection()==Directions.RIGHT) {
+        } else if (game.getPlayer().getCurrDirection()==Directions.RIGHT) {
             currPlayerImages = graphics.animRIGHT;
             lastDirection = Directions.RIGHT;
 
-        } else if (player.getCurrDirection()==Directions.UP) {
+        } else if (game.getPlayer().getCurrDirection()==Directions.UP) {
             currPlayerImages = graphics.animSTAND_UP;
             lastDirection = Directions.UP;
 
-        } else if (player.getCurrDirection()==Directions.DOWN) {
+        } else if (game.getPlayer().getCurrDirection()==Directions.DOWN) {
             currPlayerImages = graphics.animSTAND_DOWN;
             lastDirection = Directions.DOWN;
 
-        } else if (player.getCurrDirection()==Directions.LEFT) {
+        } else if (game.getPlayer().getCurrDirection()==Directions.LEFT) {
             currPlayerImages = graphics.animLEFT;
             lastDirection = Directions.LEFT;
         }
@@ -165,7 +202,7 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
         boolean drewPlayer = false;
-        int playerY = player.getHitBox().getyCoord();
+        int playerY = game.getPlayer().getHitBox().getyCoord();
         int objectY;
         int objectX;
         //concept: player shows behind or infront of bushes
@@ -178,14 +215,14 @@ public class Main extends Application {
                 gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()),objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
 
-                gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
-                        player.getyCoord() * game.getTileDimension());
+                gc.drawImage(currPlayerImages[graphics.imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                        game.getPlayer().getyCoord() * game.getTileDimension());
                 drewPlayer = true;
 
             } else {
                 if (!drewPlayer) {
-                    gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
-                            player.getyCoord() * game.getTileDimension());
+                    gc.drawImage(currPlayerImages[graphics.imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                            game.getPlayer().getyCoord() * game.getTileDimension());
                     drewPlayer=true;
                 }
                 //for (int i = 0; i<game.getGameObjects().length; i++) {
@@ -193,8 +230,8 @@ public class Main extends Application {
                         objectY*game.getTileDimension());
             }
             if (!drewPlayer) {
-                gc.drawImage(currPlayerImages[graphics.imageIndex], player.getxCoord() * game.getTileDimension(),
-                        player.getyCoord() * game.getTileDimension());
+                gc.drawImage(currPlayerImages[graphics.imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                        game.getPlayer().getyCoord() * game.getTileDimension());
             }
         }
 
@@ -205,7 +242,7 @@ public class Main extends Application {
 
 
         if (showHitBoxes) {
-            drawRectangle(gc, player.getHitBox().getxCoord(), player.getHitBox().getyCoord(), player.getHitBox().getWidth(), player.getHitBox().getHeight());
+            drawRectangle(gc, game.getPlayer().getHitBox().getxCoord(), game.getPlayer().getHitBox().getyCoord(), game.getPlayer().getHitBox().getWidth(), game.getPlayer().getHitBox().getHeight());
             //drawRectangle(gc, game.getGameObjects().getFirst().getHitBox().getRectangle());
             for (GameObject gameObject : game.getGameObjects()) {
                 drawRectangle(gc, gameObject.getHitBox().getxCoord(), gameObject.getHitBox().getyCoord(), gameObject.getHitBox().getWidth(), gameObject.getHitBox().getHeight());

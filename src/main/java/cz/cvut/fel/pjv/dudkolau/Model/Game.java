@@ -15,12 +15,11 @@ public class Game {
     private Player player;
     private Level currLevel;
 
-    private int Width;
-    private int Height;
     private int tileDimension;
     private boolean isPaused;
     private int levelsNum = 0;
     private int enemieMoveCounter = 0;
+    private boolean mainMenuOn;
 
     private boolean playerCollidesWithEnemy = false; //add to game data
 
@@ -39,20 +38,12 @@ public class Game {
         this.tileDimension = tileDimension;
     }
 
-    public void setWidth(int width) {
-        Width = width;
-    }
-
-    public void setHeight(int height) {
-        Height = height;
-    }
-
     public int getWidth() {
-        return Width;
+        return width;
     }
 
     public int getHeight() {
-        return Height;
+        return height;
     }
 
     public int getTileDimension() {
@@ -64,15 +55,106 @@ public class Game {
     }
 
 
-    public Game(Player player, int h, int w) {
+    public Game() {
+        mainMenuOn = true;
+        startGame();
+
+        GameData gameData = new GameData();
+        gameData.setTotalLevelNum(4);
+
+    }
+
+    public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setCurrLevel(Level currLevel) {
+        this.currLevel = currLevel;
+    }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public int getLevelsNum() {
+        return levelsNum;
+    }
+
+    public void setLevelsNum(int levelsNum) {
+        this.levelsNum = levelsNum;
+    }
+
+    public int getEnemieMoveCounter() {
+        return enemieMoveCounter;
+    }
+
+    public void setEnemieMoveCounter(int enemieMoveCounter) {
+        this.enemieMoveCounter = enemieMoveCounter;
+    }
+
+    public boolean isMainMenuOn() {
+        return mainMenuOn;
+    }
+
+    public void setMainMenuOn(boolean mainMenuOn) {
+        this.mainMenuOn = mainMenuOn;
+    }
+
+    public boolean isPlayerCollidesWithEnemy() {
+        return playerCollidesWithEnemy;
+    }
+
+    public void setPlayerCollidesWithEnemy(boolean playerCollidesWithEnemy) {
+        this.playerCollidesWithEnemy = playerCollidesWithEnemy;
+    }
+
+    public void update() {
+        //move the player***************************************************
+        player.move(player.getCurrDirection(), width, height, tileDimension);
+        for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
+            if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().get(i))) {
+                player.jumpBack(width, height);
+            }
+        }
+
+        //Enemies movement and collision *********************************
+        Enemy e;
+        for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
+            e=currLevel.getEnemies().get(i);
+            if (playerCollidesWithEnemy) {
+
+            }
+            if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
+                player.jumpBack(width, height);
+            }
+            if (enemieMoveCounter == 0 || enemieMoveCounter == 1) {
+                if (e.getSelfMovementPosition()>=enemyMovementLength) {
+                    System.out.println("Turning left");
+                    e.setCurrDirection(Directions.LEFT);
+                } else if (e.getSelfMovementPosition()<=0) {
+                    System.out.println("Turning right");
+                    e.setCurrDirection(Directions.RIGHT);
+                }
+                e.updateSelfMovementPosition();
+                //System.out.println("SM Position: "+ e.getSelfMovementPosition() +", Hitbox xCoord: "+ e.getHitBox().getxCoord());
+                e.move(e.getCurrDirection(), width, height, tileDimension);
+                if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
+                    e.jumpBack(width, height);
+                }
+            }
+            enemieMoveCounter = (enemieMoveCounter+1)%3;
+
+        }//*****************************************************************
+
+    }
+
+    public void startGame() {
+        this.player = new Player();
         player.setxCoord(0);
         player.setyCoord(0);
         player.setWidth(playerWidth);
         player.setHeight(playerHeight);
         player.setHitBox(playerXOffset, playerYOffset);
-        Height = h;
-        Width = w;
         loadAllLevels();
         currLevel = levels.getFirst();
         if (currLevel==null) {
@@ -87,52 +169,7 @@ public class Game {
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
         }
 
-        GameData gameData = new GameData();
-        gameData.setTotalLevelNum(4);
-
     }
-
-    public void update() {
-        //move the player***************************************************
-        player.move(player.getCurrDirection(), Width, Height, tileDimension);
-        for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
-            if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().get(i))) {
-                player.jumpBack(Width, Height);
-            }
-        }
-
-        //Enemies movement and collision *********************************
-        Enemy e;
-        for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
-            e=currLevel.getEnemies().get(i);
-            if (playerCollidesWithEnemy) {
-
-            }
-            if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
-                player.jumpBack(Width, Height);
-            }
-            if (enemieMoveCounter == 0 || enemieMoveCounter == 1) {
-                if (e.getSelfMovementPosition()>=enemyMovementLength) {
-                    System.out.println("Turning left");
-                    e.setCurrDirection(Directions.LEFT);
-                } else if (e.getSelfMovementPosition()<=0) {
-                    System.out.println("Turning right");
-                    e.setCurrDirection(Directions.RIGHT);
-                }
-                e.updateSelfMovementPosition();
-                //System.out.println("SM Position: "+ e.getSelfMovementPosition() +", Hitbox xCoord: "+ e.getHitBox().getxCoord());
-                e.move(e.getCurrDirection(), Width, Height, tileDimension);
-                if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
-                    e.jumpBack(Width, Height);
-                }
-            }
-            enemieMoveCounter = (enemieMoveCounter+1)%3;
-
-        }//*****************************************************************
-
-    }
-
-
     public Level getCurrLevel() {
         return currLevel;
     }
