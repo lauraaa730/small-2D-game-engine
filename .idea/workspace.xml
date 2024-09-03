@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fixed enemy movement. Added the option to turn off collision between player and enemy.">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Started adding buttons for the main menu.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +34,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -153,7 +153,8 @@
       <workItem from="1718794550125" duration="907000" />
       <workItem from="1718830644772" duration="2781000" />
       <workItem from="1718881420249" duration="9681000" />
-      <workItem from="1718902817168" duration="6052000" />
+      <workItem from="1718902817168" duration="6097000" />
+      <workItem from="1725375335884" duration="1345000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -371,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718902905335</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Started adding buttons for the main menu.">
+      <option name="closed" value="true" />
+      <created>1718909123841</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1718909123841</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +416,8 @@
     <MESSAGE value="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy." />
     <MESSAGE value="Implementing enemies." />
     <MESSAGE value="Fixed enemy movement. Added the option to turn off collision between player and enemy." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed enemy movement. Added the option to turn off collision between player and enemy." />
+    <MESSAGE value="Started adding buttons for the main menu." />
+    <option name="LAST_COMMIT_MESSAGE" value="Started adding buttons for the main menu." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

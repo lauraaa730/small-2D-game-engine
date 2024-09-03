@@ -26,23 +26,22 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
+import static cz.cvut.fel.pjv.dudkolau.Graphics.*;
 
 public class Main extends Application {
-    private Graphics graphics = new Graphics();
+    //private Graphics graphics = new Graphics();
     //private Image playerImage =  new Image("playerImage.png");
 
     private Image pausedImage = new Image("paused.png");
     private Game game = new Game();
-
-    private Image[] currPlayerImages = graphics.animSTAND_RIGHT;
+    private Image[] currPlayerImages = animSTAND_RIGHT;
     private  Directions lastDirection = Directions.NONE;
-
-    public int animationCounter = 0;
-
-    public boolean mainMenuButtonsAdded = false;
-
+    private int animationCounter = 0;
+    private boolean mainMenuButtonsAdded = false;
     private boolean showHitBoxes = false;
     private Image backgroundImage = new Image("background.png");
+    private Image currBackgroundImage;
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -144,7 +143,7 @@ public class Main extends Application {
                         }
                         render(canvas);
                         GraphicsContext gc = canvas.getGraphicsContext2D();
-                        gc.drawImage(graphics.backgroundPaused,0,0);
+                        gc.drawImage(backgroundPaused,0,0);
                         gc.drawImage(pausedImage, 155,110);
                     }
 
@@ -164,35 +163,35 @@ public class Main extends Application {
 
     private void setCurrPlayerImages() {
         if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.RIGHT) {
-            currPlayerImages = graphics.animSTAND_RIGHT;
+            currPlayerImages = animSTAND_RIGHT;
             lastDirection = Directions.NONE;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.LEFT) {
-            currPlayerImages = graphics.animSTAND_LEFT;
+            currPlayerImages = animSTAND_LEFT;
             lastDirection = Directions.NONE;
 
         }  else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.UP) {
-            currPlayerImages = graphics.animSTAND_UP;
+            currPlayerImages = animSTAND_UP;
             lastDirection = Directions.NONE;
 
         }  else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.DOWN) {
-            currPlayerImages = graphics.animSTAND_DOWN;
+            currPlayerImages = animSTAND_DOWN;
             lastDirection = Directions.NONE;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.RIGHT) {
-            currPlayerImages = graphics.animRIGHT;
+            currPlayerImages = animRIGHT;
             lastDirection = Directions.RIGHT;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.UP) {
-            currPlayerImages = graphics.animSTAND_UP;
+            currPlayerImages = animSTAND_UP;
             lastDirection = Directions.UP;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.DOWN) {
-            currPlayerImages = graphics.animSTAND_DOWN;
+            currPlayerImages = animSTAND_DOWN;
             lastDirection = Directions.DOWN;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.LEFT) {
-            currPlayerImages = graphics.animLEFT;
+            currPlayerImages = animLEFT;
             lastDirection = Directions.LEFT;
         }
     }
@@ -215,13 +214,13 @@ public class Main extends Application {
                 gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()),objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
 
-                gc.drawImage(currPlayerImages[graphics.imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
                         game.getPlayer().getyCoord() * game.getTileDimension());
                 drewPlayer = true;
 
             } else {
                 if (!drewPlayer) {
-                    gc.drawImage(currPlayerImages[graphics.imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                    gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
                             game.getPlayer().getyCoord() * game.getTileDimension());
                     drewPlayer=true;
                 }
@@ -230,7 +229,7 @@ public class Main extends Application {
                         objectY*game.getTileDimension());
             }
             if (!drewPlayer) {
-                gc.drawImage(currPlayerImages[graphics.imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
                         game.getPlayer().getyCoord() * game.getTileDimension());
             }
         }
@@ -254,7 +253,7 @@ public class Main extends Application {
     }
 
     public void animate() {
-        graphics.imageIndex = (graphics.imageIndex + 1) % currPlayerImages.length;
+        imageIndex = (imageIndex + 1) % currPlayerImages.length;
     }
 
     private void drawRectangle(GraphicsContext gc, int x, int y, int w, int h){

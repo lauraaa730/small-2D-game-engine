@@ -8,9 +8,9 @@ import javafx.scene.image.Image;
 
 public class Graphics {
 
-    public Image backgroundPaused = new Image("backgroundPaused.png");
+    public static Image backgroundPaused = new Image("backgroundPaused.png");
 
-    public Image[] animRIGHT = {
+    public static Image[] animRIGHT = {
             new Image("animRIGHT-1.png"),
             new Image("animRIGHT-2.png"),
             new Image("animRIGHT-3.png"),
@@ -21,7 +21,7 @@ public class Graphics {
             new Image("animRIGHT-8.png")
     };
 
-    public Image[] animSTAND_RIGHT = {
+    public static Image[] animSTAND_RIGHT = {
             new Image("animSTAND_RIGHT-1.png"),
             new Image("animSTAND_RIGHT-2.png"),
             new Image("animSTAND_RIGHT-3.png"),
@@ -31,7 +31,7 @@ public class Graphics {
             new Image("animSTAND_RIGHT-7.png"),
             new Image("animSTAND_RIGHT-8.png"),
     };
-    public Image[] animSTAND_UP = {
+    public static Image[] animSTAND_UP = {
             new Image("animSTAND_UP-1.png"),
             new Image("animSTAND_UP-2.png"),
             new Image("animSTAND_UP-3.png"),
@@ -41,7 +41,7 @@ public class Graphics {
             new Image("animSTAND_UP-7.png"),
             new Image("animSTAND_UP-8.png"),
     };
-    public Image[] animSTAND_DOWN = {
+    public static Image[] animSTAND_DOWN = {
             new Image("animSTAND_DOWN-1.png"),
             new Image("animSTAND_DOWN-2.png"),
             new Image("animSTAND_DOWN-3.png"),
@@ -52,7 +52,7 @@ public class Graphics {
             new Image("animSTAND_DOWN-8.png"),
     };
 
-    public Image[] animSTAND_LEFT = {
+    public static Image[] animSTAND_LEFT = {
             new Image("animSTAND_LEFT-1.png"),
             new Image("animSTAND_LEFT-2.png"),
             new Image("animSTAND_LEFT-3.png"),
@@ -62,7 +62,7 @@ public class Graphics {
             new Image("animSTAND_LEFT-7.png"),
             new Image("animSTAND_LEFT-8.png"),
     };
-    public Image[] animLEFT = {
+    public static Image[] animLEFT = {
             new Image("animLEFT-1.png"),
             new Image("animLEFT-2.png"),
             new Image("animLEFT-3.png"),
@@ -74,7 +74,7 @@ public class Graphics {
     };
 
 
-    public int imageIndex = 0;
+    public static int imageIndex = 0; //in animation cycle
 
 
 
