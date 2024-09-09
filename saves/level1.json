@@ -3,7 +3,7 @@
   "backgroundName" : "backgroundLevel1.png",
   "backgroundObjectsNum": 3,
   "interactableObjectsNum": 0,
-  "enemiesNum" : 1,
+  "enemiesNum" : 2,
   "backgroundObjects": [{
     "xCoord" : 25,
     "yCoord" : 50,
@@ -29,10 +29,19 @@
   "enemies": [
     {
       "currDirection" : 3,
-      "xCoord" : 0,
+      "xCoord" : 50,
       "yCoord" : 90,
       "imageName" : "ghost.png",
       "width" : 70,
       "height" : 70
-    }]
+    },
+    {
+      "currDirection" : 3,
+      "xCoord" : 0,
+      "yCoord" : 5,
+      "imageName" : "ghost.png",
+      "width" : 70,
+      "height" : 70
+    }
+  ]
 }

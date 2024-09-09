@@ -129,10 +129,10 @@ public class Game {
             }
             if (enemieMoveCounter == 0 || enemieMoveCounter == 1) {
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
-                    System.out.println("Turning left");
+                    //System.out.println("Turning left");
                     e.setCurrDirection(Directions.LEFT);
                 } else if (e.getSelfMovementPosition()<=0) {
-                    System.out.println("Turning right");
+                    //System.out.println("Turning right");
                     e.setCurrDirection(Directions.RIGHT);
                 }
                 e.updateSelfMovementPosition();
@@ -141,6 +141,7 @@ public class Game {
                 if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
                     e.jumpBack(width, height);
                 }
+                //TODO enemy by se mel pohybovat i vertikalne, pridat do jsonu movement jakej atd
             }
             enemieMoveCounter = (enemieMoveCounter+1)%3;
 
@@ -149,6 +150,7 @@ public class Game {
     }
 
     public void startGame() {
+        //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
         this.player = new Player();
         player.setxCoord(0);
         player.setyCoord(0);

@@ -32,7 +32,6 @@ public class Main extends Application {
     //private Graphics graphics = new Graphics();
     //private Image playerImage =  new Image("playerImage.png");
 
-    private Image pausedImage = new Image("paused.png");
     private Game game = new Game();
     private Image[] currPlayerImages = animSTAND_RIGHT;
     private  Directions lastDirection = Directions.NONE;
@@ -53,19 +52,12 @@ public class Main extends Application {
         Scene scene = new Scene(pane, game.getWidth(), game.getHeight());
 
 
-        Button continueButton = new Button("Continue");
-        continueButton.setLayoutX(600);
-        continueButton.setLayoutY(200);
-        continueButton.setFocusTraversable(false);
+        Button continueButton = new Button();
+        Button exitGameButton = new Button();
+        Button saveGameButton = new Button();
+        loadButtons(continueButton,exitGameButton, saveGameButton);
 
-        Button newGameButton = new Button("Start New Game");
-        newGameButton.setGraphic(new ImageView(new Image("bushHorizontal.png")));
-        newGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        newGameButton.setLayoutX(100);
-        newGameButton.setLayoutY(200);
-        newGameButton.setFocusTraversable(false);
-
-        game.setPaused(true);
+        game.setPaused(false);
 
         stage.setTitle("Beyond the Forest");
         stage.setResizable(true);
@@ -111,9 +103,16 @@ public class Main extends Application {
             }
         });
 
-        newGameButton.setOnAction(new EventHandler<ActionEvent>() {
+        continueButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 game.setPaused(!game.getIsPaused());
+            }
+        });
+
+        exitGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                System.out.println("Exiting!");
+                System.exit(0);
             }
         });
 
@@ -123,10 +122,11 @@ public class Main extends Application {
             public void handle(long l) {
                 if ((l - lastCall) >= 25_000_000) {
                     if (!game.getIsPaused()) {
+                        //TODO sprinting?
                         game.update();
                         setCurrPlayerImages();
                         if (mainMenuButtonsAdded) {
-                            pane.getChildren().removeAll(newGameButton, continueButton);
+                            pane.getChildren().removeAll(exitGameButton, continueButton, saveGameButton);
                             mainMenuButtonsAdded = false;
                             System.out.println("Deleted button");
                         }
@@ -137,14 +137,14 @@ public class Main extends Application {
                         animationCounter++;
                     } else {
                         if (!mainMenuButtonsAdded) {
-                            pane.getChildren().addAll(newGameButton, continueButton);
+                            pane.getChildren().addAll(exitGameButton, continueButton, saveGameButton);
                             mainMenuButtonsAdded = true;
                             System.out.println("Added button");
                         }
                         render(canvas);
                         GraphicsContext gc = canvas.getGraphicsContext2D();
                         gc.drawImage(backgroundPaused,0,0);
-                        gc.drawImage(pausedImage, 155,110);
+                        gc.drawImage(pausedGame, 155,110);
                     }
 
                     lastCall = l;
@@ -263,6 +263,27 @@ public class Main extends Application {
         rect.setStroke(Color.RED);
         rect.setStrokeWidth(2);
         gc.strokeRect(x*tileDimension, y*tileDimension, w, h);
+    }
+
+    private void loadButtons(Button continueButton, Button exitGameButton, Button saveGameButton) {
+        continueButton.setGraphic(new ImageView(continueImage));
+        continueButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        continueButton.setBackground(Background.fill(Color.TRANSPARENT));
+        continueButton.setLayoutX(170);
+        continueButton.setLayoutY(230);
+
+        exitGameButton.setGraphic(new ImageView(exitGameImage));
+        exitGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        exitGameButton.setBackground(Background.fill(Color.TRANSPARENT));
+        exitGameButton.setLayoutX(170);
+        exitGameButton.setLayoutY(300);
+        //exitGameButton.setFocusTraversable(false);
+
+        saveGameButton.setGraphic(new ImageView(new Image("saveGameButton.png")));
+        saveGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        saveGameButton.setBackground(Background.fill(Color.TRANSPARENT));
+        saveGameButton.setLayoutX(170);
+        saveGameButton.setLayoutY(370);
     }
 
     public static void main(String[] args) { launch(args); }
