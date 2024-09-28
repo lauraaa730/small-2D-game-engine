@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
+import com.fasterxml.jackson.annotation.JsonView;
 
 public class Enemy extends InteractableObject implements Entity{
     private int health;

@@ -11,6 +11,10 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import cz.cvut.fel.pjv.dudkolau.Model.Views;
+
+
 public class Game {
     private Player player;
     private Level currLevel;
@@ -58,6 +62,7 @@ public class Game {
     public Game() {
         mainMenuOn = true;
         startGame();
+        //loadSavedGame();
 
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
@@ -149,8 +154,13 @@ public class Game {
 
     }
 
+    public void setLevels(List<Level> levels) {
+        this.levels = levels;
+    }
+
     public void startGame() {
         //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
+
         this.player = new Player();
         player.setxCoord(0);
         player.setyCoord(0);
@@ -169,6 +179,30 @@ public class Game {
         for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
             System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
+        }
+
+    }
+
+    public void loadSavedGame() {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            GameData gameData = objectMapper.readValue(
+                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/current-game-state.json" ), GameData.class
+            );
+            levels = gameData.getLevels();
+            currLevel = levels.get(gameData.getCurrPlayerLevel());
+            this.player = new Player();
+            player.setxCoord(gameData.getCurrPlayerX());
+            player.setyCoord(gameData.getCurrPlayerY());
+            player.setWidth(playerWidth);
+            player.setHeight(playerHeight);
+            player.setHitBox(playerXOffset, playerYOffset);
+            System.out.println("Loaded game succesfully!");
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Something went wrong with json");
         }
 
     }
@@ -215,6 +249,32 @@ public class Game {
             }
 
         }
+    }
+
+    public void saveGame() {
+        GameData gameData = new GameData();
+        gameData.setCurrPlayerLevel(currLevel.getLevelType());
+        gameData.setCurrPlayerX(this.player.getxCoord());
+        gameData.setCurrPlayerY(this.player.getyCoord());
+        gameData.setTotalLevelNum(levelsNum);
+
+        gameData.setLevels(levels);
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            //objectMapper.addMixIn(java.awt.Rectangle.class, RectangleMixin.class);
+
+            objectMapper.writerWithView(Views.SaveGameView.class).writeValue(
+                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/current-game-state.json" ), gameData
+            );
+            System.out.println("game saved succesfully");
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Something went wrong with json");
+        }
+
+
     }
 
 }

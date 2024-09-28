@@ -2,9 +2,14 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonView;
 
 public class Level {
+
+    @JsonView(Views.SaveGameView.class)
     private int levelType;
+
+    @JsonView(Views.SaveGameView.class)
     private String backgroundName;
 
     public String getBackgroundName() {
@@ -15,8 +20,10 @@ public class Level {
         this.backgroundName = backgroundName;
     }
 
+    //@JsonView(Views.SaveGameView.class)
     private int backgroundObjectsNum;
     private int interactableObjectsNum;
+    //@JsonView(Views.SaveGameView.class)
     private int enemiesNum;
     private List<InteractableObject> interactableObjects = new ArrayList<>();
     private List<BackgroundObject> backgroundObjects = new ArrayList<>();

@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
+
 public interface Entity {
     public int getHealth();
     public int getxCoord();

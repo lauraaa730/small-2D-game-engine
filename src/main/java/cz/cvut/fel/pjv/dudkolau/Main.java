@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -113,6 +115,13 @@ public class Main extends Application {
             @Override public void handle(ActionEvent event) {
                 System.out.println("Exiting!");
                 System.exit(0);
+            }
+        });
+
+        saveGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                System.out.println("Saving...");
+                game.saveGame();
             }
         });
 
