@@ -61,8 +61,8 @@ public class Game {
 
     public Game() {
         mainMenuOn = true;
-        startGame();
-        //loadSavedGame();
+        //startGame();
+        loadSavedGame();
 
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
@@ -187,11 +187,19 @@ public class Game {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            GameData gameData = objectMapper.readValue(
+            GameData gameData = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
                     new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/current-game-state.json" ), GameData.class
             );
+
             levels = gameData.getLevels();
-            currLevel = levels.get(gameData.getCurrPlayerLevel());
+            System.out.println(gameData.getCurrPlayerLevel());
+            for (int i = 0; i <levels.size(); i++) {
+                if (levels.get(i).getLevelType()==gameData.getCurrPlayerLevel()) {
+                    currLevel = levels.get(i);
+                    break;
+                }
+            }
+
             this.player = new Player();
             player.setxCoord(gameData.getCurrPlayerX());
             player.setyCoord(gameData.getCurrPlayerY());
@@ -203,6 +211,14 @@ public class Game {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Something went wrong with json");
+        }
+
+        for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
+            this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
+        }
+        for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
+            System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
+            this.currLevel.getEnemies().get(i).setHitBox(0, 0);
         }
 
     }
@@ -225,7 +241,7 @@ public class Game {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            Level levelToRead = objectMapper.readValue(
+            Level levelToRead = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
                     new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/" + levelName), Level.class
             );
             System.out.println(levelToRead);

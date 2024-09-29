@@ -34,7 +34,6 @@ public class GameData {
     }
 
     //@JsonView(Views.SaveGameView.class)
-    @JsonIgnore
     private List<Level> levels;
 
     public int getCurrPlayerX() {

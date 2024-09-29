@@ -1,5 +1,7 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
 public class Player implements Entity {
@@ -9,12 +11,13 @@ public class Player implements Entity {
     private int yCoord;
     private int height;
     private int width;
-
+    @JsonIgnore
+    private HitBox hitBox = new HitBox();
     //for JSON
     public Player() {
     }
 
-    private HitBox hitBox = new HitBox();
+
 
     public int getHeight() {
         return height;

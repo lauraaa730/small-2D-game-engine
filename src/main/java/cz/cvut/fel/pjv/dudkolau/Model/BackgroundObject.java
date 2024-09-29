@@ -1,5 +1,7 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
 
 /*
@@ -14,6 +16,7 @@ public class BackgroundObject implements GameObject{
     private String imageName;
     private int width;
     private int height;
+    @JsonIgnore
     private HitBox hitBox = new HitBox();
 
     public int getxCoord() {

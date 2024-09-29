@@ -2,23 +2,18 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class Level {
 
-    @JsonView(Views.SaveGameView.class)
     private int levelType;
 
-    @JsonView(Views.SaveGameView.class)
+
     private String backgroundName;
 
-    public String getBackgroundName() {
-        return backgroundName;
-    }
 
-    public void setBackgroundName(String backgroundName) {
-        this.backgroundName = backgroundName;
-    }
 
     //@JsonView(Views.SaveGameView.class)
     private int backgroundObjectsNum;
@@ -43,7 +38,13 @@ public class Level {
     public int getBackgroundObjectsNum() {
         return backgroundObjectsNum;
     }
+    public String getBackgroundName() {
+        return backgroundName;
+    }
 
+    public void setBackgroundName(String backgroundName) {
+        this.backgroundName = backgroundName;
+    }
     public void setBackgroundObjectsNum(int backgroundObjectsNum) {
         this.backgroundObjectsNum = backgroundObjectsNum;
     }

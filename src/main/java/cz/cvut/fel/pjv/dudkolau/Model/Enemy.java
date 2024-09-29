@@ -1,6 +1,8 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class Enemy extends InteractableObject implements Entity{
@@ -10,8 +12,11 @@ public class Enemy extends InteractableObject implements Entity{
     private int height;
     private int width;
     private String imageName;
+
+    @JsonIgnore
     private HitBox hitBox = new HitBox();
     private int selfMovementPosition = 0;
+
     private Directions currDirection = Directions.RIGHT;
     @Override
     public String getImageName() {

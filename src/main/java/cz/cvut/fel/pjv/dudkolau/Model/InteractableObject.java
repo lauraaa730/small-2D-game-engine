@@ -1,13 +1,17 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class InteractableObject implements GameObject {
     private int xCoord;
     private int yCoord;
+    @JsonIgnore
     private HitBox hitBox = new HitBox();
-
+    private int width;
+    private int height;
     @Override
     public String getImageName() {
         return null;
@@ -17,9 +21,6 @@ public class InteractableObject implements GameObject {
     public void setImageName(String imageName) {
 
     }
-
-    private int width;
-    private int height;
 
     @Override
     public HitBox getHitBox() {
