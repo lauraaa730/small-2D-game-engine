@@ -29,7 +29,7 @@ public class InteractableObject implements GameObject {
 
     @Override
     public void setHitBox(int xOffset, int yOffset) {
-        this.hitBox.setRectangle(xCoord*tileDimension, yCoord*tileDimension, this.width, this.height, xOffset, yOffset);
+        this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class Main extends Application {
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = false;
+    private boolean showHitBoxes = true;
     private Image backgroundImage = new Image("background.png");
     private Image currBackgroundImage;
 
@@ -250,7 +250,6 @@ public class Main extends Application {
 
 
         if (showHitBoxes) {
-            drawRectangle(gc, game.getPlayer().getHitBox().getxCoord(), game.getPlayer().getHitBox().getyCoord(), game.getPlayer().getHitBox().getWidth(), game.getPlayer().getHitBox().getHeight());
             //drawRectangle(gc, game.getGameObjects().getFirst().getHitBox().getRectangle());
             for (GameObject gameObject : game.getGameObjects()) {
                 drawRectangle(gc, gameObject.getHitBox().getxCoord(), gameObject.getHitBox().getyCoord(), gameObject.getHitBox().getWidth(), gameObject.getHitBox().getHeight());
@@ -258,6 +257,7 @@ public class Main extends Application {
             for (Enemy enemy : game.getCurrLevel().getEnemies()) {
                 drawRectangle(gc, enemy.getHitBox().getxCoord(), enemy.getHitBox().getyCoord(), enemy.getHitBox().getWidth(), enemy.getHitBox().getHeight());
             }
+            drawRectangle(gc, game.getPlayer().getHitBox().getxCoord(), game.getPlayer().getHitBox().getyCoord(), game.getPlayer().getHitBox().getWidth(), game.getPlayer().getHitBox().getHeight());
         }
     }
 

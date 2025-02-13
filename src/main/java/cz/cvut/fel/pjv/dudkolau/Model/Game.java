@@ -61,13 +61,17 @@ public class Game {
 
     public Game() {
         mainMenuOn = true;
-        //startGame();
-        loadSavedGame();
+        startGame(mainMenuOn);
+
+
+        //TODO kdyz dam loadSavedGame - tak palyer nema hitbox a nemuze se hybat right and down
+        //loadSavedGame();
 
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
 
     }
+
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -113,11 +117,17 @@ public class Game {
         this.playerCollidesWithEnemy = playerCollidesWithEnemy;
     }
 
+    public void startGame(boolean newGame) {
+        //startNewGame();
+        loadSavedGame();
+    }
+
     public void update() {
         //move the player***************************************************
         player.move(player.getCurrDirection(), width, height, tileDimension);
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
             if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().get(i))) {
+                System.out.println("Collisison");
                 player.jumpBack(width, height);
             }
         }
@@ -158,7 +168,7 @@ public class Game {
         this.levels = levels;
     }
 
-    public void startGame() {
+    public void startNewGame() {
         //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
 
         this.player = new Player();
@@ -203,6 +213,7 @@ public class Game {
             this.player = new Player();
             player.setxCoord(gameData.getCurrPlayerX());
             player.setyCoord(gameData.getCurrPlayerY());
+            System.out.println(player.getxCoord());
             player.setWidth(playerWidth);
             player.setHeight(playerHeight);
             player.setHitBox(playerXOffset, playerYOffset);
