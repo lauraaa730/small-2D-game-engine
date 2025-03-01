@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="SetHitBox for player fixed. It was multiplied by tile dimension twice, now only once. Player can now start wherever. Also divided starGame method into two, depending on whether we are loading saved game or new game.">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added more sprites">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +172,7 @@
       <workItem from="1739714638248" duration="102000" />
       <workItem from="1740330116150" duration="154000" />
       <workItem from="1740330316470" duration="95000" />
-      <workItem from="1740827476349" duration="11000" />
+      <workItem from="1740827476349" duration="567000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -446,7 +446,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739446310090</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Added more sprites">
+      <option name="closed" value="true" />
+      <created>1740827519643</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1740827519643</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,7 +472,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="first commit" />
     <MESSAGE value="commit" />
     <MESSAGE value="Added first basic gui, only can move the characte" />
     <MESSAGE value="added animation - walk cycle" />
@@ -489,7 +496,8 @@
     <MESSAGE value="Started working on saving and loading the game using json ignore annotations." />
     <MESSAGE value="Saving game and loading saved game now works." />
     <MESSAGE value="SetHitBox for player fixed. It was multiplied by tile dimension twice, now only once. Player can now start wherever. Also divided starGame method into two, depending on whether we are loading saved game or new game." />
-    <option name="LAST_COMMIT_MESSAGE" value="SetHitBox for player fixed. It was multiplied by tile dimension twice, now only once. Player can now start wherever. Also divided starGame method into two, depending on whether we are loading saved game or new game." />
+    <MESSAGE value="Added more sprites" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more sprites" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

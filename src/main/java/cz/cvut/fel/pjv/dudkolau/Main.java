@@ -40,7 +40,7 @@ public class Main extends Application {
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
     private boolean showHitBoxes = false;
-    private Image backgroundImage = new Image("background.png");
+    //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
     @Override
@@ -192,11 +192,11 @@ public class Main extends Application {
             lastDirection = Directions.RIGHT;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.UP) {
-            currPlayerImages = animSTAND_UP;
+            currPlayerImages = animUP;
             lastDirection = Directions.UP;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.DOWN) {
-            currPlayerImages = animSTAND_DOWN;
+            currPlayerImages = animDOWN;
             lastDirection = Directions.DOWN;
 
         } else if (game.getPlayer().getCurrDirection()==Directions.LEFT) {

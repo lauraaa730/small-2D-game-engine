@@ -11,6 +11,7 @@ public class Graphics {
 
     public static Image backgroundPaused = new Image("backgroundPaused.png");
     public static Image pausedGame = new Image("pausedGame.png");
+    public static Image backgroundImage = new Image("background_wall.png");
     public static Image saveGameImage = new Image("saveGameButton.png");
     public static Image exitGameImage = new Image("exitGameButton.png");
     public static Image continueImage = new Image("continueButton.png");
@@ -26,6 +27,30 @@ public class Graphics {
             new Image("animRIGHT-7.png"),
             new Image("animRIGHT-8.png")
     };
+
+    public static Image[] animUP = {
+            new Image("animUP-1.png"),
+            new Image("animUP-2.png"),
+            new Image("animUP-3.png"),
+            new Image("animUP-4.png"),
+            new Image("animUP-5.png"),
+            new Image("animUP-6.png"),
+            new Image("animUP-7.png"),
+            new Image("animUP-8.png")
+    };
+
+    public static Image[] animDOWN = {
+            new Image("animDOWN-1.png"),
+            new Image("animDOWN-2.png"),
+            new Image("animDOWN-3.png"),
+            new Image("animDOWN-4.png"),
+            new Image("animDOWN-5.png"),
+            new Image("animDOWN-6.png"),
+            new Image("animDOWN-7.png"),
+            new Image("animDOWN-8.png")
+    };
+
+
 
     public static Image[] animSTAND_RIGHT = {
             new Image("animSTAND_RIGHT-1.png"),
