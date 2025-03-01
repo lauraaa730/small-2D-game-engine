@@ -63,10 +63,6 @@ public class Game {
         mainMenuOn = true;
         startGame(mainMenuOn);
 
-
-        //TODO kdyz dam loadSavedGame - tak palyer nema hitbox a nemuze se hybat right and down
-        //loadSavedGame();
-
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
 
