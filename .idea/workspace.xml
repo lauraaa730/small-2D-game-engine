@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added more sprites">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Completed player animations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Graphics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +23,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -172,7 +176,10 @@
       <workItem from="1739714638248" duration="102000" />
       <workItem from="1740330116150" duration="154000" />
       <workItem from="1740330316470" duration="95000" />
-      <workItem from="1740827476349" duration="567000" />
+      <workItem from="1740827476349" duration="761000" />
+      <workItem from="1741005331994" duration="61000" />
+      <workItem from="1741006555151" duration="6000" />
+      <workItem from="1741529251382" duration="3020000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -454,7 +461,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740827519643</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Completed player animations">
+      <option name="closed" value="true" />
+      <created>1740828062226</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1740828062226</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -472,7 +487,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit" />
     <MESSAGE value="Added first basic gui, only can move the characte" />
     <MESSAGE value="added animation - walk cycle" />
     <MESSAGE value="fixed walk cycle errors" />
@@ -497,7 +511,8 @@
     <MESSAGE value="Saving game and loading saved game now works." />
     <MESSAGE value="SetHitBox for player fixed. It was multiplied by tile dimension twice, now only once. Player can now start wherever. Also divided starGame method into two, depending on whether we are loading saved game or new game." />
     <MESSAGE value="Added more sprites" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more sprites" />
+    <MESSAGE value="Completed player animations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed player animations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

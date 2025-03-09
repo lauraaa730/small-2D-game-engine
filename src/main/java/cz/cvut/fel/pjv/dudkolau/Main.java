@@ -82,13 +82,13 @@ public class Main extends Application {
                     if (keyEvent.getCode() == KeyCode.ESCAPE) {
                         game.setPaused(!game.getIsPaused());
                     }
-                    if (keyEvent.getCode() == KeyCode.LEFT) {
+                    if (keyEvent.getCode() == KeyCode.A) {
                         game.getPlayer().setCurrDirection(Directions.LEFT);
-                    } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+                    } else if (keyEvent.getCode() == KeyCode.D) {
                         game.getPlayer().setCurrDirection(Directions.RIGHT);
-                    } else if (keyEvent.getCode() == KeyCode.DOWN) {
+                    } else if (keyEvent.getCode() == KeyCode.S) {
                         game.getPlayer().setCurrDirection(Directions.DOWN);
-                    } else if (keyEvent.getCode() == KeyCode.UP) {
+                    } else if (keyEvent.getCode() == KeyCode.W) {
                         game.getPlayer().setCurrDirection(Directions.UP);
                     }
             }
@@ -97,9 +97,9 @@ public class Main extends Application {
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.LEFT ||
-                        keyEvent.getCode() == KeyCode.RIGHT ||keyEvent.getCode() == KeyCode.UP ||
-                        keyEvent.getCode() == KeyCode.DOWN) {
+                if (keyEvent.getCode() == KeyCode.A ||
+                        keyEvent.getCode() == KeyCode.D ||keyEvent.getCode() == KeyCode.W ||
+                        keyEvent.getCode() == KeyCode.S) {
                     game.getPlayer().setCurrDirection(Directions.NONE);
                 }
             }
