@@ -114,8 +114,8 @@ public class Game {
     }
 
     public void startGame(boolean newGame) {
-        //startNewGame();
-        loadSavedGame();
+        startNewGame();
+        //loadSavedGame();
     }
 
     public void update() {

@@ -5,7 +5,7 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
-public class Enemy extends InteractableObject implements Entity{
+public class Enemy implements Entity{
     private int health;
     private int xCoord;
     private int yCoord;
@@ -18,12 +18,11 @@ public class Enemy extends InteractableObject implements Entity{
     private int selfMovementPosition = 0;
 
     private Directions currDirection = Directions.RIGHT;
-    @Override
+
     public String getImageName() {
         return imageName;
     }
 
-    @Override
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
@@ -45,22 +44,20 @@ public class Enemy extends InteractableObject implements Entity{
         return hitBox;
     }
 
-    @Override
     public int getHeight() {
         return height;
     }
 
-    @Override
+
     public void setHeight(int height) {
         this.height = height;
     }
 
-    @Override
+
     public int getWidth() {
         return width;
     }
 
-    @Override
     public void setWidth(int width) {
         this.width = width;
     }
