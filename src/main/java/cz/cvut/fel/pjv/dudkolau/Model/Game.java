@@ -119,13 +119,27 @@ public class Game {
     }
 
     public void update() {
+        GameObject currentObject;
         //move the player***************************************************
         player.move(player.getCurrDirection(), width, height, tileDimension);
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
-            if (checkCollisionWithObject(player,this.currLevel.getBackgroundObjects().get(i))) {
-                System.out.println("Collisison");
-                player.jumpBack(width, height);
+            currentObject = this.currLevel.getBackgroundObjects().get(i);
+            if (checkCollisionWithObject(player,currentObject)) {
+                player.jumpBack(true,width, height);
             }
+            if (isPlayerFacingObject(currentObject)) {
+                System.out.println("FACING");
+            }
+        }
+
+        for (int i = 0; i < currLevel.getInteractableObjectsNum() ; i++) {
+            currentObject = this.currLevel.getBackgroundObjects().get(i);
+            if (checkCollisionWithObject(player,currentObject)) {
+                player.jumpBack(true,width, height);
+            } /*
+            if (isPlayerFacingObject(currentObject)) {
+                System.out.println("FACING");
+            }*/
         }
 
         //Enemies movement and collision *********************************
@@ -136,7 +150,7 @@ public class Game {
 
             }
             if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
-                player.jumpBack(width, height);
+                player.jumpBack(true,width, height);
             }
             if (enemieMoveCounter == 0 || enemieMoveCounter == 1) {
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
@@ -168,6 +182,7 @@ public class Game {
         //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
 
         this.player = new Player();
+        player.setInteracting(false);
         player.setxCoord(0);
         player.setyCoord(0);
         player.setWidth(playerWidth);
@@ -189,6 +204,34 @@ public class Game {
 
     }
 
+
+    public Level getCurrLevel() {
+        return currLevel;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public List<GameObject> getGameObjects() {
+        List<GameObject> gameObjects = new ArrayList<>();
+        gameObjects.addAll(this.currLevel.getBackgroundObjects());
+        gameObjects.addAll(this.currLevel.getInteractableObjects());
+        return gameObjects;
+    }
+
+    private boolean isPlayerFacingObject(GameObject object) {
+        player.move(player.getLastDirection(), width, height, tileDimension);
+        if (checkCollisionWithObject(player,object)) {
+            player.jumpBack(false,width, height);
+            return true;
+        }
+        player.jumpBack(false,width, height);
+
+        return false;
+    }
+
+    // Saving and loading help functions ***********************
     public void loadSavedGame() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -228,20 +271,6 @@ public class Game {
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
         }
 
-    }
-    public Level getCurrLevel() {
-        return currLevel;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public List<GameObject> getGameObjects() {
-        List<GameObject> gameObjects = new ArrayList<>();
-        gameObjects.addAll(this.currLevel.getBackgroundObjects());
-        gameObjects.addAll(this.currLevel.getInteractableObjects());
-        return gameObjects;
     }
 
     private Level loadLevelFromJson(String levelName){

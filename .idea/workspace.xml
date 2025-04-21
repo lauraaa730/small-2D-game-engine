@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="testing gitlab push">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Button.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" afterDir="false" />
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="added 2 classes: potion and Button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +189,12 @@
       <workItem from="1741887563016" duration="16000" />
       <workItem from="1744473237681" duration="943000" />
       <workItem from="1744544049648" duration="2461000" />
-      <workItem from="1744562182769" duration="2583000" />
+      <workItem from="1744562182769" duration="2643000" />
+      <workItem from="1744565314785" duration="2437000" />
+      <workItem from="1744812685817" duration="543000" />
+      <workItem from="1744887978939" duration="1461000" />
+      <workItem from="1745003360110" duration="46000" />
+      <workItem from="1745257033395" duration="4555000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -494,7 +500,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741534910926</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="added 2 classes: potion and Button">
+      <option name="closed" value="true" />
+      <created>1744565278540</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1744565278540</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,7 +526,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added animation - walk cycle" />
     <MESSAGE value="fixed walk cycle errors" />
     <MESSAGE value="added bush" />
     <MESSAGE value="Fixed hitboxes, if showHitboxes == true, the hitboxes of every object is now shown, even when moving. Added collision check with objects when player moves." />
@@ -537,7 +550,8 @@
     <MESSAGE value="Added more sprites" />
     <MESSAGE value="Completed player animations" />
     <MESSAGE value="testing gitlab push" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing gitlab push" />
+    <MESSAGE value="added 2 classes: potion and Button" />
+    <option name="LAST_COMMIT_MESSAGE" value="added 2 classes: potion and Button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

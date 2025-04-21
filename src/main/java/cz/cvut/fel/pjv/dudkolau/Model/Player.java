@@ -11,6 +11,25 @@ public class Player implements Entity {
     private int yCoord;
     private int height;
     private int width;
+    private boolean interacting;
+    private  Directions lastDirection = Directions.NONE;
+
+    public Directions getLastDirection() {
+        return lastDirection;
+    }
+
+    public void setLastDirection(Directions lastDirection) {
+        this.lastDirection = lastDirection;
+    }
+
+    public boolean isInteracting() {
+        return interacting;
+    }
+
+    public void setInteracting(boolean interacting) {
+        this.interacting = interacting;
+    }
+
     @JsonIgnore
     private HitBox hitBox = new HitBox();
     //for JSON
@@ -105,16 +124,31 @@ public class Player implements Entity {
         currDirection = d;
     }
 
-    public void jumpBack(int w, int h) {
-        if (currDirection == Directions.LEFT) {
-            move(Directions.RIGHT, w, h, tileDimension);
-        } else if (currDirection == Directions.RIGHT) {
-            move(Directions.LEFT, w, h, tileDimension);
-        } else if (currDirection == Directions.UP) {
-            move(Directions.DOWN, w, h, tileDimension);
-        } else if (currDirection == Directions.DOWN) {
-            move(Directions.UP, w, h, tileDimension);
+    public void jumpBack(boolean fromCurrDir,int w, int h) {
+        //if we want to check from curr direction, fromCurrDir will be 1,
+        //if from last dir, it will be 0
+        if (fromCurrDir) {
+            if (currDirection == Directions.LEFT) {
+                move(Directions.RIGHT, w, h, tileDimension);
+            } else if (currDirection == Directions.RIGHT) {
+                move(Directions.LEFT, w, h, tileDimension);
+            } else if (currDirection == Directions.UP) {
+                move(Directions.DOWN, w, h, tileDimension);
+            } else if (currDirection == Directions.DOWN) {
+                move(Directions.UP, w, h, tileDimension);
+            }
+        } else {
+            if (lastDirection == Directions.LEFT) {
+                move(Directions.RIGHT, w, h, tileDimension);
+            } else if (lastDirection == Directions.RIGHT) {
+                move(Directions.LEFT, w, h, tileDimension);
+            } else if (lastDirection == Directions.UP) {
+                move(Directions.DOWN, w, h, tileDimension);
+            } else if (lastDirection == Directions.DOWN) {
+                move(Directions.UP, w, h, tileDimension);
+            }
         }
+
     }
 
 }

@@ -23,7 +23,7 @@
     },
     {
       "currDirection" : 3,
-      "xCoord" : 0,
+      "xCoord" : 10,
       "yCoord" : 5,
       "imageName" : "ghost.png",
       "width" : 70,

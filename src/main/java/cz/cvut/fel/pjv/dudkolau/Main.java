@@ -83,13 +83,19 @@ public class Main extends Application {
                         game.setPaused(!game.getIsPaused());
                     }
                     if (keyEvent.getCode() == KeyCode.A) {
+                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
                         game.getPlayer().setCurrDirection(Directions.LEFT);
                     } else if (keyEvent.getCode() == KeyCode.D) {
+                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
                         game.getPlayer().setCurrDirection(Directions.RIGHT);
                     } else if (keyEvent.getCode() == KeyCode.S) {
+                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
                         game.getPlayer().setCurrDirection(Directions.DOWN);
                     } else if (keyEvent.getCode() == KeyCode.W) {
+                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
                         game.getPlayer().setCurrDirection(Directions.UP);
+                    } else if (keyEvent.getCode() == KeyCode.E) {
+                        game.getPlayer().setInteracting(true);
                     }
             }
         });
@@ -100,7 +106,10 @@ public class Main extends Application {
                 if (keyEvent.getCode() == KeyCode.A ||
                         keyEvent.getCode() == KeyCode.D ||keyEvent.getCode() == KeyCode.W ||
                         keyEvent.getCode() == KeyCode.S) {
+                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
                     game.getPlayer().setCurrDirection(Directions.NONE);
+                } else if (keyEvent.getCode() == KeyCode.E) {
+                    game.getPlayer().setInteracting(false);
                 }
             }
         });
@@ -171,6 +180,8 @@ public class Main extends Application {
     }
 
     private void setCurrPlayerImages() {
+        //System.out.println(game.getPlayer().getLastDirection());
+        //using last direction instead of player.getLastDirection for simpler code and efficiency
         if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.RIGHT) {
             currPlayerImages = animSTAND_RIGHT;
             lastDirection = Directions.NONE;
