@@ -127,19 +127,17 @@ public class Game {
             if (checkCollisionWithObject(player,currentObject)) {
                 player.jumpBack(true,width, height);
             }
-            if (isPlayerFacingObject(currentObject)) {
-                System.out.println("FACING");
-            }
         }
 
         for (int i = 0; i < currLevel.getInteractableObjectsNum() ; i++) {
             currentObject = this.currLevel.getBackgroundObjects().get(i);
             if (checkCollisionWithObject(player,currentObject)) {
                 player.jumpBack(true,width, height);
-            } /*
-            if (isPlayerFacingObject(currentObject)) {
-                System.out.println("FACING");
-            }*/
+            }
+            // Check if player is interacting with an object
+            if ( player.isInteracting() && isPlayerFacingObject(currentObject)) {
+                //interact action
+            }
         }
 
         //Enemies movement and collision *********************************

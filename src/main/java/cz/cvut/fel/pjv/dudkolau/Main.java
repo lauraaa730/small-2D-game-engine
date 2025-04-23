@@ -39,7 +39,7 @@ public class Main extends Application {
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = false;
+    private boolean showHitBoxes = true;
     //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
@@ -162,7 +162,7 @@ public class Main extends Application {
                         render(canvas);
                         GraphicsContext gc = canvas.getGraphicsContext2D();
                         gc.drawImage(backgroundPaused,0,0);
-                        gc.drawImage(pausedGame, 155,110);
+                        gc.drawImage(pausedMenu, 155,110);
                     }
 
                     lastCall = l;
@@ -289,21 +289,21 @@ public class Main extends Application {
         continueButton.setGraphic(new ImageView(continueImage));
         continueButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         continueButton.setBackground(Background.fill(Color.TRANSPARENT));
-        continueButton.setLayoutX(170);
-        continueButton.setLayoutY(230);
+        continueButton.setLayoutX(180);
+        continueButton.setLayoutY(370);
 
         exitGameButton.setGraphic(new ImageView(exitGameImage));
         exitGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         exitGameButton.setBackground(Background.fill(Color.TRANSPARENT));
-        exitGameButton.setLayoutX(170);
+        exitGameButton.setLayoutX(180);
         exitGameButton.setLayoutY(300);
         //exitGameButton.setFocusTraversable(false);
 
         saveGameButton.setGraphic(new ImageView(new Image("saveGameButton.png")));
         saveGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         saveGameButton.setBackground(Background.fill(Color.TRANSPARENT));
-        saveGameButton.setLayoutX(170);
-        saveGameButton.setLayoutY(370);
+        saveGameButton.setLayoutX(180);
+        saveGameButton.setLayoutY(230);
     }
 
     public static void main(String[] args) { launch(args); }

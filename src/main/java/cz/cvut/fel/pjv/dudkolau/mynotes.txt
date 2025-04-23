@@ -8,3 +8,4 @@ konzultace:
 
   otazky:
     -je v pohode ze v mainu jde vsechno pres game? game.getPlayer atd.. jestli to nezpomaluje
+    - je potreba vlakno? jak to zakomponovat

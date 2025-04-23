@@ -11,7 +11,8 @@ public class Player implements Entity {
     private int yCoord;
     private int height;
     private int width;
-    private boolean interacting;
+    @JsonIgnore
+    private boolean interacting; //this does not need to go into json
     private  Directions lastDirection = Directions.NONE;
 
     public Directions getLastDirection() {
