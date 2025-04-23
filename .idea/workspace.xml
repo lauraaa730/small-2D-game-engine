@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Changed paused menu background image">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Working on doors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/level2.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/InteractableObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/InteractableObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +221,7 @@
       <workItem from="1745003360110" duration="46000" />
       <workItem from="1745257033395" duration="5734000" />
       <workItem from="1745321799524" duration="932000" />
-      <workItem from="1745411314920" duration="6437000" />
+      <workItem from="1745411314920" duration="8159000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -593,7 +591,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745415935561</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Working on doors">
+      <option name="closed" value="true" />
+      <created>1745418476424</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1745418476424</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -611,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added 3D effect when player stands behind or infront of bush. Changed some hitbox methods." />
     <MESSAGE value="Added pausing." />
     <MESSAGE value="added objectmapper, added more animations" />
     <MESSAGE value="added even more animations" />
@@ -636,7 +641,8 @@
     <MESSAGE value="Added player attribute Last direction (previously only in the main function) + tha game now recognizes when player is facing an object and standing right in front of it. (isPlayerFacingObject() method)" />
     <MESSAGE value="Sleeping mushroom on pause menu" />
     <MESSAGE value="Changed paused menu background image" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed paused menu background image" />
+    <MESSAGE value="Working on doors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on doors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,6 +3,7 @@
   "backgroundName" : "backgroundLevel1.png",
   "backgroundObjectsNum": 3,
   "interactableObjectsNum": 0,
+  "doorsNum" : 0,
   "enemiesNum" :0,
   "backgroundObjects": [{
     "xCoord" : 25,

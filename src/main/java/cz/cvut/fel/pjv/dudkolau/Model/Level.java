@@ -20,6 +20,8 @@ public class Level {
     private int interactableObjectsNum;
     //@JsonView(Views.SaveGameView.class)
     private int enemiesNum;
+    private int doorsNum;
+    private List<Door> doors = new ArrayList<>();
     private List<InteractableObject> interactableObjects = new ArrayList<>();
     private List<BackgroundObject> backgroundObjects = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
@@ -89,4 +91,19 @@ public class Level {
         this.enemies = enemies;
     }
 
+    public int getDoorsNum() {
+        return doorsNum;
+    }
+
+    public void setDoorsNum(int doorsNum) {
+        this.doorsNum = doorsNum;
+    }
+
+    public List<Door> getDoors() {
+        return doors;
+    }
+
+    public void setDoors(List<Door> doors) {
+        this.doors = doors;
+    }
 }

@@ -2,7 +2,8 @@
   "levelType" : 1,
   "backgroundName" : "backgroundLevel1.png",
   "backgroundObjectsNum": 1,
-  "interactableObjectsNum": 1,
+  "interactableObjectsNum": 0,
+  "doorsNum": 1,
   "enemiesNum" : 2,
   "backgroundObjects": [{
     "xCoord" : 25,
@@ -11,14 +12,15 @@
     "width" : 170,
     "height" : 110
   }],
-  "interactableObjects": [ {
+  "interactableObjects": [],
+  "doors": [ {
+    "level1" : 0,
+    "level2" : 1,
     "xCoord" : 0,
     "yCoord" : 15,
     "imageName" : "doorVertical.png",
     "width" : 20,
-    "height" : 100,
-    "level1" : 0,
-    "level2" : 1
+    "height" : 100
   }],
   "enemies": [
     {
