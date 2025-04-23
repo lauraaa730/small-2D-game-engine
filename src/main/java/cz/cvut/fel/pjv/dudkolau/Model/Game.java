@@ -129,14 +129,35 @@ public class Game {
             }
         }
 
-        for (int i = 0; i < currLevel.getInteractableObjectsNum() ; i++) {
-            currentObject = this.currLevel.getBackgroundObjects().get(i);
-            if (checkCollisionWithObject(player,currentObject)) {
+        Door currDoor;
+        for (int i = 0; i < currLevel.getDoorsNum() ; i++) {
+            currDoor = this.currLevel.getDoors().get(i);
+            if (checkCollisionWithObject(player,currDoor)) {
                 player.jumpBack(true,width, height);
+                System.out.println("collision");
             }
             // Check if player is interacting with an object
-            if ( player.isInteracting() && isPlayerFacingObject(currentObject)) {
-                //interact action
+            if ( player.isInteracting() && isPlayerFacingObject(currDoor)) {
+                // wtf proc mi tady nejde dat current object do te podminky??? - protoze gameobject nema tu metodu
+                if (currDoor.getLevel1() == currLevel.getLevelType()) {
+                    currLevel = levels.get(currDoor.getLevel2()-1);
+                    for (int j = 0; j < this.currLevel.getBackgroundObjectsNum(); j++) {
+                        this.currLevel.getBackgroundObjects().get(j).setHitBox(bushXOffset, bushYOffset);
+                    }
+                    for (int j = 0; j < this.currLevel.getDoorsNum(); j++) {
+                        this.currLevel.getDoors().get(j).setHitBox(0, 0);
+                    }
+                    for (int j = 0; j < this.currLevel.getEnemiesNum(); j++) {
+                        this.currLevel.getEnemies().get(j).setHitBox(0, 0);
+                    }
+                    System.out.println(width/tileDimension);
+                    System.out.println(currDoor.getWidth());
+                    player.setxCoord(width/tileDimension - currDoor.getxCoord());
+                    if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
+                        player.setxCoord((width-player.getWidth())/tileDimension);
+                    }
+                    return;
+                }
             }
         }
 
@@ -199,10 +220,10 @@ public class Game {
             this.currLevel.getDoors().get(i).setHitBox(0, 0);
         }
         for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
-            System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
         }
-
+        System.out.println(currLevel.getDoors().getFirst().getWidth());
+        System.out.println(currLevel.getDoors().getFirst().getxCoord());
     }
 
 
@@ -218,6 +239,7 @@ public class Game {
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects.addAll(this.currLevel.getBackgroundObjects());
         gameObjects.addAll(this.currLevel.getInteractableObjects());
+        gameObjects.addAll(this.currLevel.getDoors());
         return gameObjects;
     }
 
@@ -280,11 +302,10 @@ public class Game {
     private Level loadLevelFromJson(String levelName){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
+            File jsonFile = new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/" + levelName);
 
-            Level levelToRead = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
-                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/" + levelName), Level.class
-            );
-            System.out.println(levelToRead);
+            Level levelToRead = objectMapper.readerWithView(Views.SaveGameView.class).readValue(jsonFile, Level.class);
+            System.out.println("Loaded level");
             return levelToRead;
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

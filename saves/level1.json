@@ -14,10 +14,10 @@
   }],
   "interactableObjects": [],
   "doors": [ {
-    "level1" : 0,
-    "level2" : 1,
+    "level1" : 1,
+    "level2" : 2,
     "xCoord" : 0,
-    "yCoord" : 15,
+    "yCoord" : 50,
     "imageName" : "doorVertical.png",
     "width" : 20,
     "height" : 100

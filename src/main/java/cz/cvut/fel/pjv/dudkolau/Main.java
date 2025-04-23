@@ -39,7 +39,7 @@ public class Main extends Application {
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
     //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
@@ -224,6 +224,7 @@ public class Main extends Application {
         int playerY = game.getPlayer().getHitBox().getyCoord();
         int objectY;
         int objectX;
+        //TODO toto je zbytecne pro vsechno krome background objects, zmenit to maybe??
         //concept: player shows behind or infront of bushes
         for (int i = 0; i < game.getGameObjects().size(); i++) {
 

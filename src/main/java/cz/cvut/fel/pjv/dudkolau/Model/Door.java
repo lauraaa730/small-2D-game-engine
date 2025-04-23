@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Door extends InteractableObject implements GameObject {
+public class Door implements GameObject {
     private int level1;
     private int level2;
     private int xCoord;
@@ -24,6 +24,7 @@ public class Door extends InteractableObject implements GameObject {
         this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
     }
 
+    @JsonIgnore
     public int getOutLevel(int enterLevel) {
         if (enterLevel == level1) {
             return level2;

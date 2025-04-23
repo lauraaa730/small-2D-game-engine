@@ -59,6 +59,7 @@ public class Level {
         this.interactableObjectsNum = interactableObjectsNum;
     }
 
+
     public int getEnemiesNum() {
         return enemiesNum;
     }
