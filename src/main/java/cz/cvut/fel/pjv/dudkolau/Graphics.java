@@ -16,6 +16,8 @@ public class Graphics {
     public static Image exitGameImage = new Image("exitGameButton.png");
     public static Image continueImage = new Image("continueButton.png");
 
+    public static Image pausedMenu = new Image("pausedBackground.png");
+
 
     public static Image[] animRIGHT = {
             new Image("animRIGHT-1.png"),
