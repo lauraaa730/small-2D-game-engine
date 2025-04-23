@@ -72,8 +72,5 @@ public class Button extends InteractableObject implements GameObject {
         super.setyCoord(y);
     }
 
-    @Override
-    public void interactAction() {
-        super.interactAction();
-    }
+
 }

@@ -72,8 +72,4 @@ public class Potion extends InteractableObject implements GameObject {
         super.setyCoord(y);
     }
 
-    @Override
-    public void interactAction() {
-        super.interactAction();
-    }
 }

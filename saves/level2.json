@@ -1,0 +1,30 @@
+{
+  "levelType" : 2,
+  "backgroundName" : "backgroundLevel1.png",
+  "backgroundObjectsNum": 3,
+  "interactableObjectsNum": 0,
+  "enemiesNum" :0,
+  "backgroundObjects": [{
+    "xCoord" : 25,
+    "yCoord" : 10,
+    "imageName" : "bushHorizontal.png",
+    "width" : 170,
+    "height" : 110
+  },
+    {
+      "xCoord" : 100,
+      "yCoord" : 10,
+      "imageName" : "bushHorizontal.png",
+      "width" : 170,
+      "height" : 110
+    },
+    {
+      "xCoord" : 25,
+      "yCoord" : 50,
+      "imageName" : "bushVertical.png",
+      "width" : 110,
+      "height" : 170
+    }],
+  "interactableObjects": [],
+  "enemies": []
+}

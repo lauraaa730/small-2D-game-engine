@@ -187,13 +187,16 @@ public class Game {
         player.setHeight(playerHeight);
         player.setHitBox(playerXOffset, playerYOffset);
         loadAllLevels();
-        currLevel = levels.getFirst();
+        currLevel = levels.get(0);
         if (currLevel==null) {
-            System.out.println("Level1 is null!");
+            System.out.println("Level2 is null!");
             System.exit(1);
         }
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
+        }
+        for (int i = 0; i < this.currLevel.getInteractableObjectsNum(); i++) {
+            this.currLevel.getInteractableObjects().get(i).setHitBox(0, 0);
         }
         for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
             System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
