@@ -156,6 +156,7 @@ public class Game {
                     if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
                         player.setxCoord((width-player.getWidth())/tileDimension);
                     }
+                    player.setHitBox(playerXOffset,playerYOffset);
                     return;
                 }
             }

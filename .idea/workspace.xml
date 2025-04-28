@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fixing level loading">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Door.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,32 +31,32 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitLabMergeRequestFiltersHistory"><![CDATA[{
-  "history": [
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;history&quot;: [
     {
-      "state": "MERGED",
-      "assignee": {
-        "type": "org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue",
-        "username": "dudkolau",
-        "fullname": "Laura Kateřina Dudková"
+      &quot;state&quot;: &quot;MERGED&quot;,
+      &quot;assignee&quot;: {
+        &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+        &quot;username&quot;: &quot;dudkolau&quot;,
+        &quot;fullname&quot;: &quot;Laura Kateřina Dudková&quot;
       }
     }
   ],
-  "lastFilter": {
-    "state": "MERGED",
-    "assignee": {
-      "type": "org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue",
-      "username": "dudkolau",
-      "fullname": "Laura Kateřina Dudková"
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;MERGED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;dudkolau&quot;,
+      &quot;fullname&quot;: &quot;Laura Kateřina Dudková&quot;
     }
   }
-}]]></component>
-  <component name="GitLabMergeRequestsSettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "first": "https://gitlab.fel.cvut.cz/B242_B0B36PJV/dudkolau.git",
-    "second": "e83f6621-e533-421c-8ce1-7ba9dec247b7"
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitlab.fel.cvut.cz/B242_B0B36PJV/dudkolau.git&quot;,
+    &quot;second&quot;: &quot;e83f6621-e533-421c-8ce1-7ba9dec247b7&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -222,6 +219,8 @@
       <workItem from="1745257033395" duration="5734000" />
       <workItem from="1745321799524" duration="932000" />
       <workItem from="1745411314920" duration="11449000" />
+      <workItem from="1745493521549" duration="11000" />
+      <workItem from="1745840281833" duration="147000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
