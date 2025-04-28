@@ -1,6 +1,5 @@
 konzultace:
     - jak upravit rychlost? Aby se postavicka hybala rychleji ale ne teleportovala - snizit timer a pridat counter pro animation
-    -v Game, mela bych si drzet pole levelu? a nebo vzdycky jen jeden level najednou? - pole levelu
     - je lepsi zpusob jak implementovat isThereObstacle? - ne, resp hitboxy
 
     -TODO pridat jeden json file na jmena spritu okolnich objektu a nebo taky ne xd
@@ -8,4 +7,4 @@ konzultace:
 
   otazky:
     -je v pohode ze v mainu jde vsechno pres game? game.getPlayer atd.. jestli to nezpomaluje
-    - je potreba vlakno? jak to zakomponovat
+    - kde vsude musim mit override? nemma to skoro nikde a nwm jestli to je treba

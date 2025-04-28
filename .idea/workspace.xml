@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fixing level loading">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fixed hitbox of player when level transitioning">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +225,7 @@
       <workItem from="1745321799524" duration="932000" />
       <workItem from="1745411314920" duration="11449000" />
       <workItem from="1745493521549" duration="11000" />
-      <workItem from="1745840281833" duration="147000" />
+      <workItem from="1745840281833" duration="3309000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -606,7 +611,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745420761931</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Fixed hitbox of player when level transitioning">
+      <option name="closed" value="true" />
+      <created>1745840458472</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1745840458472</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +637,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added objectmapper, added more animations" />
     <MESSAGE value="added even more animations" />
     <MESSAGE value="loading level from JSON - temporary not functional version" />
     <MESSAGE value="Changed Rectangle in HitBox to different data class using java.awt. Level loading from JSON is now functional." />
@@ -649,7 +661,8 @@
     <MESSAGE value="Changed paused menu background image" />
     <MESSAGE value="Working on doors" />
     <MESSAGE value="Fixing level loading" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing level loading" />
+    <MESSAGE value="Fixed hitbox of player when level transitioning" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed hitbox of player when level transitioning" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

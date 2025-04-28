@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
 public class Player implements Entity {
-    private int health;
+    private int maxHealth;
+    private int currHealth;
     private int xCoord;
 
     private int yCoord;
@@ -49,10 +50,6 @@ public class Player implements Entity {
 
     public int getWidth() {
         return width;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public int getxCoord() {
@@ -112,9 +109,21 @@ public class Player implements Entity {
 
     public int interact() { return 0;}
 
-    @Override
-    public int getHealth(){ return health; }
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getCurrHealth() {
+        return currHealth;
+    }
+
+    public void setCurrHealth(int currHealth) {
+        this.currHealth = currHealth;
+    }
 
     public Directions getCurrDirection() {
         return currDirection;

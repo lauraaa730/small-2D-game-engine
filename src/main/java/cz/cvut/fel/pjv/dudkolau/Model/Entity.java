@@ -2,7 +2,10 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 
 public interface Entity {
-    public int getHealth();
+    public int getMaxHealth();
+    public int getCurrHealth();
+    public void setMaxHealth(int maxHealth);
+    public void setCurrHealth(int currHealth);
     public int getxCoord();
     public int getyCoord();
     public Directions getCurrDirection();

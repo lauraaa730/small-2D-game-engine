@@ -202,6 +202,8 @@ public class Game {
         //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
 
         this.player = new Player();
+        player.setMaxHealth(8); //TODO pridat do json souboru
+        player.setCurrHealth(4);
         player.setInteracting(false);
         player.setxCoord(0);
         player.setyCoord(0);

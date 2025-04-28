@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class Enemy implements Entity{
-    private int health;
+    private int maxHealth;
+    private int currHealth;
     private int xCoord;
     private int yCoord;
     private int height;
@@ -31,9 +32,6 @@ public class Enemy implements Entity{
     public Enemy() {
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     public void setHitBox(int xOffset, int yOffset) {
         this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
@@ -53,6 +51,25 @@ public class Enemy implements Entity{
         this.height = height;
     }
 
+    @Override
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    @Override
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    @Override
+    public int getCurrHealth() {
+        return currHealth;
+    }
+
+    @Override
+    public void setCurrHealth(int currHealth) {
+        this.currHealth = currHealth;
+    }
 
     public int getWidth() {
         return width;
@@ -112,8 +129,6 @@ public class Enemy implements Entity{
     @Override
     public void attack(Directions d){}
 
-    @Override
-    public int getHealth(){ return health; }
 
     @Override
     public int getxCoord() { return xCoord; }

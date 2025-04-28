@@ -259,6 +259,16 @@ public class Main extends Application {
             gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
         }
 
+        //Render hearts
+        int currHealth = game.getPlayer().getCurrHealth();
+        int maxHealth = game.getPlayer().getMaxHealth();
+        for (int i = 0; i<currHealth;i++) {
+            gc.drawImage(new Image("heartFull.png"), width-50*maxHealth + i*50,5);
+        }
+        for (int i = 0; i<(maxHealth-currHealth);i++) {
+            gc.drawImage(new Image("heartEmpty.png"),width-50*(maxHealth-currHealth)+ i*50, 5);
+        }
+
 
 
         if (showHitBoxes) {
