@@ -4,6 +4,7 @@
   "backgroundObjectsNum": 1,
   "interactableObjectsNum": 0,
   "doorsNum": 1,
+  "potionsNum" : 1,
   "enemiesNum" : 2,
   "backgroundObjects": [{
     "xCoord" : 25,
@@ -41,5 +42,13 @@
       "height" : 70,
       "hasCollision" : 1
     }
-  ]
+  ],
+  "potions": [ {
+    "healthAdd" : 2,
+    "xCoord" : 140,
+    "yCoord" : 50,
+    "imageName" : "heartFull.png",
+    "width" : 50,
+    "height" : 50
+  }]
 }

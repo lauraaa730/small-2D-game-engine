@@ -9,17 +9,27 @@ public class Potion extends InteractableObject implements GameObject {
     private String imageName;
     private int width;
     private int height;
+    private int healthAdd;
+
+
+    public int getHealthAdd() {
+        return healthAdd;
+    }
+
+    public void setHealthAdd(int healthAdd) {
+        this.healthAdd = healthAdd;
+    }
+
     @JsonIgnore
     private HitBox hitBox = new HitBox();
 
-    @Override
     public String getImageName() {
-        return super.getImageName();
+        return this.imageName;
     }
 
-    @Override
+
     public void setImageName(String imageName) {
-        super.setImageName(imageName);
+        this.imageName = imageName;
     }
 
     @Override
@@ -27,6 +37,7 @@ public class Potion extends InteractableObject implements GameObject {
         return super.getHitBox();
     }
 
+    //TODO BACHA !!!!! prepsat super. settery a gettery, blblo imagename u potionu!!
     @Override
     public void setHitBox(int xOffset, int yOffset) {
         super.setHitBox(xOffset, yOffset);

@@ -8,3 +8,13 @@ konzultace:
   otazky:
     -je v pohode ze v mainu jde vsechno pres game? game.getPlayer atd.. jestli to nezpomaluje
     - kde vsude musim mit override? nemma to skoro nikde a nwm jestli to je treba
+    -TODO nefunguje mi dobre player position pri prochazeni dvermi + jak nastavit interacting
+        aby sem se hned nedostala zpatky(i pro potion interaction)
+    -jak udelat pomalu menici se pozadi pri transition?
+    -musim delat celou hru nebo fakt staci jen uz pridat fighting, potion + button?
+    -musim pridat diagonalni pohyb?
+    -interactable object co s touto tridou?
+
+
+
+2.konzultace:

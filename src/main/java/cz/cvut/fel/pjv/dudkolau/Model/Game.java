@@ -151,6 +151,7 @@ public class Game {
                     }
                     System.out.println(width/tileDimension);
                     System.out.println(currDoor.getWidth());
+                    //TODO fix player spawning when travelling through door
                     player.setxCoord(width/tileDimension - currDoor.getxCoord());
                     if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
                         player.setxCoord((width-player.getWidth())/tileDimension);
@@ -160,8 +161,95 @@ public class Game {
                 }
             }
         }
+        Potion currPotion;
+        for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
+            currPotion = this.currLevel.getPotions().get(i);
+            if (checkCollisionWithObject(player, currPotion)) {
+                player.jumpBack(true, width, height);
+                System.out.println("collision");
+            }
+            // Check if player is interacting with an object
+            if (player.isInteracting() && isPlayerFacingObject(currPotion)) {
+                player.setCurrHealth(player.getCurrHealth()+currPotion.getHealthAdd());
+            }
+        }
 
-        //Enemies movement and collision *********************************
+        //Enemies movement and collision
+        updateEnemies();
+
+    }
+
+    public void setLevels(List<Level> levels) {
+        this.levels = levels;
+    }
+
+    public void startNewGame() {
+        //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
+
+        this.player = new Player();
+        player.setMaxHealth(8); //TODO pridat do json souboru
+        player.setCurrHealth(4);
+        player.setInteracting(false);
+        player.setxCoord(0);
+        player.setyCoord(0);
+        player.setWidth(playerWidth);
+        player.setHeight(playerHeight);
+        player.setHitBox(playerXOffset, playerYOffset);
+        loadAllLevels();
+        currLevel = levels.getFirst();
+        if (currLevel==null) {
+            System.out.println("Level1 is null!");
+            System.exit(1);
+        }
+        for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
+            this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
+        }
+        for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
+            this.currLevel.getDoors().get(i).setHitBox(0, 0);
+        }
+        for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
+            this.currLevel.getEnemies().get(i).setHitBox(0, 0);
+        }
+        for (int i = 0; i < this.currLevel.getPotionsNum(); i++) {
+            this.currLevel.getPotions().get(i).setHitBox(0, 0);
+            System.out.println("!!!!!");
+            System.out.println(currLevel.getPotionsNum());
+            System.out.println(currLevel.getPotions().get(i).getImageName());
+        }
+        System.out.println(currLevel.getDoors().getFirst().getWidth());
+        System.out.println(currLevel.getDoors().getFirst().getxCoord());
+    }
+
+
+    public Level getCurrLevel() {
+        return currLevel;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public List<GameObject> getGameObjects() {
+        List<GameObject> gameObjects = new ArrayList<>();
+        gameObjects.addAll(this.currLevel.getBackgroundObjects());
+        gameObjects.addAll(this.currLevel.getInteractableObjects());
+        gameObjects.addAll(this.currLevel.getDoors());
+        gameObjects.addAll(this.currLevel.getPotions());
+        return gameObjects;
+    }
+
+    private boolean isPlayerFacingObject(GameObject object) {
+        player.move(player.getLastDirection(), width, height, tileDimension);
+        if (checkCollisionWithObject(player,object)) {
+            player.jumpBack(false,width, height);
+            return true;
+        }
+        player.jumpBack(false,width, height);
+
+        return false;
+    }
+
+    private void updateEnemies() {
         Enemy e;
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
@@ -176,9 +264,9 @@ public class Game {
                         System.exit(0);
                     }
                 }
-                 if (e.isHasCollision()) {
-                     player.jumpBack(true,width, height);
-                 }
+                if (e.isHasCollision()) {
+                    player.jumpBack(true,width, height);
+                }
 
             }
             if (enemieMoveCounter !=2) { //slowing down enemies
@@ -220,70 +308,6 @@ public class Game {
             enemieMoveCounter = (enemieMoveCounter+1)%3; // for speeding up or slowing down enemy movement
 
         }//*****************************************************************
-
-    }
-
-    public void setLevels(List<Level> levels) {
-        this.levels = levels;
-    }
-
-    public void startNewGame() {
-        //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
-
-        this.player = new Player();
-        player.setMaxHealth(8); //TODO pridat do json souboru
-        player.setCurrHealth(4);
-        player.setInteracting(false);
-        player.setxCoord(0);
-        player.setyCoord(0);
-        player.setWidth(playerWidth);
-        player.setHeight(playerHeight);
-        player.setHitBox(playerXOffset, playerYOffset);
-        loadAllLevels();
-        currLevel = levels.getFirst();
-        if (currLevel==null) {
-            System.out.println("Level1 is null!");
-            System.exit(1);
-        }
-        for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
-            this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
-        }
-        for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
-            this.currLevel.getDoors().get(i).setHitBox(0, 0);
-        }
-        for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
-            this.currLevel.getEnemies().get(i).setHitBox(0, 0);
-        }
-        System.out.println(currLevel.getDoors().getFirst().getWidth());
-        System.out.println(currLevel.getDoors().getFirst().getxCoord());
-    }
-
-
-    public Level getCurrLevel() {
-        return currLevel;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public List<GameObject> getGameObjects() {
-        List<GameObject> gameObjects = new ArrayList<>();
-        gameObjects.addAll(this.currLevel.getBackgroundObjects());
-        gameObjects.addAll(this.currLevel.getInteractableObjects());
-        gameObjects.addAll(this.currLevel.getDoors());
-        return gameObjects;
-    }
-
-    private boolean isPlayerFacingObject(GameObject object) {
-        player.move(player.getLastDirection(), width, height, tileDimension);
-        if (checkCollisionWithObject(player,object)) {
-            player.jumpBack(false,width, height);
-            return true;
-        }
-        player.jumpBack(false,width, height);
-
-        return false;
     }
 
     // Saving and loading help functions ***********************
@@ -331,6 +355,7 @@ public class Game {
         for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
             this.currLevel.getDoors().get(i).setHitBox(bushXOffset, bushYOffset);
         }
+        //TODO Potions
 
     }
 

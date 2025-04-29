@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Edited enemy movement. Enemies now have a boolean for deciding if they have collision or not. (e.g. ghost vs zombies) Works also with saveGame() and loadSavedGame(). Also fixed hearts for these functions.">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Player now takes damage from colliding with enemies. Added invincibilityCooldown to Constants, which is the time the game waits to allow more hits to the player (aka breathing time)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/level2.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/unittesty.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/unittesty.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,15 +226,7 @@
       <workItem from="1745411314920" duration="11449000" />
       <workItem from="1745493521549" duration="11000" />
       <workItem from="1745840281833" duration="3462000" />
-      <workItem from="1745929283914" duration="3850000" />
-    </task>
-    <task id="LOCAL-00004" summary="commit">
-      <option name="closed" value="true" />
-      <created>1713291654884</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1713291654884</updated>
+      <workItem from="1745929283914" duration="7613000" />
     </task>
     <task id="LOCAL-00005" summary="commit">
       <option name="closed" value="true" />
@@ -616,7 +612,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745932215660</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Player now takes damage from colliding with enemies. Added invincibilityCooldown to Constants, which is the time the game waits to allow more hits to the player (aka breathing time)">
+      <option name="closed" value="true" />
+      <created>1745933974745</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1745933974745</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -634,7 +638,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush." />
     <MESSAGE value="added vertical bush sprite" />
     <MESSAGE value="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy." />
     <MESSAGE value="Implementing enemies." />
@@ -659,7 +662,8 @@
     <MESSAGE value="Added hearts, rendering correctly" />
     <MESSAGE value="Heart sprites" />
     <MESSAGE value="Edited enemy movement. Enemies now have a boolean for deciding if they have collision or not. (e.g. ghost vs zombies) Works also with saveGame() and loadSavedGame(). Also fixed hearts for these functions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited enemy movement. Enemies now have a boolean for deciding if they have collision or not. (e.g. ghost vs zombies) Works also with saveGame() and loadSavedGame(). Also fixed hearts for these functions." />
+    <MESSAGE value="Player now takes damage from colliding with enemies. Added invincibilityCooldown to Constants, which is the time the game waits to allow more hits to the player (aka breathing time)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Player now takes damage from colliding with enemies. Added invincibilityCooldown to Constants, which is the time the game waits to allow more hits to the player (aka breathing time)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

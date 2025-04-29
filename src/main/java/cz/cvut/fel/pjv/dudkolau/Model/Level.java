@@ -21,7 +21,10 @@ public class Level {
     //@JsonView(Views.SaveGameView.class)
     private int enemiesNum;
     private int doorsNum;
+    private int potionsNum;
     private List<Door> doors = new ArrayList<>();
+
+    private List<Potion> potions = new ArrayList<>();
     private List<InteractableObject> interactableObjects = new ArrayList<>();
     private List<BackgroundObject> backgroundObjects = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
@@ -35,6 +38,22 @@ public class Level {
 
     public void setLevelType(int levelType) {
         this.levelType = levelType;
+    }
+
+    public int getPotionsNum() {
+        return potionsNum;
+    }
+
+    public void setPotionsNum(int potionsNum) {
+        this.potionsNum = potionsNum;
+    }
+
+    public List<Potion> getPotions() {
+        return potions;
+    }
+
+    public void setPotions(List<Potion> potions) {
+        this.potions = potions;
     }
 
     public int getBackgroundObjectsNum() {
