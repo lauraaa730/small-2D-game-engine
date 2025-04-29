@@ -25,7 +25,6 @@ public class Game {
     private int enemieMoveCounter = 0;
     private boolean mainMenuOn;
 
-    private boolean playerCollidesWithEnemy = false; //add to game data
 
     private List<Level> levels = new ArrayList<>();
 
@@ -105,14 +104,6 @@ public class Game {
         this.mainMenuOn = mainMenuOn;
     }
 
-    public boolean isPlayerCollidesWithEnemy() {
-        return playerCollidesWithEnemy;
-    }
-
-    public void setPlayerCollidesWithEnemy(boolean playerCollidesWithEnemy) {
-        this.playerCollidesWithEnemy = playerCollidesWithEnemy;
-    }
-
     public void startGame(boolean newGame) {
         startNewGame();
         //loadSavedGame();
@@ -129,6 +120,7 @@ public class Game {
             }
         }
 
+        //Check and use doors **********************************************************
         Door currDoor;
         for (int i = 0; i < currLevel.getDoorsNum() ; i++) {
             currDoor = this.currLevel.getDoors().get(i);
@@ -166,13 +158,11 @@ public class Game {
         Enemy e;
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
-            if (playerCollidesWithEnemy) {
 
-            }
-            if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
+            if (e.isHasCollision() && checkCollisionWithEntity(player,e)) {
                 player.jumpBack(true,width, height);
             }
-            if (enemieMoveCounter == 0 || enemieMoveCounter == 1) {
+            if (enemieMoveCounter !=2) { //slowing down enemies
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
                     //System.out.println("Turning left");
                     e.setCurrDirection(Directions.LEFT);
@@ -183,12 +173,20 @@ public class Game {
                 e.updateSelfMovementPosition();
                 //System.out.println("SM Position: "+ e.getSelfMovementPosition() +", Hitbox xCoord: "+ e.getHitBox().getxCoord());
                 e.move(e.getCurrDirection(), width, height, tileDimension);
-                if (playerCollidesWithEnemy && checkCollisionWithEntity(player,e)) {
+                //TODO aby se vcas odrazel od sten?
+                if (e.isHasCollision() && checkCollisionWithEntity(player,e)) {
                     e.jumpBack(width, height);
+                    if  (e.getCurrDirection()==Directions.LEFT) {
+                        e.setSelfMovementPosition(0);
+                        e.setCurrDirection(Directions.RIGHT);
+                    } else if (e.getCurrDirection() == Directions.RIGHT) {
+                        e.setSelfMovementPosition(enemyMovementLength);
+                        e.setCurrDirection(Directions.LEFT);
+                    }
                 }
                 //TODO enemy by se mel pohybovat i vertikalne, pridat do jsonu movement jakej atd
             }
-            enemieMoveCounter = (enemieMoveCounter+1)%3;
+            enemieMoveCounter = (enemieMoveCounter+1)%3; // for speeding up or slowing down enemy movement
 
         }//*****************************************************************
 
@@ -276,6 +274,9 @@ public class Game {
             }
 
             this.player = new Player();
+            player.setInteracting(false);
+            player.setMaxHealth(gameData.getMaxPlayerHealth());
+            player.setCurrHealth(gameData.getCurrPlayerHealth());
             player.setxCoord(gameData.getCurrPlayerX());
             player.setyCoord(gameData.getCurrPlayerY());
             System.out.println(player.getxCoord());
@@ -333,6 +334,8 @@ public class Game {
 
     public void saveGame() {
         GameData gameData = new GameData();
+        gameData.setCurrPlayerHealth(this.player.getCurrHealth());
+        gameData.setMaxPlayerHealth(this.player.getMaxHealth());
         gameData.setCurrPlayerLevel(currLevel.getLevelType());
         gameData.setCurrPlayerX(this.player.getxCoord());
         gameData.setCurrPlayerY(this.player.getyCoord());

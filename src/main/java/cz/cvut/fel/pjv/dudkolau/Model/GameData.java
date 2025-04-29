@@ -23,6 +23,9 @@ public class GameData {
     @JsonView(Views.SaveGameView.class)
     private int currPlayerY;
     private int currPlayerLevel;
+    private int currPlayerHealth;
+    private int maxPlayerHealth;
+
 
 
     public List<Level> getLevels() {
@@ -72,5 +75,21 @@ public class GameData {
 
     public void setTotalLevelNum(int totalLevelNum) {
         this.totalLevelNum = totalLevelNum;
+    }
+
+    public int getCurrPlayerHealth() {
+        return currPlayerHealth;
+    }
+
+    public void setCurrPlayerHealth(int currPlayerHealth) {
+        this.currPlayerHealth = currPlayerHealth;
+    }
+
+    public int getMaxPlayerHealth() {
+        return maxPlayerHealth;
+    }
+
+    public void setMaxPlayerHealth(int maxPlayerHealth) {
+        this.maxPlayerHealth = maxPlayerHealth;
     }
 }

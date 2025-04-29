@@ -29,15 +29,17 @@
       "yCoord" : 90,
       "imageName" : "ghost.png",
       "width" : 70,
-      "height" : 70
+      "height" : 70,
+      "hasCollision" : 0
     },
     {
       "currDirection" : 3,
-      "xCoord" : 10,
+      "xCoord" : 90,
       "yCoord" : 5,
       "imageName" : "ghost.png",
       "width" : 70,
-      "height" : 70
+      "height" : 70,
+      "hasCollision" : 1
     }
   ]
 }

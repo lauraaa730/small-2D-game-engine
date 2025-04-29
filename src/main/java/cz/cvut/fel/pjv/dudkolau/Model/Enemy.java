@@ -14,6 +14,8 @@ public class Enemy implements Entity{
     private int width;
     private String imageName;
 
+    private boolean hasCollision;
+
     @JsonIgnore
     private HitBox hitBox = new HitBox();
     private int selfMovementPosition = 0;
@@ -49,6 +51,14 @@ public class Enemy implements Entity{
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isHasCollision() {
+        return hasCollision;
+    }
+
+    public void setHasCollision(boolean hasCollision) {
+        this.hasCollision = hasCollision;
     }
 
     @Override
