@@ -24,6 +24,7 @@ public class Game {
     private int levelsNum = 0;
     private int enemieMoveCounter = 0;
     private boolean mainMenuOn;
+    private int invincibilityTimer = 0; //counter that provides invincibility for player after getting hit
 
 
     private List<Level> levels = new ArrayList<>();
@@ -110,6 +111,12 @@ public class Game {
     }
 
     public void update() {
+        if (invincibilityTimer > 0) {
+            invincibilityTimer++;
+            if (invincibilityTimer>= invincibilityCooldown) {
+                invincibilityTimer=0;
+            }
+        }
         GameObject currentObject;
         //move the player***************************************************
         player.move(player.getCurrDirection(), width, height, tileDimension);
@@ -159,8 +166,20 @@ public class Game {
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
 
-            if (e.isHasCollision() && checkCollisionWithEntity(player,e)) {
-                player.jumpBack(true,width, height);
+            if (checkCollisionWithEntity(player,e)) {
+                if (invincibilityTimer == 0) {
+                    invincibilityTimer = 1; //start the counter
+                    player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
+                    System.out.println("OUCH!");
+                    if (player.getCurrHealth() <=0) {
+                        System.out.println("GAME OVER");
+                        System.exit(0);
+                    }
+                }
+                 if (e.isHasCollision()) {
+                     player.jumpBack(true,width, height);
+                 }
+
             }
             if (enemieMoveCounter !=2) { //slowing down enemies
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
@@ -174,15 +193,27 @@ public class Game {
                 //System.out.println("SM Position: "+ e.getSelfMovementPosition() +", Hitbox xCoord: "+ e.getHitBox().getxCoord());
                 e.move(e.getCurrDirection(), width, height, tileDimension);
                 //TODO aby se vcas odrazel od sten?
-                if (e.isHasCollision() && checkCollisionWithEntity(player,e)) {
-                    e.jumpBack(width, height);
-                    if  (e.getCurrDirection()==Directions.LEFT) {
-                        e.setSelfMovementPosition(0);
-                        e.setCurrDirection(Directions.RIGHT);
-                    } else if (e.getCurrDirection() == Directions.RIGHT) {
-                        e.setSelfMovementPosition(enemyMovementLength);
-                        e.setCurrDirection(Directions.LEFT);
+                if (checkCollisionWithEntity(player,e)) {
+                    if (invincibilityTimer == 0) {
+                        invincibilityTimer = 1; //start the counter
+                        player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
+                        System.out.println("OUCH!");
+                        if (player.getCurrHealth() <=0) {
+                            System.out.println("GAME OVER");
+                            System.exit(0);
+                        }
                     }
+                    if(e.isHasCollision()) {
+                        e.jumpBack(width, height);
+                        if  (e.getCurrDirection()==Directions.LEFT) {
+                            e.setSelfMovementPosition(0);
+                            e.setCurrDirection(Directions.RIGHT);
+                        } else if (e.getCurrDirection() == Directions.RIGHT) {
+                            e.setSelfMovementPosition(enemyMovementLength);
+                            e.setCurrDirection(Directions.LEFT);
+                        }
+                    }
+
                 }
                 //TODO enemy by se mel pohybovat i vertikalne, pridat do jsonu movement jakej atd
             }

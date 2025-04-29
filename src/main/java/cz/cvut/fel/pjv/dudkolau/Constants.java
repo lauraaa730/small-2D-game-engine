@@ -2,7 +2,7 @@ package cz.cvut.fel.pjv.dudkolau;
 //try
 
 public class Constants {
-    public static final int enemyMovementLength = 30;
+
     public static final int width = 800;
     public static final int height = 600;
     public static final int tileDimension = 5;
@@ -16,6 +16,9 @@ public class Constants {
 
     public static final int bushXOffset = 15;
     public static final int bushYOffset = 30;
+
+    public static final int enemyMovementLength = 30;
+    public static final int invincibilityCooldown = 75;
 
 
 }

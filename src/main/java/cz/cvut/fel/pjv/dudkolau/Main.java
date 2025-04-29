@@ -140,7 +140,7 @@ public class Main extends Application {
             public void handle(long l) {
                 if ((l - lastCall) >= 25_000_000) {
                     if (!game.getIsPaused()) {
-                        //TODO sprinting?
+                        //TODO sprinting?sss
                         game.update();
                         setCurrPlayerImages();
                         if (mainMenuButtonsAdded) {
