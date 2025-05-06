@@ -154,7 +154,7 @@ public class Game {
                     //TODO fix player spawning when travelling through door
                     player.setxCoord(width/tileDimension - currDoor.getxCoord());
                     if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
-                        player.setxCoord((width-player.getWidth())/tileDimension);
+                        player.setxCoord((width-player.getWidth())/tileDimension-5); //HOW DOES THIS WORK???
                     }
                     player.setHitBox(playerXOffset,playerYOffset);
                     return;

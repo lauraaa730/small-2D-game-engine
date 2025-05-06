@@ -9,7 +9,14 @@ public class Potion extends InteractableObject implements GameObject {
     private String imageName;
     private int width;
     private int height;
+    private Effect effect;
     private int healthAdd;
+
+    private int damageModifier;
+
+    /*How many game cycles will this effect last - applies only to invincibility*/
+    private int invincibilityDuration;
+
 
 
     public int getHealthAdd() {

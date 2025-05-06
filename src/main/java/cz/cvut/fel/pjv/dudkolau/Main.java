@@ -39,7 +39,7 @@ public class Main extends Application {
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
     //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
