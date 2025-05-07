@@ -44,7 +44,7 @@
     }
   ],
   "potions": [ {
-    "healthAdd" : 2,
+    "healthAdd" : 1,
     "xCoord" : 140,
     "yCoord" : 50,
     "imageName" : "healthPotion.png",

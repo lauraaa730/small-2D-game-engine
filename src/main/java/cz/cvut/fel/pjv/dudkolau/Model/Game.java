@@ -124,6 +124,7 @@ public class Game {
 
         //Check and use doors **********************************************************
         Door currDoor;
+        //TODO also up and down doors
         for (int i = 0; i < currLevel.getDoorsNum() ; i++) {
             currDoor = this.currLevel.getDoors().get(i);
             if (checkCollisionWithObject(player,currDoor)) {
@@ -145,7 +146,6 @@ public class Game {
                     }
                     System.out.println(width/tileDimension);
                     System.out.println(currDoor.getWidth());
-                    //TODO fix player spawning when travelling through door
                     player.setxCoord(width/tileDimension - currDoor.getxCoord());
                     if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
                         player.setxCoord((width-player.getWidth())/tileDimension-5); //HOW DOES THIS WORK???
@@ -156,15 +156,20 @@ public class Game {
             }
         }
         Potion currPotion;
+        //System.out.println("Current health: "+ player.getCurrHealth());
         for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
             currPotion = this.currLevel.getPotions().get(i);
             if (checkCollisionWithObject(player, currPotion)) {
                 player.jumpBack(true, width, height);
-                System.out.println("collision");
             }
             // Check if player is interacting with an object
-            if (player.isInteracting() && isPlayerFacingObject(currPotion)) {
-                player.setCurrHealth(player.getCurrHealth()+currPotion.getHealthAdd());
+            if (interactingTimer == 0 && player.isInteracting() && isPlayerFacingObject(currPotion)) {
+                interactingTimer = 1;
+                if (player.getMaxHealth()>=player.getCurrHealth()+ currPotion.getHealthAdd()) {
+                    System.out.println("HEALING!");
+                    player.setCurrHealth(player.getCurrHealth()+currPotion.getHealthAdd());
+                }
+
             }
         }
 
@@ -358,6 +363,9 @@ public class Game {
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
         }
+        for (int i = 0; i < this.currLevel.getPotionsNum(); i++) {
+            this.currLevel.getPotions().get(i).setHitBox(0, 0);
+        }
         for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
             System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
@@ -365,7 +373,6 @@ public class Game {
         for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
             this.currLevel.getDoors().get(i).setHitBox(bushXOffset, bushYOffset);
         }
-        //TODO Potions
 
     }
 

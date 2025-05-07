@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added enum for potion effects. Fixed weird teleporting when passing through doors.">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added interaction timeout.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
@@ -232,15 +233,7 @@
       <workItem from="1746544744132" duration="323000" />
       <workItem from="1746546495316" duration="59000" />
       <workItem from="1746546575264" duration="105000" />
-      <workItem from="1746625842682" duration="2170000" />
-    </task>
-    <task id="LOCAL-00007" summary="commit">
-      <option name="closed" value="true" />
-      <created>1713879803404</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1713879803404</updated>
+      <workItem from="1746625842682" duration="3851000" />
     </task>
     <task id="LOCAL-00008" summary="Added first basic gui, only can move the characte">
       <option name="closed" value="true" />
@@ -626,7 +619,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746545056774</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Added interaction timeout.">
+      <option name="closed" value="true" />
+      <created>1746629258613</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1746629258613</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +645,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implementing enemies." />
     <MESSAGE value="Fixed enemy movement. Added the option to turn off collision between player and enemy." />
     <MESSAGE value="Started adding buttons for the main menu." />
     <MESSAGE value="Changed graphics to static" />
@@ -669,7 +669,8 @@
     <MESSAGE value="Player now takes damage from colliding with enemies. Added invincibilityCooldown to Constants, which is the time the game waits to allow more hits to the player (aka breathing time)" />
     <MESSAGE value="Added potions, handling, rendering and healing interaction. Still need to work on cooldown for interactions." />
     <MESSAGE value="Added enum for potion effects. Fixed weird teleporting when passing through doors." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added enum for potion effects. Fixed weird teleporting when passing through doors." />
+    <MESSAGE value="Added interaction timeout." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added interaction timeout." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
