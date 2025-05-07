@@ -16,6 +16,25 @@ public class Player implements Entity {
     private boolean interacting; //this does not need to go into json
     private  Directions lastDirection = Directions.NONE;
 
+    private boolean invincible = false;
+    private int damage = 1;
+
+    public boolean isInvincible() {
+        return invincible;
+    }
+
+    public void setInvincible(boolean invincible) {
+        this.invincible = invincible;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     public Directions getLastDirection() {
         return lastDirection;
     }

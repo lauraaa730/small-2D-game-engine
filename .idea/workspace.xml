@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added interaction timeout.">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fixed interaction timer for potions.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,15 +234,7 @@
       <workItem from="1746544744132" duration="323000" />
       <workItem from="1746546495316" duration="59000" />
       <workItem from="1746546575264" duration="105000" />
-      <workItem from="1746625842682" duration="3851000" />
-    </task>
-    <task id="LOCAL-00008" summary="Added first basic gui, only can move the characte">
-      <option name="closed" value="true" />
-      <created>1714037326806</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1714037326806</updated>
+      <workItem from="1746625842682" duration="6754000" />
     </task>
     <task id="LOCAL-00009" summary="added animation - walk cycle">
       <option name="closed" value="true" />
@@ -627,7 +620,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746629258613</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Fixed interaction timer for potions.">
+      <option name="closed" value="true" />
+      <created>1746631082889</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1746631082889</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed enemy movement. Added the option to turn off collision between player and enemy." />
     <MESSAGE value="Started adding buttons for the main menu." />
     <MESSAGE value="Changed graphics to static" />
     <MESSAGE value="added button sprites" />
@@ -670,7 +670,8 @@
     <MESSAGE value="Added potions, handling, rendering and healing interaction. Still need to work on cooldown for interactions." />
     <MESSAGE value="Added enum for potion effects. Fixed weird teleporting when passing through doors." />
     <MESSAGE value="Added interaction timeout." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added interaction timeout." />
+    <MESSAGE value="Fixed interaction timer for potions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed interaction timer for potions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -155,25 +155,9 @@ public class Game {
                 }
             }
         }
-        Potion currPotion;
-        //System.out.println("Current health: "+ player.getCurrHealth());
-        for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
-            currPotion = this.currLevel.getPotions().get(i);
-            if (checkCollisionWithObject(player, currPotion)) {
-                player.jumpBack(true, width, height);
-            }
-            // Check if player is interacting with an object
-            if (interactingTimer == 0 && player.isInteracting() && isPlayerFacingObject(currPotion)) {
-                interactingTimer = 1;
-                if (player.getMaxHealth()>=player.getCurrHealth()+ currPotion.getHealthAdd()) {
-                    System.out.println("HEALING!");
-                    player.setCurrHealth(player.getCurrHealth()+currPotion.getHealthAdd());
-                }
 
-            }
-        }
+        managePotions();
 
-        //Enemies movement and collision
         updateEnemies();
 
     }
@@ -260,6 +244,29 @@ public class Game {
             interactingTimer++;
             if (interactingTimer>= interactingCooldown) {
                 interactingTimer=0;
+            }
+        }
+    }
+
+    public void managePotions(){
+        Potion currPotion;
+        //System.out.println("Current health: "+ player.getCurrHealth());
+        for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
+            currPotion = this.currLevel.getPotions().get(i);
+            if (checkCollisionWithObject(player, currPotion)) {
+                player.jumpBack(true, width, height);
+            }
+            // Check if player is interacting with an object
+            if (interactingTimer == 0 && player.isInteracting() && isPlayerFacingObject(currPotion)) {
+                interactingTimer = 1;
+                if (currPotion.getEffect()== Effect.HEALTH) {
+                    if (player.getMaxHealth() >= player.getCurrHealth() + currPotion.getHealthAdd()) {
+                        System.out.println("HEALING!");
+                        player.setCurrHealth(player.getCurrHealth() + currPotion.getHealthAdd());
+                    }
+                }
+
+
             }
         }
     }

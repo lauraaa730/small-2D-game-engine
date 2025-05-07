@@ -44,10 +44,11 @@
     }
   ],
   "potions": [ {
+    "effect" : "HEALTH",
     "healthAdd" : 1,
     "xCoord" : 140,
     "yCoord" : 50,
-    "imageName" : "healthPotion.png",
+    "imageName" : "healthPotion2.png",
     "width" : 30,
     "height" : 40
   }]
