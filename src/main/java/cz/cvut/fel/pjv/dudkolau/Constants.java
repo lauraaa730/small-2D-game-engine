@@ -20,5 +20,7 @@ public class Constants {
     public static final int enemyMovementLength = 30;
     public static final int invincibilityCooldown = 75;
 
+    public static final int interactingCooldown = 10;
+
 
 }

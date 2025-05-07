@@ -47,8 +47,8 @@
     "healthAdd" : 2,
     "xCoord" : 140,
     "yCoord" : 50,
-    "imageName" : "heartFull.png",
-    "width" : 50,
-    "height" : 50
+    "imageName" : "healthPotion.png",
+    "width" : 30,
+    "height" : 40
   }]
 }

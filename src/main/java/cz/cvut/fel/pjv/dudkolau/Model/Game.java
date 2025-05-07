@@ -11,9 +11,6 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import cz.cvut.fel.pjv.dudkolau.Model.Views;
-
 
 public class Game {
     private Player player;
@@ -25,6 +22,7 @@ public class Game {
     private int enemieMoveCounter = 0;
     private boolean mainMenuOn;
     private int invincibilityTimer = 0; //counter that provides invincibility for player after getting hit
+    private int interactingTimer = 0;
 
 
     private List<Level> levels = new ArrayList<>();
@@ -111,12 +109,9 @@ public class Game {
     }
 
     public void update() {
-        if (invincibilityTimer > 0) {
-            invincibilityTimer++;
-            if (invincibilityTimer>= invincibilityCooldown) {
-                invincibilityTimer=0;
-            }
-        }
+
+        updateTimers();
+
         GameObject currentObject;
         //move the player***************************************************
         player.move(player.getCurrDirection(), width, height, tileDimension);
@@ -133,11 +128,10 @@ public class Game {
             currDoor = this.currLevel.getDoors().get(i);
             if (checkCollisionWithObject(player,currDoor)) {
                 player.jumpBack(true,width, height);
-                System.out.println("collision");
             }
             // Check if player is interacting with an object
-            if ( player.isInteracting() && isPlayerFacingObject(currDoor)) {
-                // wtf proc mi tady nejde dat current object do te podminky??? - protoze gameobject nema tu metodu
+            if ( interactingTimer==0 && player.isInteracting() && isPlayerFacingObject(currDoor)) {
+                interactingTimer = 1;
                 if (currDoor.getLevel1() == currLevel.getLevelType()) {
                     currLevel = levels.get(currDoor.getLevel2()-1);
                     for (int j = 0; j < this.currLevel.getBackgroundObjectsNum(); j++) {
@@ -247,6 +241,22 @@ public class Game {
         player.jumpBack(false,width, height);
 
         return false;
+    }
+
+    private void updateTimers() {
+        if (invincibilityTimer > 0) {
+            invincibilityTimer++;
+            if (invincibilityTimer>= invincibilityCooldown) {
+                invincibilityTimer=0;
+            }
+        }
+
+        if (interactingTimer > 0) {
+            interactingTimer++;
+            if (interactingTimer>= interactingCooldown) {
+                interactingTimer=0;
+            }
+        }
     }
 
     private void updateEnemies() {
