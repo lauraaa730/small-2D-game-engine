@@ -31,7 +31,7 @@
       "imageName" : "ghost.png",
       "width" : 70,
       "height" : 70,
-      "hasCollision" : 0
+      "hasCollision" : false
     },
     {
       "currDirection" : 3,
@@ -40,16 +40,17 @@
       "imageName" : "ghost.png",
       "width" : 70,
       "height" : 70,
-      "hasCollision" : 1
+      "hasCollision" : true
     }
   ],
   "potions": [ {
-    "effect" : "HEALTH",
-    "healthAdd" : 1,
+    "effect" : "INVINCIBILITY",
+    "healthAdd" : 0,
     "xCoord" : 140,
     "yCoord" : 50,
-    "imageName" : "healthPotion2.png",
+    "imageName" : "invincibilityPotion2.png",
     "width" : 30,
-    "height" : 40
+    "height" : 40,
+    "invincibilityDuration" : 500
   }]
 }

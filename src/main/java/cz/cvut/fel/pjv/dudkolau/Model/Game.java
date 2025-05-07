@@ -24,6 +24,8 @@ public class Game {
     private int invincibilityTimer = 0; //counter that provides invincibility for player after getting hit
     private int interactingTimer = 0;
 
+    private int inviPotionCountDown = 0;
+
 
     private List<Level> levels = new ArrayList<>();
 
@@ -246,6 +248,15 @@ public class Game {
                 interactingTimer=0;
             }
         }
+
+        if (inviPotionCountDown > 0) {
+            player.setInvincible(true);
+            inviPotionCountDown--;
+            //System.out.println("INVINCIBLE");
+        } else {
+            player.setInvincible(false);
+            //System.out.println("NOT INVINCIBLE");
+        }
     }
 
     public void managePotions(){
@@ -264,7 +275,13 @@ public class Game {
                         System.out.println("HEALING!");
                         player.setCurrHealth(player.getCurrHealth() + currPotion.getHealthAdd());
                     }
+                } else if (currPotion.getEffect() == Effect.INVINCIBILITY) {
+                    if (inviPotionCountDown < currPotion.getInvincibilityDuration()) {
+                        inviPotionCountDown = currPotion.getInvincibilityDuration();
+                    }
                 }
+
+                //TODO remove potion after consumption
 
 
             }
@@ -277,8 +294,11 @@ public class Game {
             e=currLevel.getEnemies().get(i);
 
             if (checkCollisionWithEntity(player,e)) {
-                if (invincibilityTimer == 0) {
+                //System.out.println(player.isInvincible());
+                //These two invincibility timers are CORRECTLY divided into two, two seperate things (for rendering icons)
+                if (invincibilityTimer == 0 && !player.isInvincible()){
                     invincibilityTimer = 1; //start the counter
+
                     player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
                     System.out.println("OUCH!");
                     if (player.getCurrHealth() <=0) {
@@ -293,21 +313,18 @@ public class Game {
             }
             if (enemieMoveCounter !=2) { //slowing down enemies
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
-                    //System.out.println("Turning left");
                     e.setCurrDirection(Directions.LEFT);
                 } else if (e.getSelfMovementPosition()<=0) {
-                    //System.out.println("Turning right");
                     e.setCurrDirection(Directions.RIGHT);
                 }
                 e.updateSelfMovementPosition();
-                //System.out.println("SM Position: "+ e.getSelfMovementPosition() +", Hitbox xCoord: "+ e.getHitBox().getxCoord());
                 e.move(e.getCurrDirection(), width, height, tileDimension);
-                //TODO aby se vcas odrazel od sten?
+                //TODO aby se vcas odrazel od sten? + maybe ruzny damage od enemy
                 if (checkCollisionWithEntity(player,e)) {
-                    if (invincibilityTimer == 0) {
+                    if (invincibilityTimer == 0 && !player.isInvincible()) {
                         invincibilityTimer = 1; //start the counter
                         player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
-                        System.out.println("OUCH!");
+                        System.out.println("OUCH 2!");
                         if (player.getCurrHealth() <=0) {
                             System.out.println("GAME OVER");
                             System.exit(0);

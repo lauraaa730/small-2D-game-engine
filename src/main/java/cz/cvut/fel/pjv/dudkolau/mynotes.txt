@@ -9,4 +9,4 @@ konzultace:
 
 
   poznamky:
-  -invincibility potion - dokud nedostane damage tak invincible (absorbs 1st hit no matter how big it is)
+  -

@@ -269,6 +269,10 @@ public class Main extends Application {
             gc.drawImage(new Image("heartEmpty.png"),width-50*(maxHealth-currHealth)+ i*50, 5);
         }
 
+        if (game.getPlayer().isInvincible()) {
+            gc.drawImage(new Image("invincibilityPotion2.png"), 5, 5);
+        }
+
 
 
         if (showHitBoxes) {

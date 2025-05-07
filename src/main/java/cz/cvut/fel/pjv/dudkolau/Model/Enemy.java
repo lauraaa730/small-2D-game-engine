@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class Enemy implements Entity{
+    //TODO possivly add damage?
     private int maxHealth;
     private int currHealth;
     private int xCoord;
