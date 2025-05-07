@@ -9,4 +9,6 @@ konzultace:
 
 
   poznamky:
-  -
+  -vraci getPotions atd atd doopravdy pointer resp ten list? a nebo je to lokalni kopie? aka mohu menit list pomoci getList
+  -nevadi ze v jsonu je potreba aby bylo spravne object num a pak doopravdy ta velikost seznamu?
+        nebo to mam predelat tak ze hra si na zacatku zjisti velikost podle size() ?

@@ -4,7 +4,7 @@
   "backgroundObjectsNum": 1,
   "interactableObjectsNum": 0,
   "doorsNum": 1,
-  "potionsNum" : 1,
+  "potionsNum" : 2,
   "enemiesNum" : 2,
   "backgroundObjects": [{
     "xCoord" : 25,
@@ -52,5 +52,14 @@
     "width" : 30,
     "height" : 40,
     "invincibilityDuration" : 500
-  }]
+  },
+    {
+      "effect" : "HEALTH",
+      "healthAdd" : 1,
+      "xCoord" : 150,
+      "yCoord" : 70,
+      "imageName" : "healthPotion2.png",
+      "width" : 30,
+      "height" : 40
+    }]
 }

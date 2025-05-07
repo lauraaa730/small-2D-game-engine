@@ -279,7 +279,14 @@ public class Game {
                     if (inviPotionCountDown < currPotion.getInvincibilityDuration()) {
                         inviPotionCountDown = currPotion.getInvincibilityDuration();
                     }
+                } else if (currPotion.getEffect() == Effect.DAMAGE) {
+
                 }
+
+                /* Remove the potion from the level*/
+                currLevel.getPotions().remove(i);
+                //TODO zkontrolovat jestli se to nesmaze jen lokalne, is it really pointer? --ale asi dobry
+                currLevel.setPotionsNum(currLevel.getPotions().size());
 
                 //TODO remove potion after consumption
 
