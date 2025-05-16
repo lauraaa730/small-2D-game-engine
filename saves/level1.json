@@ -31,7 +31,8 @@
       "imageName" : "ghost.png",
       "width" : 70,
       "height" : 70,
-      "hasCollision" : false
+      "hasCollision" : false,
+      "maxHealth" : 2
     },
     {
       "currDirection" : 3,
@@ -40,7 +41,8 @@
       "imageName" : "ghost.png",
       "width" : 70,
       "height" : 70,
-      "hasCollision" : true
+      "hasCollision" : true,
+      "maxHealth" : 5
     }
   ],
   "potions": [ {

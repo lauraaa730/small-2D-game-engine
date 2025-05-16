@@ -14,6 +14,8 @@ public class Player implements Entity {
     private int width;
     @JsonIgnore
     private boolean interacting; //this does not need to go into json
+    @JsonIgnore
+    private boolean fighting;
     private  Directions lastDirection = Directions.NONE;
 
     private boolean invincible = false;
@@ -35,6 +37,14 @@ public class Player implements Entity {
         this.damage = damage;
     }
 
+    public boolean isFighting() {
+        return fighting;
+    }
+
+    public void setFighting(boolean fighting) {
+        this.fighting = fighting;
+    }
+
     public Directions getLastDirection() {
         return lastDirection;
     }
@@ -54,6 +64,8 @@ public class Player implements Entity {
     @JsonIgnore
     private HitBox hitBox = new HitBox();
     //for JSON
+
+    private HitBox attackHitBox = new HitBox();
     public Player() {
     }
 
@@ -180,4 +192,39 @@ public class Player implements Entity {
 
     }
 
+    public HitBox getAttackHitBox() {
+        return attackHitBox;
+    }
+
+    public void setAttackHitBox() {
+        this.attackHitBox.setRectangle(xCoord-attackFaceOffset, yCoord-attackSideOffset, this.width/2, this.height*3/2,0,0);
+    }
+
+    public void updateAttackHitbox() {
+        if (currDirection == Directions.LEFT ||
+                (currDirection == Directions.NONE && lastDirection==Directions.LEFT)) {
+            this.attackHitBox.setxCoord(xCoord-attackFaceOffset);
+            this.attackHitBox.setyCoord(yCoord-attackSideOffset);
+            this.attackHitBox.setHeight(height+attackSideOffset*2);
+            this.attackHitBox.setWidth(width/2);
+        } else if (currDirection == Directions.RIGHT ||
+                (currDirection == Directions.NONE && lastDirection==Directions.RIGHT)) {
+            this.attackHitBox.setxCoord(xCoord+width/tileDimension-attackFaceOffset);
+            this.attackHitBox.setyCoord(yCoord-attackSideOffset);
+            this.attackHitBox.setHeight(height+attackSideOffset*3);
+            this.attackHitBox.setWidth(width/2);
+        } else if (currDirection == Directions.UP ||
+                (currDirection == Directions.NONE && lastDirection==Directions.UP)) {
+            this.attackHitBox.setxCoord(xCoord-attackSideOffset);
+            this.attackHitBox.setyCoord(yCoord-attackFaceOffset);
+            this.attackHitBox.setHeight(height/2);
+            this.attackHitBox.setWidth(width+3*attackSideOffset);
+        } else if (currDirection ==  Directions.DOWN ||
+                (currDirection == Directions.NONE && lastDirection==Directions.DOWN)) {
+            this.attackHitBox.setxCoord(xCoord-attackSideOffset);
+            this.attackHitBox.setyCoord(yCoord+height/tileDimension-attackFaceOffset);
+            this.attackHitBox.setHeight(height/2);
+            this.attackHitBox.setWidth(width+2*attackSideOffset);
+        }
+    }
 }

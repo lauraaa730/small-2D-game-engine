@@ -39,7 +39,7 @@ public class Main extends Application {
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = false;
+    private boolean showHitBoxes = true;
     //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
@@ -96,6 +96,8 @@ public class Main extends Application {
                         game.getPlayer().setCurrDirection(Directions.UP);
                     } else if (keyEvent.getCode() == KeyCode.E) {
                         game.getPlayer().setInteracting(true);
+                    } else if (keyEvent.getCode() == KeyCode.SPACE) {
+                        game.getPlayer().setFighting(true);
                     }
             }
         });
@@ -110,6 +112,8 @@ public class Main extends Application {
                     game.getPlayer().setCurrDirection(Directions.NONE);
                 } else if (keyEvent.getCode() == KeyCode.E) {
                     game.getPlayer().setInteracting(false);
+                } else if (keyEvent.getCode() == KeyCode.SPACE) {
+                    game.getPlayer().setFighting(false);
                 }
             }
         });
@@ -220,6 +224,15 @@ public class Main extends Application {
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
+
+        for (Enemy enemy : game.getCurrLevel().getEnemies()) {
+            if (game.getPlayer().isFighting()) {
+                gc.drawImage(new Image("ghostHURT.png"), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
+            } else {
+                gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord() * tileDimension, enemy.getyCoord() * tileDimension);
+            }
+        }
+
         boolean drewPlayer = false;
         int playerY = game.getPlayer().getHitBox().getyCoord();
         int objectY;
@@ -235,29 +248,49 @@ public class Main extends Application {
                 gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()),objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
 
-                gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
-                        game.getPlayer().getyCoord() * game.getTileDimension());
+                if (game.getPlayer().isFighting()) {
+                    gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
+                            game.getPlayer().getyCoord() * game.getTileDimension());
+                    gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
+                            game.getPlayer().getyCoord() * game.getTileDimension());
+                } else {
+                    gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                            game.getPlayer().getyCoord() * game.getTileDimension());
+                }
                 drewPlayer = true;
 
             } else {
                 if (!drewPlayer) {
-                    gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                    drewPlayer=true;
+                    if (game.getPlayer().isFighting()) {
+                        gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
+                                game.getPlayer().getyCoord() * game.getTileDimension());
+                        gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
+                                game.getPlayer().getyCoord() * game.getTileDimension());
+                    } else {
+                        gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                                game.getPlayer().getyCoord() * game.getTileDimension());
+                    }
+                        drewPlayer=true;
+
                 }
                 //for (int i = 0; i<game.getGameObjects().length; i++) {
                 gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()), objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
             }
             if (!drewPlayer) {
-                gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
-                        game.getPlayer().getyCoord() * game.getTileDimension());
+                if (game.getPlayer().isFighting()) {
+                    gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
+                            game.getPlayer().getyCoord() * game.getTileDimension());
+                    gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
+                            game.getPlayer().getyCoord() * game.getTileDimension());
+                }else {
+                    gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                            game.getPlayer().getyCoord() * game.getTileDimension());
+                }
+
             }
         }
 
-        for (Enemy enemy : game.getCurrLevel().getEnemies()) {
-            gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
-        }
 
         //Render hearts
         int currHealth = game.getPlayer().getCurrHealth();
@@ -270,7 +303,7 @@ public class Main extends Application {
         }
 
         if (game.getPlayer().isInvincible()) {
-            gc.drawImage(new Image("invincibilityPotion2.png"), 5, 5);
+            gc.drawImage(new Image("inviEffect.png"), 5, 5);
         }
 
 
@@ -284,6 +317,7 @@ public class Main extends Application {
                 drawRectangle(gc, enemy.getHitBox().getxCoord(), enemy.getHitBox().getyCoord(), enemy.getHitBox().getWidth(), enemy.getHitBox().getHeight());
             }
             drawRectangle(gc, game.getPlayer().getHitBox().getxCoord(), game.getPlayer().getHitBox().getyCoord(), game.getPlayer().getHitBox().getWidth(), game.getPlayer().getHitBox().getHeight());
+            drawRectangle(gc, game.getPlayer().getAttackHitBox().getxCoord(), game.getPlayer().getAttackHitBox().getyCoord(), game.getPlayer().getAttackHitBox().getWidth(), game.getPlayer().getAttackHitBox().getHeight());
         }
     }
 

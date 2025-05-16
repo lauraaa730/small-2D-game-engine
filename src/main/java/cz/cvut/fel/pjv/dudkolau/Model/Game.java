@@ -26,6 +26,7 @@ public class Game {
 
     private int inviPotionCountDown = 0;
 
+    //private int attackTimer = 0;
 
     private List<Level> levels = new ArrayList<>();
 
@@ -113,6 +114,7 @@ public class Game {
     public void update() {
 
         updateTimers();
+        player.updateAttackHitbox();
 
         GameObject currentObject;
         //move the player***************************************************
@@ -161,7 +163,6 @@ public class Game {
         managePotions();
 
         updateEnemies();
-
     }
 
     public void setLevels(List<Level> levels) {
@@ -180,6 +181,7 @@ public class Game {
         player.setWidth(playerWidth);
         player.setHeight(playerHeight);
         player.setHitBox(playerXOffset, playerYOffset);
+        player.setAttackHitBox();
         loadAllLevels();
         currLevel = levels.getFirst();
         if (currLevel==null) {
@@ -194,6 +196,7 @@ public class Game {
         }
         for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
+            this.currLevel.getEnemies().get(i).setCurrHealth(this.currLevel.getEnemies().get(i).getMaxHealth());
         }
         for (int i = 0; i < this.currLevel.getPotionsNum(); i++) {
             this.currLevel.getPotions().get(i).setHitBox(0, 0);
@@ -201,8 +204,7 @@ public class Game {
             System.out.println(currLevel.getPotionsNum());
             System.out.println(currLevel.getPotions().get(i).getImageName());
         }
-        System.out.println(currLevel.getDoors().getFirst().getWidth());
-        System.out.println(currLevel.getDoors().getFirst().getxCoord());
+        System.out.printf("Health: %d\n",currLevel.getEnemies().getFirst().getCurrHealth());
     }
 
 
@@ -248,6 +250,14 @@ public class Game {
                 interactingTimer=0;
             }
         }
+/*
+        if (attackTimer > 0) {
+            attackTimer++;
+            if (attackTimer>= attackCooldown) {
+                attackTimer=0;
+            }
+        }*/
+
 
         if (inviPotionCountDown > 0) {
             player.setInvincible(true);
@@ -300,6 +310,16 @@ public class Game {
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
 
+            if ( player.isFighting() /*&& attackTimer <= 0*/ && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
+                e.setCurrHealth(e.getCurrHealth()-player.getDamage());
+                System.out.printf("Enemy health : %d\n", e.getCurrHealth());
+                if (e.getCurrHealth()<=0) {
+                    //currLevel.getEnemies().remove(i);
+                    currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
+                    continue;
+                }
+            }
+
             if (checkCollisionWithEntity(player,e)) {
                 //System.out.println(player.isInvincible());
                 //These two invincibility timers are CORRECTLY divided into two, two seperate things (for rendering icons)
@@ -319,6 +339,10 @@ public class Game {
 
             }
             if (enemieMoveCounter !=2) { //slowing down enemies
+                if ( /*player.isFighting() &&*/ player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
+                    //e.setCurrHealth(e.getCurrHealth()-player.getDamage());
+                    System.out.printf("Enemy health : %d\n", e.getCurrHealth());
+                }
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
                     e.setCurrDirection(Directions.LEFT);
                 } else if (e.getSelfMovementPosition()<=0) {

@@ -20,7 +20,10 @@ public class HitBox {
     }
 
     public void setxCoord(int xCoord) {
+
         this.xCoord = xCoord;
+        this.rectangle.setLocation(xCoord*tileDimension, yCoord*tileDimension);
+        this.rectangle.setBounds(this.rectangle);
     }
 
     public int getyCoord() {
@@ -28,7 +31,10 @@ public class HitBox {
     }
 
     public void setyCoord(int yCoord) {
+
         this.yCoord = yCoord;
+        this.rectangle.setLocation(xCoord*tileDimension, yCoord*tileDimension);
+        this.rectangle.setBounds(this.rectangle);
     }
 
     public int getWidth() {
