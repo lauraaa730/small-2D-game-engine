@@ -4,7 +4,7 @@
   "backgroundObjectsNum": 1,
   "interactableObjectsNum": 0,
   "doorsNum": 1,
-  "potionsNum" : 2,
+  "potionsNum" : 3,
   "enemiesNum" : 2,
   "backgroundObjects": [{
     "xCoord" : 25,
@@ -42,7 +42,7 @@
       "width" : 70,
       "height" : 70,
       "hasCollision" : true,
-      "maxHealth" : 5
+      "maxHealth" : 15
     }
   ],
   "potions": [ {
@@ -61,6 +61,15 @@
       "xCoord" : 150,
       "yCoord" : 70,
       "imageName" : "healthPotion2.png",
+      "width" : 30,
+      "height" : 40
+    },
+    {
+      "effect" : "DAMAGE",
+      "damageModifier" : 5,
+      "xCoord" : 150,
+      "yCoord" : 100,
+      "imageName" : "damagePotion2.png",
       "width" : 30,
       "height" : 40
     }]

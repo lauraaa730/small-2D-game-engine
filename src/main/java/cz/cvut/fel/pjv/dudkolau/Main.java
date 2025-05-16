@@ -39,7 +39,7 @@ public class Main extends Application {
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
     //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
@@ -63,16 +63,6 @@ public class Main extends Application {
 
         stage.setTitle("Beyond the Forest");
         stage.setResizable(true);
-        /*    File musicPath = new File("music.wav");
-        //maybe add whether program can find this file
-        try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInput);
-            clip.start();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }*/
 
 
 
@@ -225,13 +215,6 @@ public class Main extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
 
-        for (Enemy enemy : game.getCurrLevel().getEnemies()) {
-            if (game.getPlayer().isFighting()) {
-                gc.drawImage(new Image("ghostHURT.png"), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
-            } else {
-                gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord() * tileDimension, enemy.getyCoord() * tileDimension);
-            }
-        }
 
         boolean drewPlayer = false;
         int playerY = game.getPlayer().getHitBox().getyCoord();
@@ -288,6 +271,15 @@ public class Main extends Application {
                             game.getPlayer().getyCoord() * game.getTileDimension());
                 }
 
+            }
+        }
+
+        //Render enemies
+        for (Enemy enemy : game.getCurrLevel().getEnemies()) {
+            if (game.getPlayer().isFighting()) {
+                gc.drawImage(new Image("ghostHURT.png"), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
+            } else {
+                gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord() * tileDimension, enemy.getyCoord() * tileDimension);
             }
         }
 

@@ -26,7 +26,7 @@ public class Game {
 
     private int inviPotionCountDown = 0;
 
-    //private int attackTimer = 0;
+    private int attackTimer = 0;
 
     private List<Level> levels = new ArrayList<>();
 
@@ -250,13 +250,13 @@ public class Game {
                 interactingTimer=0;
             }
         }
-/*
+
         if (attackTimer > 0) {
             attackTimer++;
             if (attackTimer>= attackCooldown) {
                 attackTimer=0;
             }
-        }*/
+        }
 
 
         if (inviPotionCountDown > 0) {
@@ -290,7 +290,7 @@ public class Game {
                         inviPotionCountDown = currPotion.getInvincibilityDuration();
                     }
                 } else if (currPotion.getEffect() == Effect.DAMAGE) {
-
+                    player.setDamage(player.getDamage()+currPotion.getDamageModifier());
                 }
 
                 /* Remove the potion from the level*/
@@ -310,11 +310,12 @@ public class Game {
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
 
-            if ( player.isFighting() /*&& attackTimer <= 0*/ && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
+            if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
                 e.setCurrHealth(e.getCurrHealth()-player.getDamage());
                 System.out.printf("Enemy health : %d\n", e.getCurrHealth());
+                attackTimer = 1;
                 if (e.getCurrHealth()<=0) {
-                    //currLevel.getEnemies().remove(i);
+                    currLevel.getEnemies().remove(i);
                     currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
                     continue;
                 }
@@ -339,9 +340,15 @@ public class Game {
 
             }
             if (enemieMoveCounter !=2) { //slowing down enemies
-                if ( /*player.isFighting() &&*/ player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
-                    //e.setCurrHealth(e.getCurrHealth()-player.getDamage());
+                if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
+                    e.setCurrHealth(e.getCurrHealth()-player.getDamage());
                     System.out.printf("Enemy health : %d\n", e.getCurrHealth());
+                    attackTimer = 1;
+                    if (e.getCurrHealth()<=0) {
+                        currLevel.getEnemies().remove(i);
+                        currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
+                        continue;
+                    }
                 }
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
                     e.setCurrDirection(Directions.LEFT);
