@@ -27,5 +27,7 @@ public class Constants {
     public static final int attackFaceOffset = 5;
     public static final int attackSideOffset = 1;
 
+    public static final int playerDefaultDamage = 1;
+
 
 }

@@ -15,7 +15,7 @@ public class Potion extends InteractableObject implements GameObject {
     private int damageModifier;
 
     /*How many game cycles will this effect last - applies only to invincibility*/
-    private int invincibilityDuration;
+    private int effectDuration;
 
     public Effect getEffect() {
         return effect;
@@ -33,12 +33,12 @@ public class Potion extends InteractableObject implements GameObject {
         this.damageModifier = damageModifier;
     }
 
-    public int getInvincibilityDuration() {
-        return invincibilityDuration;
+    public int getEffectDuration() {
+        return effectDuration;
     }
 
-    public void setInvincibilityDuration(int invincibilityDuration) {
-        this.invincibilityDuration = invincibilityDuration;
+    public void setEffectDuration(int effectDuration) {
+        this.effectDuration = effectDuration;
     }
 
     public int getHealthAdd() {

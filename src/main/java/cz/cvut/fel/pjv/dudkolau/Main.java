@@ -294,8 +294,12 @@ public class Main extends Application {
             gc.drawImage(new Image("heartEmpty.png"),width-50*(maxHealth-currHealth)+ i*50, 5);
         }
 
+        //Render Effects
         if (game.getPlayer().isInvincible()) {
             gc.drawImage(new Image("inviEffect.png"), 5, 5);
+        }
+        if (game.getDamagePotionCountDown()>0) {
+            gc.drawImage(new Image("inviEffect.png"), 50,5);
         }
 
 

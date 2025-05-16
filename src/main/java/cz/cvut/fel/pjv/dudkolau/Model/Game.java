@@ -25,6 +25,7 @@ public class Game {
     private int interactingTimer = 0;
 
     private int inviPotionCountDown = 0;
+    private int damagePotionCountDown = 0;
 
     private int attackTimer = 0;
 
@@ -216,6 +217,10 @@ public class Game {
         return player;
     }
 
+    public int getDamagePotionCountDown() {
+        return damagePotionCountDown;
+    }
+
     public List<GameObject> getGameObjects() {
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects.addAll(this.currLevel.getBackgroundObjects());
@@ -262,10 +267,15 @@ public class Game {
         if (inviPotionCountDown > 0) {
             player.setInvincible(true);
             inviPotionCountDown--;
-            //System.out.println("INVINCIBLE");
         } else {
             player.setInvincible(false);
-            //System.out.println("NOT INVINCIBLE");
+        }
+
+        if (damagePotionCountDown > 0) {
+            damagePotionCountDown--;
+        } else {
+            player.setDamage(playerDefaultDamage);
+
         }
     }
 
@@ -286,10 +296,11 @@ public class Game {
                         player.setCurrHealth(player.getCurrHealth() + currPotion.getHealthAdd());
                     }
                 } else if (currPotion.getEffect() == Effect.INVINCIBILITY) {
-                    if (inviPotionCountDown < currPotion.getInvincibilityDuration()) {
-                        inviPotionCountDown = currPotion.getInvincibilityDuration();
+                    if (inviPotionCountDown < currPotion.getEffectDuration()) {
+                        inviPotionCountDown = currPotion.getEffectDuration();
                     }
                 } else if (currPotion.getEffect() == Effect.DAMAGE) {
+                    damagePotionCountDown = currPotion.getEffectDuration();
                     player.setDamage(player.getDamage()+currPotion.getDamageModifier());
                 }
 

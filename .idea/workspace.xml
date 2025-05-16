@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fighting, but working on intellij idea issue">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Fighting now tested and functional, added damage potion, which increases damage output permanently">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/level1.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/level1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Potion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,15 +239,7 @@
       <workItem from="1747402554586" duration="12258000" />
       <workItem from="1747417264094" duration="35000" />
       <workItem from="1747417309693" duration="159000" />
-      <workItem from="1747417612545" duration="1996000" />
-    </task>
-    <task id="LOCAL-00013" summary="Fixed hitboxes, if showHitboxes == true, the hitboxes of every object is now shown, even when moving. Added collision check with objects when player moves.">
-      <option name="closed" value="true" />
-      <created>1716304563000</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1716304563000</updated>
+      <workItem from="1747417612545" duration="3119000" />
     </task>
     <task id="LOCAL-00014" summary="Added 3D effect when player stands behind or infront of bush. Changed some hitbox methods.">
       <option name="closed" value="true" />
@@ -632,7 +625,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747418287364</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Fighting now tested and functional, added damage potion, which increases damage output permanently">
+      <option name="closed" value="true" />
+      <created>1747419656694</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1747419656694</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,7 +651,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started working on saving and loading the game using json ignore annotations." />
     <MESSAGE value="Saving game and loading saved game now works." />
     <MESSAGE value="SetHitBox for player fixed. It was multiplied by tile dimension twice, now only once. Player can now start wherever. Also divided starGame method into two, depending on whether we are loading saved game or new game." />
     <MESSAGE value="Added more sprites" />
@@ -675,7 +675,8 @@
     <MESSAGE value="Invincibility potion now working fully." />
     <MESSAGE value="Fixed some issues with rendering and managing potions" />
     <MESSAGE value="Fighting, but working on intellij idea issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fighting, but working on intellij idea issue" />
+    <MESSAGE value="Fighting now tested and functional, added damage potion, which increases damage output permanently" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fighting now tested and functional, added damage potion, which increases damage output permanently" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

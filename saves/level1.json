@@ -53,7 +53,7 @@
     "imageName" : "invincibilityPotion2.png",
     "width" : 30,
     "height" : 40,
-    "invincibilityDuration" : 500
+    "effectDuration" : 500
   },
     {
       "effect" : "HEALTH",
@@ -71,6 +71,7 @@
       "yCoord" : 100,
       "imageName" : "damagePotion2.png",
       "width" : 30,
-      "height" : 40
+      "height" : 40,
+      "effectDuration" : 500
     }]
 }
