@@ -11,6 +11,8 @@ public class Door implements GameObject {
     private String imageName;
     private int width;
     private int height;
+
+    private boolean locked;
     @JsonIgnore
     private HitBox hitBox = new HitBox();
 
@@ -89,5 +91,13 @@ public class Door implements GameObject {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }

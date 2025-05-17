@@ -12,7 +12,11 @@ public interface GameObject {
     public HitBox getHitBox();
     public void setHitBox(int xOffset, int yOffset);
 
-    int getWidth();
-    int getHeight();
+    public int getWidth();
+    public int getHeight();
+
+    public void setWidth(int width);
+    public void setHeight(int height);
+
 
 }
