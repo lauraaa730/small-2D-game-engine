@@ -127,6 +127,20 @@ public class Game {
             }
         }
 
+        Button currentButton;
+        for (int i = 0; i < currLevel.getButtonsNum() ; i++) {
+            currentButton = this.currLevel.getButtons().get(i);
+            if (checkCollisionWithObject(player,currentButton)) {
+                currentButton.setPressed(true);
+                if (!currentButton.isFake()) {
+                    for (int j = 0; j<currLevel.getDoorsNum(); j++) {
+                        currLevel.getDoors().get(i).setLocked(false);
+                    }
+                }
+
+            }
+        }
+
         //Check and use doors **********************************************************
         Door currDoor;
         //TODO also up and down doors
@@ -136,7 +150,7 @@ public class Game {
                 player.jumpBack(true,width, height);
             }
             // Check if player is interacting with an object
-            if ( interactingTimer==0 && player.isInteracting() && isPlayerFacingObject(currDoor)) {
+            if ( !currDoor.isLocked() && interactingTimer==0 && player.isInteracting() && isPlayerFacingObject(currDoor)) {
                 interactingTimer = 1;
                 if (currDoor.getLevel1() == currLevel.getLevelType()) {
                     currLevel = levels.get(currDoor.getLevel2()-1);
@@ -148,6 +162,12 @@ public class Game {
                     }
                     for (int j = 0; j < this.currLevel.getEnemiesNum(); j++) {
                         this.currLevel.getEnemies().get(j).setHitBox(0, 0);
+                    }
+                    for (int j = 0; j < this.currLevel.getPotionsNum(); j++) {
+                        this.currLevel.getPotions().get(j).setHitBox(0, 0);
+                    }
+                    for (int j = 0; j < this.currLevel.getButtonsNum(); j++) {
+                        this.currLevel.getButtons().get(j).setHitBox(0, 0);
                     }
                     System.out.println(width/tileDimension);
                     System.out.println(currDoor.getWidth());
@@ -201,11 +221,10 @@ public class Game {
         }
         for (int i = 0; i < this.currLevel.getPotionsNum(); i++) {
             this.currLevel.getPotions().get(i).setHitBox(0, 0);
-            System.out.println("!!!!!");
-            System.out.println(currLevel.getPotionsNum());
-            System.out.println(currLevel.getPotions().get(i).getImageName());
         }
-        System.out.printf("Health: %d\n",currLevel.getEnemies().getFirst().getCurrHealth());
+        for (int i = 0; i < this.currLevel.getButtonsNum(); i++) {
+            this.currLevel.getButtons().get(i).setHitBox(0, 0);
+        }
     }
 
 
@@ -222,9 +241,9 @@ public class Game {
     }
 
     public List<GameObject> getGameObjects() {
+        //TODO rename to getbackgroundobjects
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects.addAll(this.currLevel.getBackgroundObjects());
-        gameObjects.addAll(this.currLevel.getInteractableObjects());
         gameObjects.addAll(this.currLevel.getDoors());
         gameObjects.addAll(this.currLevel.getPotions());
         return gameObjects;
@@ -433,6 +452,7 @@ public class Game {
             System.out.println("Something went wrong with json");
         }
 
+        //TODO tuto cast kodu dat do jedne funkce
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
         }
@@ -446,6 +466,9 @@ public class Game {
         for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
             this.currLevel.getDoors().get(i).setHitBox(bushXOffset, bushYOffset);
         }
+        for (int i = 0; i < this.currLevel.getButtonsNum(); i++) {
+            this.currLevel.getButtons().get(i).setHitBox(0, 0);
+        }// END of TODO
 
     }
 

@@ -212,6 +212,7 @@ public class Main extends Application {
 
 
     private void render(Canvas canvas) {
+        //TODO pridat vsechny images do graphics
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0);
 
@@ -220,6 +221,20 @@ public class Main extends Application {
         int playerY = game.getPlayer().getHitBox().getyCoord();
         int objectY;
         int objectX;
+
+        //Render buttons
+        cz.cvut.fel.pjv.dudkolau.Model.Button b;
+        for (int i = 0; i < game.getCurrLevel().getButtonsNum(); i++) { {
+            b = game.getCurrLevel().getButtons().get(i);
+            if (b.isPressed()) {
+                gc.drawImage(new Image("pressedButton.png"), b.getxCoord()* game.getTileDimension(),b.getyCoord()* game.getTileDimension());
+            } else {
+                gc.drawImage(new Image("button.png"), b.getxCoord()* game.getTileDimension(),b.getyCoord()* game.getTileDimension());
+
+            }
+        }
+
+        }
         //TODO toto je zbytecne pro vsechno krome background objects, zmenit to maybe??
         //concept: player shows behind or infront of bushes
         for (int i = 0; i < game.getGameObjects().size(); i++) {
@@ -299,8 +314,9 @@ public class Main extends Application {
             gc.drawImage(new Image("inviEffect.png"), 5, 5);
         }
         if (game.getDamagePotionCountDown()>0) {
-            gc.drawImage(new Image("inviEffect.png"), 50,5);
+            gc.drawImage(new Image("damageEffect.png"), 50,5);
         }
+
 
 
 
@@ -311,6 +327,10 @@ public class Main extends Application {
             }
             for (Enemy enemy : game.getCurrLevel().getEnemies()) {
                 drawRectangle(gc, enemy.getHitBox().getxCoord(), enemy.getHitBox().getyCoord(), enemy.getHitBox().getWidth(), enemy.getHitBox().getHeight());
+            }
+            for (cz.cvut.fel.pjv.dudkolau.Model.Button b2 : game.getCurrLevel().getButtons()) {
+                drawRectangle(gc, b2.getHitBox().getxCoord(), b2.getHitBox().getyCoord(), b2.getHitBox().getWidth(), b2.getHitBox().getHeight());
+
             }
             drawRectangle(gc, game.getPlayer().getHitBox().getxCoord(), game.getPlayer().getHitBox().getyCoord(), game.getPlayer().getHitBox().getWidth(), game.getPlayer().getHitBox().getHeight());
             drawRectangle(gc, game.getPlayer().getAttackHitBox().getxCoord(), game.getPlayer().getAttackHitBox().getyCoord(), game.getPlayer().getAttackHitBox().getWidth(), game.getPlayer().getAttackHitBox().getHeight());

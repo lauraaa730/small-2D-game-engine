@@ -17,15 +17,14 @@ public class Level {
 
     //@JsonView(Views.SaveGameView.class)
     private int backgroundObjectsNum;
-    private int interactableObjectsNum;
-    //@JsonView(Views.SaveGameView.class)
     private int enemiesNum;
     private int doorsNum;
     private int potionsNum;
+    private int buttonsNum;
     private List<Door> doors = new ArrayList<>();
 
     private List<Potion> potions = new ArrayList<>();
-    private List<InteractableObject> interactableObjects = new ArrayList<>();
+    private  List<Button> buttons = new ArrayList<>();
     private List<BackgroundObject> backgroundObjects = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
 
@@ -70,13 +69,6 @@ public class Level {
         this.backgroundObjectsNum = backgroundObjectsNum;
     }
 
-    public int getInteractableObjectsNum() {
-        return interactableObjectsNum;
-    }
-
-    public void setInteractableObjectsNum(int interactableObjectsNum) {
-        this.interactableObjectsNum = interactableObjectsNum;
-    }
 
 
     public int getEnemiesNum() {
@@ -87,13 +79,6 @@ public class Level {
         this.enemiesNum = enemiesNum;
     }
 
-    public List<InteractableObject> getInteractableObjects() {
-        return interactableObjects;
-    }
-
-    public void setInteractableObjects(List<InteractableObject> interactableObjects) {
-        this.interactableObjects = interactableObjects;
-    }
 
     public List<BackgroundObject> getBackgroundObjects() {
         return backgroundObjects;
@@ -125,5 +110,21 @@ public class Level {
 
     public void setDoors(List<Door> doors) {
         this.doors = doors;
+    }
+
+    public int getButtonsNum() {
+        return buttonsNum;
+    }
+
+    public void setButtonsNum(int buttonsNum) {
+        this.buttonsNum = buttonsNum;
+    }
+
+    public List<Button> getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
     }
 }

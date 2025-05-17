@@ -2,7 +2,7 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Potion extends InteractableObject implements GameObject {
+public class Potion implements GameObject {
 
     private int xCoord;
     private int yCoord;
@@ -14,7 +14,7 @@ public class Potion extends InteractableObject implements GameObject {
 
     private int damageModifier;
 
-    /*How many game cycles will this effect last - applies only to invincibility*/
+    /*How many game cycles will this effect last*/
     private int effectDuration;
 
     public Effect getEffect() {
@@ -62,54 +62,51 @@ public class Potion extends InteractableObject implements GameObject {
     }
 
     @Override
-    public HitBox getHitBox() {
-        return super.getHitBox();
-    }
-
-    //TODO BACHA !!!!! prepsat super. settery a gettery, blblo imagename u potionu!!
-    @Override
-    public void setHitBox(int xOffset, int yOffset) {
-        super.setHitBox(xOffset, yOffset);
-    }
-
-    @Override
     public int getxCoord() {
-        return super.getxCoord();
+        return xCoord;
+    }
+
+    @Override
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
     }
 
     @Override
     public int getyCoord() {
-        return super.getyCoord();
+        return yCoord;
     }
 
     @Override
-    public void setxCoord(int x) {
-        super.setxCoord(x);
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
     }
 
     @Override
     public int getWidth() {
-        return super.getWidth();
+        return width;
     }
 
     @Override
     public void setWidth(int width) {
-        super.setWidth(width);
+        this.width = width;
     }
 
     @Override
     public int getHeight() {
-        return super.getHeight();
+        return height;
     }
 
     @Override
     public void setHeight(int height) {
-        super.setHeight(height);
+        this.height = height;
     }
 
     @Override
-    public void setyCoord(int y) {
-        super.setyCoord(y);
+    public HitBox getHitBox() {
+        return hitBox;
     }
 
+    public void setHitBox(int xOffset, int yOffset) {
+        this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
+    }
 }

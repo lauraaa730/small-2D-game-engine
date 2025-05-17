@@ -2,10 +2,10 @@
   "levelType" : 1,
   "backgroundName" : "backgroundLevel1.png",
   "backgroundObjectsNum": 1,
-  "interactableObjectsNum": 0,
   "doorsNum": 1,
   "potionsNum" : 3,
   "enemiesNum" : 2,
+  "buttonsNum" : 1,
   "backgroundObjects": [{
     "xCoord" : 25,
     "yCoord" : 50,
@@ -13,7 +13,6 @@
     "width" : 170,
     "height" : 110
   }],
-  "interactableObjects": [],
   "doors": [ {
     "level1" : 1,
     "level2" : 2,
@@ -21,7 +20,8 @@
     "yCoord" : 50,
     "imageName" : "doorVertical.png",
     "width" : 20,
-    "height" : 100
+    "height" : 100,
+    "locked" : true
   }],
   "enemies": [
     {
@@ -73,5 +73,14 @@
       "width" : 30,
       "height" : 40,
       "effectDuration" : 500
-    }]
+    }],
+  "buttons" : [ {
+    "pressed" : false,
+    "fake" : false,
+    "xCoord" : 75,
+    "yCoord" : 95,
+    "imageName" : "button.png",
+    "width" : 60,
+    "height" : 30
+  }]
 }

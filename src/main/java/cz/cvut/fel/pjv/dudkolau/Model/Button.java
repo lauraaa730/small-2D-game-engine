@@ -1,5 +1,5 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
-
+//TODO prejmenovat!!!!
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Button implements GameObject {
