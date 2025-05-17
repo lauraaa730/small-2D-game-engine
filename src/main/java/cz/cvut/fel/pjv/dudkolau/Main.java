@@ -22,11 +22,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
-
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Graphics.*;
 
@@ -38,8 +33,17 @@ public class Main extends Application {
     private Image[] currPlayerImages = animSTAND_RIGHT;
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
+    private boolean pausedMenuButtonsAdded = false;
     private boolean mainMenuButtonsAdded = false;
     private boolean showHitBoxes = false;
+
+    private Button continueButton = new Button();
+    private Button exitGameButton = new Button();
+    private Button saveGameButton = new Button();
+    private Button loadSavedButton = new Button();
+    private Button startNewButton = new Button();
+
+    private Button menuButton = new Button();
     //private Image backgroundImage = new Image("background_wall.png");
     private Image currBackgroundImage;
 
@@ -54,12 +58,7 @@ public class Main extends Application {
         Scene scene = new Scene(pane, game.getWidth(), game.getHeight());
 
 
-        Button continueButton = new Button();
-        Button exitGameButton = new Button();
-        Button saveGameButton = new Button();
-        loadButtons(continueButton,exitGameButton, saveGameButton);
-
-        game.setPaused(false);
+        loadButtons();
 
         stage.setTitle("Beyond the Forest");
         stage.setResizable(true);
@@ -71,6 +70,7 @@ public class Main extends Application {
             public void handle(KeyEvent keyEvent) {
                     if (keyEvent.getCode() == KeyCode.ESCAPE) {
                         game.setPaused(!game.getIsPaused());
+                        game.setRunning(!game.isRunning());
                     }
                     if (keyEvent.getCode() == KeyCode.A) {
                         game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
@@ -111,6 +111,7 @@ public class Main extends Application {
         continueButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 game.setPaused(!game.getIsPaused());
+                game.setRunning(!game.isRunning());
             }
         });
 
@@ -128,35 +129,104 @@ public class Main extends Application {
             }
         });
 
+        loadSavedButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                System.out.println("Loading saved game...");
+                game.startGame(false);
+            }
+        });
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                game.setPaused(false);
+                game.setRunning(false);
+                game.setMainMenuOn(true);
+            }
+        });
+
+        startNewButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                System.out.println("Starting new game");
+                game.startGame(true);
+            }
+        });
+
         AnimationTimer timer = new AnimationTimer() {
             long lastCall;
             @Override
             public void handle(long l) {
                 if ((l - lastCall) >= 25_000_000) {
-                    if (!game.getIsPaused()) {
+                    //GAMEPLAY
+                    if (game.isRunning()) {
                         //TODO sprinting?sss
                         game.update();
                         setCurrPlayerImages();
-                        if (mainMenuButtonsAdded) {
-                            pane.getChildren().removeAll(exitGameButton, continueButton, saveGameButton);
-                            mainMenuButtonsAdded = false;
+                        if (pausedMenuButtonsAdded) {
+                            pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
+                            pausedMenuButtonsAdded = false;
                             System.out.println("Deleted button");
+                        }
+                        if (mainMenuButtonsAdded) {
+                            pane.getChildren().removeAll(exitGameButton,loadSavedButton,startNewButton);
+                            mainMenuButtonsAdded = false;
                         }
                         render(canvas);
                         if (animationCounter%3==0) {
                             animate();
                         }
                         animationCounter++;
-                    } else {
-                        if (!mainMenuButtonsAdded) {
-                            pane.getChildren().addAll(exitGameButton, continueButton, saveGameButton);
-                            mainMenuButtonsAdded = true;
+
+                    // PAUSED MENU
+                    } else if (game.isPaused()){
+                        if (!pausedMenuButtonsAdded) {
+                            loadButtons();
+                            pane.getChildren().addAll(menuButton, continueButton, saveGameButton);
+                            pausedMenuButtonsAdded = true;
                             System.out.println("Added button");
                         }
                         render(canvas);
                         GraphicsContext gc = canvas.getGraphicsContext2D();
                         gc.drawImage(backgroundPaused,0,0);
                         gc.drawImage(pausedMenu, 155,110);
+
+                    //MAIN MENU
+                    } else if (game.isMainMenuOn()) {
+                        if (pausedMenuButtonsAdded) {
+                            pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
+                            pausedMenuButtonsAdded = false;
+                            System.out.println("Deleted button");
+                        }
+                        if (!mainMenuButtonsAdded) {
+                            loadButtons();
+                            exitGameButton.setLayoutX(578);
+                            exitGameButton.setLayoutY(400);
+                            pane.getChildren().addAll(loadSavedButton, startNewButton, exitGameButton);
+                            mainMenuButtonsAdded = true;
+                            System.out.println("Added button");
+                        }
+                        GraphicsContext gc = canvas.getGraphicsContext2D();
+                        gc.drawImage(mainMenuBackground,0,0);
+                        gc.drawImage(ghostCycle[ghostCycleIndex],90,150);
+                        gc.drawImage(animSTAND_MENU[playerImageIndex], 220,280);
+                        if (animationCounter%3==0) {
+                            animate();
+                        }
+                        animationCounter++;
+
+                        //GAME OVER
+                    } else if (game.isGameOverMenu()) {
+                        if (!mainMenuButtonsAdded) {
+                            exitGameButton.setLayoutX(450);
+                            exitGameButton.setLayoutY(400);
+                            startNewButton.setLayoutX(450);
+                            startNewButton.setLayoutY(260);
+                            loadSavedButton.setLayoutX(450);
+                            loadSavedButton.setLayoutY(330);
+                            pane.getChildren().addAll(loadSavedButton, startNewButton, exitGameButton);
+                            mainMenuButtonsAdded = true;
+                            System.out.println("Added button");
+                        }
+                        GraphicsContext gc = canvas.getGraphicsContext2D();
+                        gc.drawImage(gameOverBackground,0,0);
                     }
 
                     lastCall = l;
@@ -224,12 +294,21 @@ public class Main extends Application {
 
         //Render buttons
         cz.cvut.fel.pjv.dudkolau.Model.Button b;
-        for (int i = 0; i < game.getCurrLevel().getButtonsNum(); i++) { {
+        for (int i = 0; i < game.getCurrLevel().getButtonsNum(); i++) {
             b = game.getCurrLevel().getButtons().get(i);
             if (b.isPressed()) {
-                gc.drawImage(new Image("pressedButton.png"), b.getxCoord()* game.getTileDimension(),b.getyCoord()* game.getTileDimension());
+                gc.drawImage(new Image("pressedButton.png"), b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
             } else {
-                gc.drawImage(new Image("button.png"), b.getxCoord()* game.getTileDimension(),b.getyCoord()* game.getTileDimension());
+                gc.drawImage(new Image("button.png"), b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
+            }
+        }
+        Door currDoor;
+        for (int i = 0; i < game.getCurrLevel().getDoorsNum(); i++) { {
+            currDoor = game.getCurrLevel().getDoors().get(i);
+            if (currDoor.isLocked()) {
+                gc.drawImage(new Image(currDoor.getLockedImageName()), currDoor.getxCoord()* game.getTileDimension(),currDoor.getyCoord()* game.getTileDimension());
+            } else {
+                gc.drawImage(new Image(currDoor.getImageName()), currDoor.getxCoord()* game.getTileDimension(),currDoor.getyCoord()* game.getTileDimension());
 
             }
         }
@@ -252,7 +331,7 @@ public class Main extends Application {
                     gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
                             game.getPlayer().getyCoord() * game.getTileDimension());
                 } else {
-                    gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                    gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
                             game.getPlayer().getyCoord() * game.getTileDimension());
                 }
                 drewPlayer = true;
@@ -265,7 +344,7 @@ public class Main extends Application {
                         gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
                                 game.getPlayer().getyCoord() * game.getTileDimension());
                     } else {
-                        gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                        gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
                                 game.getPlayer().getyCoord() * game.getTileDimension());
                     }
                         drewPlayer=true;
@@ -282,7 +361,7 @@ public class Main extends Application {
                     gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
                             game.getPlayer().getyCoord() * game.getTileDimension());
                 }else {
-                    gc.drawImage(currPlayerImages[imageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                    gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
                             game.getPlayer().getyCoord() * game.getTileDimension());
                 }
 
@@ -291,11 +370,7 @@ public class Main extends Application {
 
         //Render enemies
         for (Enemy enemy : game.getCurrLevel().getEnemies()) {
-            if (game.getPlayer().isFighting()) {
-                gc.drawImage(new Image("ghostHURT.png"), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
-            } else {
-                gc.drawImage(new Image(enemy.getImageName()), enemy.getxCoord() * tileDimension, enemy.getyCoord() * tileDimension);
-            }
+            gc.drawImage(new Image("ghost.png"), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
         }
 
 
@@ -338,7 +413,10 @@ public class Main extends Application {
     }
 
     public void animate() {
-        imageIndex = (imageIndex + 1) % currPlayerImages.length;
+        playerImageIndex = (playerImageIndex + 1) % currPlayerImages.length;
+        if (game.isMainMenuOn()) {
+            ghostCycleIndex =  (ghostCycleIndex + 1) % ghostCycle.length;
+        }
     }
 
     private void drawRectangle(GraphicsContext gc, int x, int y, int w, int h){
@@ -350,12 +428,37 @@ public class Main extends Application {
         gc.strokeRect(x*tileDimension, y*tileDimension, w, h);
     }
 
-    private void loadButtons(Button continueButton, Button exitGameButton, Button saveGameButton) {
+    private void loadButtons() {
         continueButton.setGraphic(new ImageView(continueImage));
         continueButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         continueButton.setBackground(Background.fill(Color.TRANSPARENT));
         continueButton.setLayoutX(180);
         continueButton.setLayoutY(370);
+
+        menuButton.setGraphic(new ImageView(menuButtonImage));
+        menuButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        menuButton.setBackground(Background.fill(Color.TRANSPARENT));
+        menuButton.setLayoutX(180);
+        menuButton.setLayoutY(300);
+        //exitGameButton.setFocusTraversable(false);
+
+        saveGameButton.setGraphic(new ImageView(saveGameImage));
+        saveGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        saveGameButton.setBackground(Background.fill(Color.TRANSPARENT));
+        saveGameButton.setLayoutX(180);
+        saveGameButton.setLayoutY(230);
+
+        loadSavedButton.setGraphic(new ImageView(loadSavedImage));
+        loadSavedButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        loadSavedButton.setBackground(Background.fill(Color.TRANSPARENT));
+        loadSavedButton.setLayoutX(450);
+        loadSavedButton.setLayoutY(300);
+
+        startNewButton.setGraphic(new ImageView(startNewImage));
+        startNewButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        startNewButton.setBackground(Background.fill(Color.TRANSPARENT));
+        startNewButton.setLayoutX(480);
+        startNewButton.setLayoutY(200);
 
         exitGameButton.setGraphic(new ImageView(exitGameImage));
         exitGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -364,11 +467,7 @@ public class Main extends Application {
         exitGameButton.setLayoutY(300);
         //exitGameButton.setFocusTraversable(false);
 
-        saveGameButton.setGraphic(new ImageView(new Image("saveGameButton.png")));
-        saveGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        saveGameButton.setBackground(Background.fill(Color.TRANSPARENT));
-        saveGameButton.setLayoutX(180);
-        saveGameButton.setLayoutY(230);
+
     }
 
     public static void main(String[] args) { launch(args); }

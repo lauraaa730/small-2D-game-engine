@@ -29,5 +29,8 @@ public class Constants {
 
     public static final int playerDefaultDamage = 1;
 
+    public static final int buttonXOffset = 2;
+    public static final int buttonYOffset = 1;
+
 
 }

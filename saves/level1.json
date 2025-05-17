@@ -9,19 +9,21 @@
   "backgroundObjects": [{
     "xCoord" : 25,
     "yCoord" : 50,
-    "imageName" : "bushHorizontal.png",
+    "imageName" : "bigBushHorizontal.png",
     "width" : 170,
     "height" : 110
   }],
   "doors": [ {
     "level1" : 1,
     "level2" : 2,
-    "xCoord" : 0,
-    "yCoord" : 50,
-    "imageName" : "doorVertical.png",
-    "width" : 20,
-    "height" : 100,
-    "locked" : true
+    "xCoord" : 65,
+    "yCoord" : 1,
+    "imageName" : "upDoor.png",
+    "lockedImageName" : "upLockedDoor.png",
+    "dir" : "UP",
+    "width" : 100,
+    "height" : 30,
+    "locked" : false
   }],
   "enemies": [
     {
@@ -81,6 +83,6 @@
     "yCoord" : 95,
     "imageName" : "button.png",
     "width" : 60,
-    "height" : 30
+    "height" : 10
   }]
 }

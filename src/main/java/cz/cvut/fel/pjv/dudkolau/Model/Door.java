@@ -9,10 +9,13 @@ public class Door implements GameObject {
     private int xCoord;
     private int yCoord;
     private String imageName;
+    private String lockedImageName;
     private int width;
     private int height;
 
     private boolean locked;
+
+    private Directions dir;
     @JsonIgnore
     private HitBox hitBox = new HitBox();
 
@@ -77,6 +80,14 @@ public class Door implements GameObject {
         this.imageName = imageName;
     }
 
+    public String getLockedImageName() {
+        return lockedImageName;
+    }
+
+    public void setLockedImageName(String lockedImageName) {
+        this.lockedImageName = lockedImageName;
+    }
+
     public int getWidth() {
         return width;
     }
@@ -99,5 +110,13 @@ public class Door implements GameObject {
 
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public Directions getDir() {
+        return dir;
+    }
+
+    public void setDir(Directions dir) {
+        this.dir = dir;
     }
 }

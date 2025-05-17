@@ -15,9 +15,38 @@ public class Graphics {
     public static Image saveGameImage = new Image("saveGameButton.png");
     public static Image exitGameImage = new Image("exitGameButton.png");
     public static Image continueImage = new Image("continueButton.png");
+    public static Image startNewImage = new Image("startNewButton.png");
+    public static Image loadSavedImage = new Image("loadSavedButton.png");
+    public static Image menuButtonImage = new Image("menuButton.png");
 
     public static Image pausedMenu = new Image("pausedBackground.png");
+    public static Image mainMenuBackground = new Image("mainMenu.png");
+    public static Image gameOverBackground = new Image("gameOverMenu.png");
 
+    public static Image[] ghostCycle = {
+            new Image("ghostCycle-1.png"),
+            new Image("ghostCycle-2.png"),
+            new Image("ghostCycle-3.png"),
+            new Image("ghostCycle-4.png"),
+            new Image("ghostCycle-5.png"),
+            new Image("ghostCycle-6.png"),
+            new Image("ghostCycle-7.png"),
+            new Image("ghostCycle-8.png"),
+            new Image("ghostCycle-9.png"),
+            new Image("ghostCycle-10.png"),
+            new Image("ghostCycle-11.png")
+    };
+
+    public static Image[] animSTAND_MENU = {
+            new Image("mainMenuPlayer-1.png"),
+            new Image("mainMenuPlayer-2.png"),
+            new Image("mainMenuPlayer-3.png"),
+            new Image("mainMenuPlayer-4.png"),
+            new Image("mainMenuPlayer-5.png"),
+            new Image("mainMenuPlayer-6.png"),
+            new Image("mainMenuPlayer-7.png"),
+            new Image("mainMenuPlayer-8.png")
+    };
 
     public static Image[] animRIGHT = {
             new Image("animRIGHT-1.png"),
@@ -107,7 +136,9 @@ public class Graphics {
     };
 
 
-    public static int imageIndex = 0; //in animation cycle
+    public static int playerImageIndex = 0; //in animation cycle
+    public static int ghostCycleIndex = 0;
+
 
 
 

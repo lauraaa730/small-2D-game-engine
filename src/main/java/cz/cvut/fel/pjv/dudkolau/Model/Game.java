@@ -10,6 +10,7 @@ import java.util.List;
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
+import static cz.cvut.fel.pjv.dudkolau.Model.Directions.*;
 
 
 public class Game {
@@ -18,6 +19,8 @@ public class Game {
 
     private int tileDimension;
     private boolean isPaused;
+    private boolean running;
+    private boolean gameOverMenu;
     private int levelsNum = 0;
     private int enemieMoveCounter = 0;
     private boolean mainMenuOn;
@@ -62,9 +65,10 @@ public class Game {
 
 
     public Game() {
-        mainMenuOn = true;
-        startGame(mainMenuOn);
-
+        //startGame(true);
+        this.mainMenuOn = true;
+        this.running = false;
+        this.gameOverMenu = false;
         GameData gameData = new GameData();
         gameData.setTotalLevelNum(4);
 
@@ -103,13 +107,36 @@ public class Game {
         return mainMenuOn;
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public boolean isGameOverMenu() {
+        return gameOverMenu;
+    }
+
+    public void setGameOverMenu(boolean gameOverMenu) {
+        this.gameOverMenu = gameOverMenu;
+    }
+
     public void setMainMenuOn(boolean mainMenuOn) {
         this.mainMenuOn = mainMenuOn;
     }
 
     public void startGame(boolean newGame) {
-        startNewGame();
-        //loadSavedGame();
+        this.running = true;
+        this.mainMenuOn = false;
+        this.gameOverMenu = false;
+        this.isPaused = false;
+        if (newGame) {
+            startNewGame();
+        } else {
+            loadSavedGame();
+        }
     }
 
     public void update() {
@@ -134,7 +161,7 @@ public class Game {
                 currentButton.setPressed(true);
                 if (!currentButton.isFake()) {
                     for (int j = 0; j<currLevel.getDoorsNum(); j++) {
-                        currLevel.getDoors().get(i).setLocked(false);
+                        currLevel.getDoors().get(j).setLocked(false);
                     }
                 }
 
@@ -167,14 +194,20 @@ public class Game {
                         this.currLevel.getPotions().get(j).setHitBox(0, 0);
                     }
                     for (int j = 0; j < this.currLevel.getButtonsNum(); j++) {
-                        this.currLevel.getButtons().get(j).setHitBox(0, 0);
+                        this.currLevel.getButtons().get(j).setHitBox(buttonXOffset, buttonYOffset);
                     }
-                    System.out.println(width/tileDimension);
-                    System.out.println(currDoor.getWidth());
-                    player.setxCoord(width/tileDimension - currDoor.getxCoord());
-                    if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
-                        player.setxCoord((width-player.getWidth())/tileDimension-5); //HOW DOES THIS WORK???
+                    if (currDoor.getDir()==LEFT || currDoor.getDir()==RIGHT) {
+                        player.setxCoord(width/tileDimension - currDoor.getxCoord());
+                        if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
+                            player.setxCoord((width-player.getWidth())/tileDimension-5); //HOW DOES THIS WORK???
+                        }
+                    } else if (currDoor.getDir() == UP || currDoor.getDir()==DOWN) {
+                        player.setyCoord(height/tileDimension - currDoor.getyCoord());
+                        if (player.getyCoord() >=height/tileDimension-player.getHeight()/tileDimension) {
+                            player.setyCoord((height-player.getHeight())/tileDimension-5);
+                        }
                     }
+
                     player.setHitBox(playerXOffset,playerYOffset);
                     return;
                 }
@@ -223,7 +256,7 @@ public class Game {
             this.currLevel.getPotions().get(i).setHitBox(0, 0);
         }
         for (int i = 0; i < this.currLevel.getButtonsNum(); i++) {
-            this.currLevel.getButtons().get(i).setHitBox(0, 0);
+            this.currLevel.getButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
         }
     }
 
@@ -244,7 +277,6 @@ public class Game {
         //TODO rename to getbackgroundobjects
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects.addAll(this.currLevel.getBackgroundObjects());
-        gameObjects.addAll(this.currLevel.getDoors());
         gameObjects.addAll(this.currLevel.getPotions());
         return gameObjects;
     }
@@ -361,7 +393,8 @@ public class Game {
                     System.out.println("OUCH!");
                     if (player.getCurrHealth() <=0) {
                         System.out.println("GAME OVER");
-                        System.exit(0);
+                        this.running = false;
+                        this.gameOverMenu = true;
                     }
                 }
                 if (e.isHasCollision()) {
@@ -381,9 +414,9 @@ public class Game {
                     }
                 }
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
-                    e.setCurrDirection(Directions.LEFT);
+                    e.setCurrDirection(LEFT);
                 } else if (e.getSelfMovementPosition()<=0) {
-                    e.setCurrDirection(Directions.RIGHT);
+                    e.setCurrDirection(RIGHT);
                 }
                 e.updateSelfMovementPosition();
                 e.move(e.getCurrDirection(), width, height, tileDimension);
@@ -395,17 +428,18 @@ public class Game {
                         System.out.println("OUCH 2!");
                         if (player.getCurrHealth() <=0) {
                             System.out.println("GAME OVER");
-                            System.exit(0);
+                            this.running = false;
+                            this.gameOverMenu = true;
                         }
                     }
                     if(e.isHasCollision()) {
                         e.jumpBack(width, height);
-                        if  (e.getCurrDirection()==Directions.LEFT) {
+                        if  (e.getCurrDirection()==LEFT) {
                             e.setSelfMovementPosition(0);
-                            e.setCurrDirection(Directions.RIGHT);
-                        } else if (e.getCurrDirection() == Directions.RIGHT) {
+                            e.setCurrDirection(RIGHT);
+                        } else if (e.getCurrDirection() == RIGHT) {
                             e.setSelfMovementPosition(enemyMovementLength);
-                            e.setCurrDirection(Directions.LEFT);
+                            e.setCurrDirection(LEFT);
                         }
                     }
 
@@ -445,6 +479,7 @@ public class Game {
             player.setWidth(playerWidth);
             player.setHeight(playerHeight);
             player.setHitBox(playerXOffset, playerYOffset);
+            player.setAttackHitBox();
             System.out.println("Loaded game succesfully!");
 
         } catch (IOException ex) {
@@ -464,10 +499,10 @@ public class Game {
             this.currLevel.getEnemies().get(i).setHitBox(0, 0);
         }
         for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
-            this.currLevel.getDoors().get(i).setHitBox(bushXOffset, bushYOffset);
+            this.currLevel.getDoors().get(i).setHitBox(0,0);
         }
         for (int i = 0; i < this.currLevel.getButtonsNum(); i++) {
-            this.currLevel.getButtons().get(i).setHitBox(0, 0);
+            this.currLevel.getButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
         }// END of TODO
 
     }
