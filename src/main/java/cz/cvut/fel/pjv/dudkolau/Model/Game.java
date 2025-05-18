@@ -65,13 +65,9 @@ public class Game {
 
 
     public Game() {
-        //startGame(true);
         this.mainMenuOn = true;
         this.running = false;
         this.gameOverMenu = false;
-        GameData gameData = new GameData();
-        gameData.setTotalLevelNum(4);
-
     }
 
 
@@ -469,6 +465,7 @@ public class Game {
                 }
             }
 
+            System.out.println("setting player");
             this.player = new Player();
             player.setInteracting(false);
             player.setMaxHealth(gameData.getMaxPlayerHealth());

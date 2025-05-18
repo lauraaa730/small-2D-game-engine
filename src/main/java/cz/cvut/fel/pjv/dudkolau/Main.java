@@ -66,7 +66,7 @@ public class Main extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                     if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                        game.setPaused(!game.getIsPaused());
+                        game.setPaused(!game.isPaused());
                         game.setRunning(!game.isRunning());
                     }
                     if (keyEvent.getCode() == KeyCode.A) {
@@ -107,7 +107,7 @@ public class Main extends Application {
 
         continueButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
-                game.setPaused(!game.getIsPaused());
+                game.setPaused(!game.isPaused());
                 game.setRunning(!game.isRunning());
             }
         });

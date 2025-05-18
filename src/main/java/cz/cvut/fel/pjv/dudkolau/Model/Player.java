@@ -135,8 +135,6 @@ public class Player implements Entity {
         }
     }
 
-    @Override
-    public void attack(Directions d){}
 
     public int interact() { return 0;}
 

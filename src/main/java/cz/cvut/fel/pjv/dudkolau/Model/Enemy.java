@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class Enemy implements Entity{
-    //TODO possivly add damage?
     private int maxHealth;
     private int currHealth;
     private int xCoord;
@@ -23,10 +22,12 @@ public class Enemy implements Entity{
 
     private Directions currDirection = Directions.RIGHT;
 
+    @SuppressWarnings("unused")
     public String getImageName() {
         return imageName;
     }
 
+    @SuppressWarnings("unused")
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
@@ -36,6 +37,7 @@ public class Enemy implements Entity{
     }
 
 
+    @Override
     public void setHitBox(int xOffset, int yOffset) {
         this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
     }
@@ -45,11 +47,12 @@ public class Enemy implements Entity{
         return hitBox;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
-
+    @Override
     public void setHeight(int height) {
         this.height = height;
     }
@@ -58,6 +61,7 @@ public class Enemy implements Entity{
         return hasCollision;
     }
 
+    @SuppressWarnings("unused")
     public void setHasCollision(boolean hasCollision) {
         this.hasCollision = hasCollision;
     }
@@ -82,10 +86,12 @@ public class Enemy implements Entity{
         this.currHealth = currHealth;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
 
+    @Override
     public void setWidth(int width) {
         this.width = width;
     }
@@ -136,9 +142,6 @@ public class Enemy implements Entity{
             move(Directions.UP, w, h, tileDimension);
         }
     }
-
-    @Override
-    public void attack(Directions d){}
 
 
     @Override
