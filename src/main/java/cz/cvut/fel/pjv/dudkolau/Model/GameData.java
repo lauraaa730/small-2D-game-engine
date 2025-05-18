@@ -18,9 +18,9 @@ public class GameData {
 
 
     private int totalLevelNum;
-    @JsonView(Views.SaveGameView.class)
+    @JsonView(Views.gameView.class)
     private int currPlayerX;
-    @JsonView(Views.SaveGameView.class)
+    @JsonView(Views.gameView.class)
     private int currPlayerY;
     private int currPlayerLevel;
     private int currPlayerHealth;

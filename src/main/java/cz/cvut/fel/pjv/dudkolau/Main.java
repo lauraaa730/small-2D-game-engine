@@ -309,69 +309,48 @@ public class Main extends Application {
                 gc.drawImage(new Image("button.png"), b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
             }
         }
+
+        //Render doors
         Door currDoor;
-        for (int i = 0; i < game.getCurrLevel().getDoorsNum(); i++) { {
+        for (int i = 0; i < game.getCurrLevel().getDoorsNum(); i++) {
             currDoor = game.getCurrLevel().getDoors().get(i);
             if (currDoor.isLocked()) {
-                gc.drawImage(new Image(currDoor.getLockedImageName()), currDoor.getxCoord()* game.getTileDimension(),currDoor.getyCoord()* game.getTileDimension());
+                gc.drawImage(new Image(currDoor.getLockedImageName()), currDoor.getxCoord() * game.getTileDimension(), currDoor.getyCoord() * game.getTileDimension());
             } else {
-                gc.drawImage(new Image(currDoor.getImageName()), currDoor.getxCoord()* game.getTileDimension(),currDoor.getyCoord()* game.getTileDimension());
-
+                gc.drawImage(new Image(currDoor.getImageName()), currDoor.getxCoord() * game.getTileDimension(), currDoor.getyCoord() * game.getTileDimension());
             }
         }
 
+        //Render potions
+        Potion currPotion;
+        for (int i = 0; i < game.getCurrLevel().getPotionsNum(); i++) {
+            currPotion = game.getCurrLevel().getPotions().get(i);
+            gc.drawImage(new Image(currPotion.getImageName()), currPotion.getxCoord()* game.getTileDimension(),currPotion.getyCoord()* game.getTileDimension());
         }
-        //TODO toto je zbytecne pro vsechno krome background objects, zmenit to maybe??
+
+
         //concept: player shows behind or infront of bushes
-        for (int i = 0; i < game.getGameObjects().size(); i++) {
+        BackgroundObject bo;
+        for (int i = 0; i < game.getCurrLevel().getBackgroundObjects().size(); i++) {
+            bo = game.getCurrLevel().getBackgroundObjects().get(i);
+            objectY = bo.getyCoord();
+            objectX = bo.getxCoord();
 
-            objectY = game.getGameObjects().get(i).getyCoord();
-            objectX = game.getGameObjects().get(i).getxCoord();
-            if (playerY-tileDimension>objectY && playerY< objectY+game.getGameObjects().get(i).getHeight()/tileDimension) {
-                //System.out.println("Hrac pred kerem, kre cislo: " + i);
-                gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()),objectX*game.getTileDimension(),
+            if (playerY-tileDimension>objectY && playerY< objectY+bo.getHeight()/tileDimension) {
+                gc.drawImage(new Image(bo.getImageName()),objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
-
-                if (game.getPlayer().isFighting()) {
-                    gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                    gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                } else {
-                    gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                }
+                renderPlayer(gc);
                 drewPlayer = true;
-
             } else {
                 if (!drewPlayer) {
-                    if (game.getPlayer().isFighting()) {
-                        gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
-                                game.getPlayer().getyCoord() * game.getTileDimension());
-                        gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
-                                game.getPlayer().getyCoord() * game.getTileDimension());
-                    } else {
-                        gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
-                                game.getPlayer().getyCoord() * game.getTileDimension());
-                    }
-                        drewPlayer=true;
-
+                    renderPlayer(gc);
+                    drewPlayer=true;
                 }
-                //for (int i = 0; i<game.getGameObjects().length; i++) {
-                gc.drawImage(new Image(game.getGameObjects().get(i).getImageName()), objectX*game.getTileDimension(),
+                gc.drawImage(new Image(bo.getImageName()), objectX*game.getTileDimension(),
                         objectY*game.getTileDimension());
             }
             if (!drewPlayer) {
-                if (game.getPlayer().isFighting()) {
-                    gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                    gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                }else {
-                    gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
-                            game.getPlayer().getyCoord() * game.getTileDimension());
-                }
-
+                renderPlayer(gc);
             }
         }
 
@@ -400,19 +379,12 @@ public class Main extends Application {
         }
 
 
-
-
         if (showHitBoxes) {
-            //drawRectangle(gc, game.getGameObjects().getFirst().getHitBox().getRectangle());
             for (GameObject gameObject : game.getGameObjects()) {
                 drawRectangle(gc, gameObject.getHitBox().getxCoord(), gameObject.getHitBox().getyCoord(), gameObject.getHitBox().getWidth(), gameObject.getHitBox().getHeight());
             }
             for (Enemy enemy : game.getCurrLevel().getEnemies()) {
                 drawRectangle(gc, enemy.getHitBox().getxCoord(), enemy.getHitBox().getyCoord(), enemy.getHitBox().getWidth(), enemy.getHitBox().getHeight());
-            }
-            for (GameButton b2 : game.getCurrLevel().getGameButtons()) {
-                drawRectangle(gc, b2.getHitBox().getxCoord(), b2.getHitBox().getyCoord(), b2.getHitBox().getWidth(), b2.getHitBox().getHeight());
-
             }
             drawRectangle(gc, game.getPlayer().getHitBox().getxCoord(), game.getPlayer().getHitBox().getyCoord(), game.getPlayer().getHitBox().getWidth(), game.getPlayer().getHitBox().getHeight());
             drawRectangle(gc, game.getPlayer().getAttackHitBox().getxCoord(), game.getPlayer().getAttackHitBox().getyCoord(), game.getPlayer().getAttackHitBox().getWidth(), game.getPlayer().getAttackHitBox().getHeight());
@@ -433,6 +405,18 @@ public class Main extends Application {
         rect.setStroke(Color.RED);
         rect.setStrokeWidth(2);
         gc.strokeRect(x*tileDimension, y*tileDimension, w, h);
+    }
+
+    private void renderPlayer(GraphicsContext gc) {
+        if (game.getPlayer().isFighting()) {
+            gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
+                    game.getPlayer().getyCoord() * game.getTileDimension());
+            gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
+                    game.getPlayer().getyCoord() * game.getTileDimension());
+        } else {
+            gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
+                    game.getPlayer().getyCoord() * game.getTileDimension());
+        }
     }
 
     private void loadButtons() {

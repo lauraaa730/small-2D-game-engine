@@ -36,26 +36,6 @@ public class Game {
 
     private List<Level> levels = new ArrayList<>();
 
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
-    public void setTileDimension(int tileDimension) {
-        this.tileDimension = tileDimension;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getTileDimension() {
-        return tileDimension;
-    }
-
     public Game() {
         this.mainMenuOn = true;
         this.running = false;
@@ -63,29 +43,7 @@ public class Game {
     }
 
 
-    public boolean isPaused() {
-        return isPaused;
-    }
 
-    public boolean isMainMenuOn() {
-        return mainMenuOn;
-    }
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
-    public boolean isGameOverMenu() {
-        return gameOverMenu;
-    }
-
-    public void setMainMenuOn(boolean mainMenuOn) {
-        this.mainMenuOn = mainMenuOn;
-    }
 
     public void startGame(boolean newGame) {
         this.running = true;
@@ -100,19 +58,17 @@ public class Game {
     }
 
     public void startNewGame() {
-
         this.player = new Player();
-
         resetGame();
 
         this.levels = new ArrayList<>();
         loadAllLevels();
-
         currLevel = levels.getFirst();
         if (currLevel==null) {
             System.out.println("Level1 is null!"); //TODO logger
             System.exit(1);
         }
+
         setObjects();
     }
 
@@ -120,94 +76,23 @@ public class Game {
 
         updateTimers();
 
+        //Move player
+        player.move(player.getCurrDirection(), width, height, tileDimension);
         player.updateAttackHitbox();
 
-        GameObject currentObject;
-        //move the player***************************************************
-        player.move(player.getCurrDirection(), width, height, tileDimension);
-        for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
-            currentObject = this.currLevel.getBackgroundObjects().get(i);
-            if (checkCollisionWithObject(player,currentObject)) {
-                System.out.println(player.getHitBox().getxCoord());
-                System.out.println(currentObject.getHitBox().getxCoord());
-                player.jumpBack(true,width, height);
-            }
-        }
+        if (enterNewLevel()) { return; }
 
-        GameButton currentGameButton;
-        for (int i = 0; i < currLevel.getGameButtonsNum() ; i++) {
-            currentGameButton = this.currLevel.getGameButtons().get(i);
-            if (checkCollisionWithObject(player, currentGameButton)) {
-                currentGameButton.setPressed(true);
-                if (!currentGameButton.isFake()) {
-                    for (int j = 0; j<currLevel.getDoorsNum(); j++) {
-                        currLevel.getDoors().get(j).setLocked(false);
-                    }
-                }
-
-            }
-        }
-
-        //Check and use doors **********************************************************
-        Door currDoor;
-        //TODO dat do funkce
-        for (int i = 0; i < currLevel.getDoorsNum() ; i++) {
-            currDoor = this.currLevel.getDoors().get(i);
-            if (checkCollisionWithObject(player,currDoor)) {
-                player.jumpBack(true,width, height);
-            }
-            // Check if player is interacting with an object
-            if ( !currDoor.isLocked() && interactingTimer==0 && player.isInteracting() && isPlayerFacingObject(currDoor)) {
-                interactingTimer = 1;
-                if (currDoor.getLevel1() == currLevel.getLevelType()) {
-                    currLevel = levels.get(currDoor.getLevel2()-1);
-                    setObjects();
-                    if (currDoor.getDir()==LEFT || currDoor.getDir()==RIGHT) {
-                        player.setxCoord(width/tileDimension - currDoor.getxCoord());
-                        if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
-                            player.setxCoord((width-player.getWidth())/tileDimension-5); //HOW DOES THIS WORK???
-                        }
-                    } else if (currDoor.getDir() == UP || currDoor.getDir()==DOWN) {
-                        player.setyCoord(height/tileDimension - currDoor.getyCoord());
-                        if (player.getyCoord() >=height/tileDimension-player.getHeight()/tileDimension) {
-                            player.setyCoord((height-player.getHeight())/tileDimension-5);
-                        }
-                    }
-
-                    player.setHitBox(player.getxOffset(), player.getyOffset());
-                    return;
-                }
-            }
-        }
-
+        //Check collisions and interaction with level objects
+        checkBackgroundObjects();
+        checkGameButtons();
         managePotions();
 
         updateEnemies();
     }
 
 
-
-    public Level getCurrLevel() {
-        return currLevel;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public int getDamagePotionCountDown() {
-        return damagePotionCountDown;
-    }
-
-    public List<GameObject> getGameObjects() {
-        //TODO rename to getbackgroundobjects
-        List<GameObject> gameObjects = new ArrayList<>();
-        gameObjects.addAll(this.currLevel.getBackgroundObjects());
-        gameObjects.addAll(this.currLevel.getPotions());
-        return gameObjects;
-    }
-
     private boolean isPlayerFacingObject(GameObject object) {
+        //Fake movement to check possible collision, then jumpback
         player.move(player.getLastDirection(), width, height, tileDimension);
         if (checkCollisionWithObject(player,object)) {
             player.jumpBack(false,width, height);
@@ -254,17 +139,55 @@ public class Game {
         }
     }
 
-    public void managePotions(){
+    private boolean enterNewLevel() {
+        Door currDoor;
+        for (int i = 0; i < currLevel.getDoorsNum() ; i++) {
+            currDoor = this.currLevel.getDoors().get(i);
+            if (checkCollisionWithObject(player,currDoor)) {
+                player.jumpBack(true,width, height);
+            }
+            // Check if player is interacting with an object
+            if ( !currDoor.isLocked() && interactingTimer==0 && player.isInteracting() && isPlayerFacingObject(currDoor)) {
+                interactingTimer = 1;
+                if (currDoor.getLevel1() == currLevel.getLevelType()) {
+                    currLevel = levels.get(currDoor.getLevel2()-1);
+                    setObjects();
+
+                    //Manage player coordination in new level
+                    if (currDoor.getDir()==LEFT || currDoor.getDir()==RIGHT) {
+                        player.setxCoord(width/tileDimension - currDoor.getxCoord());
+                        if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
+                            player.setxCoord((width-player.getWidth())/tileDimension-5);
+                        }
+                    } else if (currDoor.getDir() == UP || currDoor.getDir()==DOWN) {
+                        player.setyCoord(height/tileDimension - currDoor.getyCoord());
+                        if (player.getyCoord() >=height/tileDimension-player.getHeight()/tileDimension) {
+                            player.setyCoord((height-player.getHeight())/tileDimension-5);
+                        }
+                    }
+                    player.setHitBox(player.getxOffset(), player.getyOffset());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    private void managePotions(){
         Potion currPotion;
+
         for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
             currPotion = this.currLevel.getPotions().get(i);
             if (checkCollisionWithObject(player, currPotion)) {
                 player.jumpBack(true, width, height);
             }
 
-            // Check if player is interacting with potion
+            //Check if player is interacting with porion
             if (interactingTimer == 0 && player.isInteracting() && isPlayerFacingObject(currPotion)) {
+                //Start countdown
                 interactingTimer = 1;
+
                 if (currPotion.getEffect()== Effect.HEALTH) {
                     if (player.getMaxHealth() >= player.getCurrHealth() + currPotion.getHealthAdd()) {
                         System.out.println("HEALING!");//TODO logger
@@ -274,9 +197,13 @@ public class Game {
                     if (inviPotionCountDown < currPotion.getEffectDuration()) {
                         inviPotionCountDown = currPotion.getEffectDuration();
                     }
+                    player.setInvincible(true);
                 } else if (currPotion.getEffect() == Effect.DAMAGE) {
-                    damagePotionCountDown = currPotion.getEffectDuration();
+                     if (damagePotionCountDown < currPotion.getEffectDuration()) {
+                         damagePotionCountDown = currPotion.getEffectDuration();
+                     }
                     player.setDamage(player.getDamage()+currPotion.getDamageModifier());
+                    System.out.println("Consumed damagePotion"); //TODO logger
                 }
 
                 /* Remove the potion from the level*/
@@ -286,34 +213,52 @@ public class Game {
         }
     }
 
-    private void updateEnemies() {
-        Enemy e;
-        for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
-            e=currLevel.getEnemies().get(i);
+    private void checkBackgroundObjects() {
+        GameObject currentObject;
+        for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
+            currentObject = this.currLevel.getBackgroundObjects().get(i);
+            if (checkCollisionWithObject(player,currentObject)) {
+                System.out.println(player.getHitBox().getxCoord());
+                System.out.println(currentObject.getHitBox().getxCoord());
+                player.jumpBack(true,width, height);
+            }
+        }
+    }
 
-            attack(e,i);
-
-            if (checkCollisionWithEntity(player,e)) {
-                //These two invincibility timers are CORRECTLY divided into two, two seperate things (for rendering icons)
-                if (invincibilityTimer == 0 && !player.isInvincible()){
-                    invincibilityTimer = 1; //start the counter
-
-                    //TODO dat do jedne funkce
-                    player.setCurrHealth(player.getCurrHealth()-1);
-                    System.out.println("OUCH!");//TODO logger
-                    if (player.getCurrHealth() <=0) {
-                        System.out.println("GAME OVER");//TODO logger
-                        this.running = false;
-                        this.gameOverMenu = true;
+    private void checkGameButtons() {
+        GameButton currentGameButton;
+        for (int i = 0; i < currLevel.getGameButtonsNum() ; i++) {
+            currentGameButton = this.currLevel.getGameButtons().get(i);
+            if (checkCollisionWithObject(player, currentGameButton)) {
+                currentGameButton.setPressed(true);
+                if (!currentGameButton.isFake()) {
+                    for (int j = 0; j<currLevel.getDoorsNum(); j++) {
+                        currLevel.getDoors().get(j).setLocked(false);
                     }
                 }
+            }
+        }
+    }
+
+
+    private void updateEnemies() {
+        Enemy e;
+
+        for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
+            e=currLevel.getEnemies().get(i);
+            attack(e,i);
+            if (checkCollisionWithEntity(player,e)) {
+                checkEnemyAttack();
                 if (e.isHasCollision()) {
                     player.jumpBack(true,width, height);
                 }
-
             }
-            if (enemieMoveCounter !=2) { //slowing down enemies
+
+            //Movement
+            if (enemieMoveCounter != enemyMovementModifier) { //slowing down enemies
                 attack(e,i);
+
+                //Cycle movement update
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
                     e.setCurrDirection(LEFT);
                 } else if (e.getSelfMovementPosition()<=0) {
@@ -321,17 +266,10 @@ public class Game {
                 }
                 e.updateSelfMovementPosition();
                 e.move(e.getCurrDirection(), width, height, tileDimension);
+
+                //Enemy collision and attack
                 if (checkCollisionWithEntity(player,e)) {
-                    if (invincibilityTimer == 0 && !player.isInvincible()) {
-                        invincibilityTimer = 1; //start the counter
-                        player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
-                        System.out.println("OUCH 2!"); //TODO logger
-                        if (player.getCurrHealth() <=0) {
-                            System.out.println("GAME OVER");//TODO logger
-                            this.running = false;
-                            this.gameOverMenu = true;
-                        }
-                    }
+                    checkEnemyAttack();
                     if(e.isHasCollision()) {
                         e.jumpBack(width, height);
                         if  (e.getCurrDirection()==LEFT) {
@@ -344,25 +282,37 @@ public class Game {
                     }
                 }
             }
-            enemieMoveCounter = (enemieMoveCounter+1)%3;
             // for speeding up or slowing down enemy movement
-
-        }//*****************************************************************
+            enemieMoveCounter = (enemieMoveCounter+1)%3;
+        }
     }
 
-    public void attack(Enemy e,int i) {
+    private void attack(Enemy e,int i) {
         if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
             e.setCurrHealth(e.getCurrHealth()-player.getDamage());
             System.out.printf("Enemy health : %d\n", e.getCurrHealth()); //TODO logger
             attackTimer = 1;
             if (e.getCurrHealth()<=0) {
                 currLevel.getEnemies().remove(i);
-                currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
+                currLevel.setEnemiesNum(currLevel.getEnemies().size());
             }
         }
     }
 
-    public void setObjects() {
+    private void checkEnemyAttack() {
+        if (invincibilityTimer == 0 && !player.isInvincible()) {
+            invincibilityTimer = 1; //start the counter
+            player.setCurrHealth(player.getCurrHealth()-1);
+            System.out.println("OUCH!"); //TODO logger
+            if (player.getCurrHealth() <=0) {
+                System.out.println("GAME OVER");//TODO logger
+                this.running = false;
+                this.gameOverMenu = true;
+            }
+        }
+    }
+
+    private void setObjects() {
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
         }
@@ -382,7 +332,10 @@ public class Game {
         }
     }
 
-    public void resetGame() {
+
+    // Saving and loading functions --------------------------------------------------------
+
+    private void resetGame() {
 
         this.inviPotionCountDown = 0;
         this.damagePotionCountDown = 0;
@@ -398,7 +351,7 @@ public class Game {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            WorldConfig worldConfig = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
+            WorldConfig worldConfig = objectMapper.readerWithView(Views.gameView.class).readValue(
                     new File("saves/game-world-info.json" ), WorldConfig.class
             );
 
@@ -422,14 +375,14 @@ public class Game {
         }
     }
 
-    // Saving and loading help functions ***********************
+
     public void loadSavedGame() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
             resetGame();
 
-            GameData gameData = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
+            GameData gameData = objectMapper.readerWithView(Views.gameView.class).readValue(
                     new File("saves/current-game-state.json" ), GameData.class
             );
 
@@ -466,7 +419,7 @@ public class Game {
             ObjectMapper objectMapper = new ObjectMapper();
             File jsonFile = new File("saves/" + levelName);
 
-            Level levelToRead = objectMapper.readerWithView(Views.SaveGameView.class).readValue(jsonFile, Level.class);
+            Level levelToRead = objectMapper.readerWithView(Views.gameView.class).readValue(jsonFile, Level.class);
             System.out.println("Loaded level" + levelName); //TODO logger
             return levelToRead;
         } catch (IOException ex) {
@@ -474,6 +427,7 @@ public class Game {
         }
         return null;
     }
+
 
     private void loadAllLevels() {
         Level l;
@@ -506,7 +460,7 @@ public class Game {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writerWithView(Views.SaveGameView.class).writeValue(
+            objectMapper.writerWithView(Views.gameView.class).writeValue(
                     new File("saves/current-game-state.json" ), gameData
             );
             System.out.println("game saved succesfully");//TODO logger
@@ -515,8 +469,72 @@ public class Game {
             System.out.println(ex.getMessage());
             System.out.println("Something went wrong with json");//TODO logger
         }
+    } /* ----------------------------------------------------------------------------- */
 
 
+    //Setters and Getters
+    public boolean isPaused() {
+        return isPaused;
     }
 
+    public boolean isMainMenuOn() {
+        return mainMenuOn;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public boolean isGameOverMenu() {
+        return gameOverMenu;
+    }
+
+    public void setMainMenuOn(boolean mainMenuOn) {
+        this.mainMenuOn = mainMenuOn;
+    }
+
+    public Level getCurrLevel() {
+        return currLevel;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getDamagePotionCountDown() {
+        return damagePotionCountDown;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+
+    public void setTileDimension(int tileDimension) {
+        this.tileDimension = tileDimension;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getTileDimension() {
+        return tileDimension;
+    }
+
+    public List<GameObject> getGameObjects() {
+        List<GameObject> gameObjects = new ArrayList<>();
+        gameObjects.addAll(this.currLevel.getGameButtons());
+        gameObjects.addAll(this.currLevel.getDoors());
+        gameObjects.addAll(this.currLevel.getPotions());
+        gameObjects.addAll(this.currLevel.getBackgroundObjects());
+        return gameObjects;
+    }
 }

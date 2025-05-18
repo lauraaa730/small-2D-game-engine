@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Reorganized">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/WorldConfig.java" afterDir="false" />
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Added WorldConfig data class, reorganizing Game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/game-world-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/game-world-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/GameData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Views.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Views.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,15 +244,7 @@
       <workItem from="1747417612545" duration="3158000" />
       <workItem from="1747472759224" duration="25603000" />
       <workItem from="1747554468016" duration="2491000" />
-      <workItem from="1747564364851" duration="11455000" />
-    </task>
-    <task id="LOCAL-00020" summary="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush.">
-      <option name="closed" value="true" />
-      <created>1718728758697</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1718728758697</updated>
+      <workItem from="1747564364851" duration="14912000" />
     </task>
     <task id="LOCAL-00021" summary="Fixed some animation issues, multiple bushes now loading from json. Added different sprites for paused screen and for bush.">
       <option name="closed" value="true" />
@@ -639,7 +630,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747571743894</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Added WorldConfig data class, reorganizing Game">
+      <option name="closed" value="true" />
+      <created>1747587467383</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1747587467383</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +656,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added player attribute Last direction (previously only in the main function) + tha game now recognizes when player is facing an object and standing right in front of it. (isPlayerFacingObject() method)" />
     <MESSAGE value="Sleeping mushroom on pause menu" />
     <MESSAGE value="Changed paused menu background image" />
     <MESSAGE value="Working on doors" />
@@ -682,7 +680,8 @@
     <MESSAGE value="Added main menu and game over menu as well as some new sprites." />
     <MESSAGE value="Reorganized BakcgroundObject, Doors and renamed Button to gameButton" />
     <MESSAGE value="Reorganized" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reorganized" />
+    <MESSAGE value="Added WorldConfig data class, reorganizing Game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added WorldConfig data class, reorganizing Game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
