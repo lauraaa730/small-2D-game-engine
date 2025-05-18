@@ -5,7 +5,7 @@
   "doorsNum" : 2,
   "enemiesNum" : 0,
   "potionsNum" : 0,
-  "buttonsNum" : 1,
+  "gameButtonsNum" : 1,
   "backgroundObjects": [{
     "xCoord" : 25,
     "yCoord" : 10,
@@ -52,7 +52,7 @@
       "locked" : true
     }],
   "enemies": [],
-  "buttons" : [ {
+  "gameButtons" : [ {
     "pressed" : false,
     "fake" : false,
     "xCoord" : 75,

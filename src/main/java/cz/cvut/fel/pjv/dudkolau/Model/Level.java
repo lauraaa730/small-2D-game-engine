@@ -3,9 +3,6 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
-
 public class Level {
 
     private int levelType;
@@ -20,11 +17,11 @@ public class Level {
     private int enemiesNum;
     private int doorsNum;
     private int potionsNum;
-    private int buttonsNum;
+    private int gameButtonsNum;
     private List<Door> doors = new ArrayList<>();
 
     private List<Potion> potions = new ArrayList<>();
-    private  List<Button> buttons = new ArrayList<>();
+    private  List<GameButton> gameButtons = new ArrayList<>();
     private List<BackgroundObject> backgroundObjects = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
 
@@ -112,19 +109,19 @@ public class Level {
         this.doors = doors;
     }
 
-    public int getButtonsNum() {
-        return buttonsNum;
+    public int getGameButtonsNum() {
+        return gameButtonsNum;
     }
 
-    public void setButtonsNum(int buttonsNum) {
-        this.buttonsNum = buttonsNum;
+    public void setGameButtonsNum(int gameButtonsNum) {
+        this.gameButtonsNum = gameButtonsNum;
     }
 
-    public List<Button> getButtons() {
-        return buttons;
+    public List<GameButton> getGameButtons() {
+        return gameButtons;
     }
 
-    public void setButtons(List<Button> buttons) {
-        this.buttons = buttons;
+    public void setGameButtons(List<GameButton> gameButtons) {
+        this.gameButtons = gameButtons;
     }
 }

@@ -2,7 +2,14 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 //TODO prejmenovat!!!!
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Button implements GameObject {
+
+/*
+ * @SuppressWarnings("unused") for getters and setter
+ * marked as "unused", because they are needed for json de/serialization.
+ *
+ *
+ * */
+public class GameButton implements GameObject {
 
     private int xCoord;
     private int yCoord;
@@ -88,7 +95,6 @@ public class Button implements GameObject {
         return fake;
     }
 
-    public void setFake(boolean fake) {
-        this.fake = fake;
-    }
+    @SuppressWarnings("unused")
+    public void setFake(boolean fake) { this.fake = fake; }
 }

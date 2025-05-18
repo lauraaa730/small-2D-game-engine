@@ -19,38 +19,46 @@ public class BackgroundObject implements GameObject{
     @JsonIgnore
     private HitBox hitBox = new HitBox();
 
+    @Override
     public int getxCoord() {
         return xCoord;
     }
 
+    @Override
     public void setxCoord(int xCoord) {
         this.xCoord = xCoord;
     }
 
+    @Override
     public int getyCoord() {
         return yCoord;
     }
 
+    @Override
     public void setyCoord(int yCoord) {
         this.yCoord = yCoord;
     }
 
+    @Override
     public String getImageName() {
         return imageName;
     }
 
+    @Override
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
 
+    @Override
     public void setWidth(int width) {
         this.width = width;
     }
-
+    @Override
     public int getHeight() {
         return height;
     }

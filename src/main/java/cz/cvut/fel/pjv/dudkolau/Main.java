@@ -11,9 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.annotation.JsonView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -293,9 +290,9 @@ public class Main extends Application {
         int objectX;
 
         //Render buttons
-        cz.cvut.fel.pjv.dudkolau.Model.Button b;
-        for (int i = 0; i < game.getCurrLevel().getButtonsNum(); i++) {
-            b = game.getCurrLevel().getButtons().get(i);
+        GameButton b;
+        for (int i = 0; i < game.getCurrLevel().getGameButtonsNum(); i++) {
+            b = game.getCurrLevel().getGameButtons().get(i);
             if (b.isPressed()) {
                 gc.drawImage(new Image("pressedButton.png"), b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
             } else {
@@ -403,7 +400,7 @@ public class Main extends Application {
             for (Enemy enemy : game.getCurrLevel().getEnemies()) {
                 drawRectangle(gc, enemy.getHitBox().getxCoord(), enemy.getHitBox().getyCoord(), enemy.getHitBox().getWidth(), enemy.getHitBox().getHeight());
             }
-            for (cz.cvut.fel.pjv.dudkolau.Model.Button b2 : game.getCurrLevel().getButtons()) {
+            for (GameButton b2 : game.getCurrLevel().getGameButtons()) {
                 drawRectangle(gc, b2.getHitBox().getxCoord(), b2.getHitBox().getyCoord(), b2.getHitBox().getWidth(), b2.getHitBox().getHeight());
 
             }

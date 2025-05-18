@@ -3,6 +3,12 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/*
+* @SuppressWarnings("unused") for getters and setter
+* marked as "unused", because they are needed for json de/serialization.
+*
+*
+* */
 public class Door implements GameObject {
     private int level1;
     private int level2;
@@ -16,6 +22,7 @@ public class Door implements GameObject {
     private boolean locked;
 
     private Directions dir;
+
     @JsonIgnore
     private HitBox hitBox = new HitBox();
 
@@ -29,21 +36,11 @@ public class Door implements GameObject {
         this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
     }
 
-    @JsonIgnore
-    public int getOutLevel(int enterLevel) {
-        if (enterLevel == level1) {
-            return level2;
-        } else if (enterLevel==level2) {
-            return level1;
-        } else {
-            return -1; //Doors are in the wrong place!!
-        }
-    }
-
     public int getLevel1() {
         return level1;
     }
 
+    @SuppressWarnings("unused")
     public void setLevel1(int level1) {
         this.level1 = level1;
     }
@@ -52,30 +49,35 @@ public class Door implements GameObject {
         return level2;
     }
 
-    public void setLevel2(int level2) {
-        this.level2 = level2;
-    }
+    @SuppressWarnings("unused")
+   public void setLevel2(int level2) { this.level2 = level2; }
 
+    @Override
     public int getxCoord() {
         return xCoord;
     }
 
+    @Override
     public void setxCoord(int xCoord) {
         this.xCoord = xCoord;
     }
 
+    @Override
     public int getyCoord() {
         return yCoord;
     }
 
+    @Override
     public void setyCoord(int yCoord) {
         this.yCoord = yCoord;
     }
 
+    @Override
     public String getImageName() {
         return imageName;
     }
 
+    @Override
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
@@ -84,22 +86,28 @@ public class Door implements GameObject {
         return lockedImageName;
     }
 
+
+    @SuppressWarnings("unused")
     public void setLockedImageName(String lockedImageName) {
         this.lockedImageName = lockedImageName;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }
 
+    @Override
     public void setWidth(int width) {
         this.width = width;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
+    @Override
     public void setHeight(int height) {
         this.height = height;
     }
@@ -116,6 +124,7 @@ public class Door implements GameObject {
         return dir;
     }
 
+    @SuppressWarnings("unused")
     public void setDir(Directions dir) {
         this.dir = dir;
     }

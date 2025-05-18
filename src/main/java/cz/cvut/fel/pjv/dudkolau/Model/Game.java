@@ -154,12 +154,12 @@ public class Game {
             }
         }
 
-        Button currentButton;
-        for (int i = 0; i < currLevel.getButtonsNum() ; i++) {
-            currentButton = this.currLevel.getButtons().get(i);
-            if (checkCollisionWithObject(player,currentButton)) {
-                currentButton.setPressed(true);
-                if (!currentButton.isFake()) {
+        GameButton currentGameButton;
+        for (int i = 0; i < currLevel.getGameButtonsNum() ; i++) {
+            currentGameButton = this.currLevel.getGameButtons().get(i);
+            if (checkCollisionWithObject(player, currentGameButton)) {
+                currentGameButton.setPressed(true);
+                if (!currentGameButton.isFake()) {
                     for (int j = 0; j<currLevel.getDoorsNum(); j++) {
                         currLevel.getDoors().get(j).setLocked(false);
                     }
@@ -193,8 +193,8 @@ public class Game {
                     for (int j = 0; j < this.currLevel.getPotionsNum(); j++) {
                         this.currLevel.getPotions().get(j).setHitBox(0, 0);
                     }
-                    for (int j = 0; j < this.currLevel.getButtonsNum(); j++) {
-                        this.currLevel.getButtons().get(j).setHitBox(buttonXOffset, buttonYOffset);
+                    for (int j = 0; j < this.currLevel.getGameButtonsNum(); j++) {
+                        this.currLevel.getGameButtons().get(j).setHitBox(buttonXOffset, buttonYOffset);
                     }
                     if (currDoor.getDir()==LEFT || currDoor.getDir()==RIGHT) {
                         player.setxCoord(width/tileDimension - currDoor.getxCoord());
@@ -255,8 +255,8 @@ public class Game {
         for (int i = 0; i < this.currLevel.getPotionsNum(); i++) {
             this.currLevel.getPotions().get(i).setHitBox(0, 0);
         }
-        for (int i = 0; i < this.currLevel.getButtonsNum(); i++) {
-            this.currLevel.getButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
+        for (int i = 0; i < this.currLevel.getGameButtonsNum(); i++) {
+            this.currLevel.getGameButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
         }
     }
 
@@ -501,8 +501,8 @@ public class Game {
         for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
             this.currLevel.getDoors().get(i).setHitBox(0,0);
         }
-        for (int i = 0; i < this.currLevel.getButtonsNum(); i++) {
-            this.currLevel.getButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
+        for (int i = 0; i < this.currLevel.getGameButtonsNum(); i++) {
+            this.currLevel.getGameButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
         }// END of TODO
 
     }
