@@ -13,10 +13,20 @@ public class Graphics {
     public static Image startNewImage = new Image("startNewButton.png");
     public static Image loadSavedImage = new Image("loadSavedButton.png");
     public static Image menuButtonImage = new Image("menuButton.png");
-
+    public static Image gameButtonImage  = new Image("button.png");
+    public static Image gameButtonPressedImage = new Image("pressedButton.png");
     public static Image pausedMenu = new Image("pausedBackground.png");
     public static Image mainMenuBackground = new Image("mainMenu.png");
     public static Image gameOverBackground = new Image("gameOverMenu.png");
+    public static Image enemyImage = new Image("ghost.png");
+    public static Image emptyHeartImage = new Image("heartEmpty.png");
+    public static Image fullHeartImage = new Image("heartFull.png");
+
+    public static Image inviEffectImage = new Image("inviEffect.png");
+    public static Image dmgEffectImage = new Image("damageEffect.png");
+
+    public static Image fightLeftImage = new Image("fightLEFT.png");
+    public static  Image splashLeftImage = new Image("splashLEFT.png");
 
     public static Image[] ghostCycle = {
             new Image("ghostCycle-1.png"),

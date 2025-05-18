@@ -24,7 +24,7 @@ import static cz.cvut.fel.pjv.dudkolau.Graphics.*;
 
 public class Main extends Application {
 
-    private Game game = new Game();
+    private final Game game = new Game();
     private Image[] currPlayerImages = animSTAND_RIGHT;
     private  Directions lastDirection = Directions.NONE;
     private int animationCounter = 0;
@@ -44,116 +44,28 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
+        stage.setResizable(false);
+        stage.setTitle("Beyond the Forest");
 
+        //Setting up scene
         game.setTileDimension(tileDimension);
         Canvas canvas = new Canvas(game.getWidth(), game.getHeight());
-        AnchorPane pane = new AnchorPane(canvas);
         //using anchorpane instead of stackpane allows moving buttons more freely
+        AnchorPane pane = new AnchorPane(canvas);
         Scene scene = new Scene(pane, game.getWidth(), game.getHeight());
 
 
+        //Initializing buttons
         loadButtons();
-
-        stage.setTitle("Beyond the Forest");
-        stage.setResizable(true);
-
-
-
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                try {
+        continueButton.setFocusTraversable(false);
+        saveGameButton.setFocusTraversable(false);
+        menuButton.setFocusTraversable(false);
+        loadSavedButton.setFocusTraversable(false);
+        exitGameButton.setFocusTraversable(false);
+        startNewButton.setFocusTraversable(false);
 
 
-                    if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                        game.setPaused(!game.isPaused());
-                        game.setRunning(!game.isRunning());
-                    }
-                    if (keyEvent.getCode() == KeyCode.A) {
-                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
-                        game.getPlayer().setCurrDirection(Directions.LEFT);
-                    } else if (keyEvent.getCode() == KeyCode.D) {
-                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
-                        game.getPlayer().setCurrDirection(Directions.RIGHT);
-                    } else if (keyEvent.getCode() == KeyCode.S) {
-                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
-                        game.getPlayer().setCurrDirection(Directions.DOWN);
-                    } else if (keyEvent.getCode() == KeyCode.W) {
-                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
-                        game.getPlayer().setCurrDirection(Directions.UP);
-                    } else if (keyEvent.getCode() == KeyCode.E) {
-                        game.getPlayer().setInteracting(true);
-                    } else if (keyEvent.getCode() == KeyCode.SPACE) {
-                        game.getPlayer().setFighting(true);
-                    }
-                } catch (Exception e) {
-                    e.getCause();
-                }
-            }
-        });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                try {
-                    if (keyEvent.getCode() == KeyCode.A ||
-                            keyEvent.getCode() == KeyCode.D ||keyEvent.getCode() == KeyCode.W ||
-                            keyEvent.getCode() == KeyCode.S) {
-                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
-                        game.getPlayer().setCurrDirection(Directions.NONE);
-                    } else if (keyEvent.getCode() == KeyCode.E) {
-                        game.getPlayer().setInteracting(false);
-                    } else if (keyEvent.getCode() == KeyCode.SPACE) {
-                        game.getPlayer().setFighting(false);
-                    }
-                } catch (Exception e) {
-                    e.getCause();
-                }
-            }
-        });
-
-        continueButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent event) {
-                game.setPaused(!game.isPaused());
-                game.setRunning(!game.isRunning());
-            }
-        });
-
-        exitGameButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent event) {
-                System.out.println("Exiting!");
-                System.exit(0);
-            }
-        });
-
-        saveGameButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent event) {
-                System.out.println("Saving...");
-                game.saveGame();
-            }
-        });
-
-        loadSavedButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent event) {
-                System.out.println("Loading saved game...");
-                game.startGame(false);
-            }
-        });
-        menuButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent event) {
-                game.setPaused(false);
-                game.setRunning(false);
-                game.setMainMenuOn(true);
-            }
-        });
-
-        startNewButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent event) {
-                System.out.println("Starting new game");
-                game.startGame(true);
-            }
-        });
-
+        //MAIN GAME LOOP -----------------------------------------------------
         AnimationTimer timer = new AnimationTimer() {
             long lastCall;
             @Override
@@ -179,7 +91,7 @@ public class Main extends Application {
                         }
                         animationCounter++;
 
-                    // PAUSED MENU
+                        // PAUSED MENU
                     } else if (game.isPaused()){
                         if (!pausedMenuButtonsAdded) {
                             loadButtons();
@@ -192,7 +104,7 @@ public class Main extends Application {
                         gc.drawImage(backgroundPaused,0,0);
                         gc.drawImage(pausedMenu, 155,110);
 
-                    //MAIN MENU
+                        //MAIN MENU
                     } else if (game.isMainMenuOn()) {
                         if (pausedMenuButtonsAdded) {
                             pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
@@ -243,42 +155,118 @@ public class Main extends Application {
         timer.start();
         stage.setScene(scene);
         stage.show();
+        // -----------------------------------------------------------------------------------------
 
+
+        //Event Handlers ----------------------------------------------------
+        scene.setOnKeyPressed(keyEvent -> {
+            try {
+                if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                    game.setPaused(!game.isPaused());
+                    game.setRunning(!game.isRunning());
+                }
+                if (keyEvent.getCode() == KeyCode.A) {
+                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
+                    game.getPlayer().setCurrDirection(Directions.LEFT);
+                } else if (keyEvent.getCode() == KeyCode.D) {
+                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
+                    game.getPlayer().setCurrDirection(Directions.RIGHT);
+                } else if (keyEvent.getCode() == KeyCode.S) {
+                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
+                    game.getPlayer().setCurrDirection(Directions.DOWN);
+                } else if (keyEvent.getCode() == KeyCode.W) {
+                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
+                    game.getPlayer().setCurrDirection(Directions.UP);
+                } else if (keyEvent.getCode() == KeyCode.E) {
+                    game.getPlayer().setInteracting(true);
+                } else if (keyEvent.getCode() == KeyCode.SPACE) {
+                    game.getPlayer().setFighting(true);
+                }
+            } catch (Exception e) {
+                e.getCause();
+            }
+        });
+
+        scene.setOnKeyReleased(keyEvent -> {
+            try {
+                if (keyEvent.getCode() == KeyCode.A ||
+                        keyEvent.getCode() == KeyCode.D ||keyEvent.getCode() == KeyCode.W ||
+                        keyEvent.getCode() == KeyCode.S) {
+                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
+                    game.getPlayer().setCurrDirection(Directions.NONE);
+                } else if (keyEvent.getCode() == KeyCode.E) {
+                    game.getPlayer().setInteracting(false);
+                } else if (keyEvent.getCode() == KeyCode.SPACE) {
+                    game.getPlayer().setFighting(false);
+                }
+            } catch (Exception e) {
+                e.getCause();
+            }
+        });
+
+        continueButton.setOnAction(event -> {
+            game.setPaused(!game.isPaused());
+            game.setRunning(!game.isRunning());
+        });
+
+        exitGameButton.setOnAction(event -> {
+            System.out.println("Exiting!");
+            System.exit(0);
+        });
+
+        saveGameButton.setOnAction(event -> {
+            System.out.println("Saving...");
+            game.saveGame();
+        });
+
+        loadSavedButton.setOnAction(event -> {
+            System.out.println("Loading saved game...");
+            game.startGame(false);
+        });
+        menuButton.setOnAction(event -> {
+            game.setPaused(false);
+            game.setRunning(false);
+            game.setMainMenuOn(true);
+        });
+
+        startNewButton.setOnAction(event -> {
+            System.out.println("Starting new game");
+            game.startGame(true);
+        });
 
     }
 
     private void setCurrPlayerImages() {
-        //System.out.println(game.getPlayer().getLastDirection());
-        //using last direction instead of player.getLastDirection for simpler code and efficiency
-        if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.RIGHT) {
+        Directions currDir = game.getPlayer().getCurrDirection();
+        if (currDir==Directions.NONE && lastDirection == Directions.RIGHT) {
             currPlayerImages = animSTAND_RIGHT;
             lastDirection = Directions.NONE;
 
-        } else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.LEFT) {
+        } else if (currDir==Directions.NONE && lastDirection == Directions.LEFT) {
             currPlayerImages = animSTAND_LEFT;
             lastDirection = Directions.NONE;
 
-        }  else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.UP) {
+        }  else if (currDir==Directions.NONE && lastDirection == Directions.UP) {
             currPlayerImages = animSTAND_UP;
             lastDirection = Directions.NONE;
 
-        }  else if (game.getPlayer().getCurrDirection()==Directions.NONE && lastDirection == Directions.DOWN) {
+        }  else if (currDir==Directions.NONE && lastDirection == Directions.DOWN) {
             currPlayerImages = animSTAND_DOWN;
             lastDirection = Directions.NONE;
 
-        } else if (game.getPlayer().getCurrDirection()==Directions.RIGHT) {
+        } else if (currDir==Directions.RIGHT) {
             currPlayerImages = animRIGHT;
             lastDirection = Directions.RIGHT;
 
-        } else if (game.getPlayer().getCurrDirection()==Directions.UP) {
+        } else if (currDir==Directions.UP) {
             currPlayerImages = animUP;
             lastDirection = Directions.UP;
 
-        } else if (game.getPlayer().getCurrDirection()==Directions.DOWN) {
+        } else if (currDir==Directions.DOWN) {
             currPlayerImages = animDOWN;
             lastDirection = Directions.DOWN;
 
-        } else if (game.getPlayer().getCurrDirection()==Directions.LEFT) {
+        } else if (currDir==Directions.LEFT) {
             currPlayerImages = animLEFT;
             lastDirection = Directions.LEFT;
         }
@@ -286,24 +274,25 @@ public class Main extends Application {
 
 
     private void render(Canvas canvas) {
-        //TODO pridat vsechny images do graphics
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         gc.drawImage(backgroundImage, 0, 0);
 
-
         boolean drewPlayer = false;
+
         int playerY = game.getPlayer().getHitBox().getyCoord();
         int objectY;
         int objectX;
+
 
         //Render buttons
         GameButton b;
         for (int i = 0; i < game.getCurrLevel().getGameButtonsNum(); i++) {
             b = game.getCurrLevel().getGameButtons().get(i);
             if (b.isPressed()) {
-                gc.drawImage(new Image("pressedButton.png"), b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
+                gc.drawImage(gameButtonPressedImage, b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
             } else {
-                gc.drawImage(new Image("button.png"), b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
+                gc.drawImage(gameButtonImage, b.getxCoord() * game.getTileDimension(), b.getyCoord() * game.getTileDimension());
             }
         }
 
@@ -326,7 +315,12 @@ public class Main extends Application {
         }
 
 
-        //concept: player shows behind or infront of bushes
+        /*
+        * Render player
+        * - Manage rendering order of visual objects
+        * based on player location, makes player to
+        * appear either infront of or behind the object.
+        */
         BackgroundObject bo;
         for (int i = 0; i < game.getCurrLevel().getBackgroundObjects().size(); i++) {
             bo = game.getCurrLevel().getBackgroundObjects().get(i);
@@ -353,7 +347,7 @@ public class Main extends Application {
 
         //Render enemies
         for (Enemy enemy : game.getCurrLevel().getEnemies()) {
-            gc.drawImage(new Image("ghost.png"), enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
+            gc.drawImage(enemyImage, enemy.getxCoord()*tileDimension, enemy.getyCoord()*tileDimension);
         }
 
 
@@ -361,21 +355,21 @@ public class Main extends Application {
         int currHealth = game.getPlayer().getCurrHealth();
         int maxHealth = game.getPlayer().getMaxHealth();
         for (int i = 0; i<currHealth;i++) {
-            gc.drawImage(new Image("heartFull.png"), width-50*maxHealth + i*50,5);
+            gc.drawImage(fullHeartImage, width-50*maxHealth + i*50,5);
         }
         for (int i = 0; i<(maxHealth-currHealth);i++) {
-            gc.drawImage(new Image("heartEmpty.png"),width-50*(maxHealth-currHealth)+ i*50, 5);
+            gc.drawImage(emptyHeartImage,width-50*(maxHealth-currHealth)+ i*50, 5);
         }
 
         //Render Effects
         if (game.getPlayer().isInvincible()) {
-            gc.drawImage(new Image("inviEffect.png"), 5, 5);
+            gc.drawImage(inviEffectImage, 5, 5);
         }
         if (game.getDamagePotionCountDown()>0) {
-            gc.drawImage(new Image("damageEffect.png"), 50,5);
+            gc.drawImage(dmgEffectImage, 50,5);
         }
 
-
+        //Render hitboxes if needed
         if (showHitBoxes) {
             for (GameObject gameObject : game.getGameObjects()) {
                 drawRectangle(gc, gameObject.getHitBox().getxCoord(), gameObject.getHitBox().getyCoord(), gameObject.getHitBox().getWidth(), gameObject.getHitBox().getHeight());
@@ -405,10 +399,11 @@ public class Main extends Application {
     }
 
     private void renderPlayer(GraphicsContext gc) {
+        //TODO implement all directions
         if (game.getPlayer().isFighting()) {
-            gc.drawImage(new Image("fightLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension(),
+            gc.drawImage(fightLeftImage, game.getPlayer().getxCoord() * game.getTileDimension(),
                     game.getPlayer().getyCoord() * game.getTileDimension());
-            gc.drawImage(new Image("splashLEFT.png"), game.getPlayer().getxCoord() * game.getTileDimension()-60,
+            gc.drawImage(splashLeftImage, game.getPlayer().getxCoord() * game.getTileDimension()-60,
                     game.getPlayer().getyCoord() * game.getTileDimension());
         } else {
             gc.drawImage(currPlayerImages[playerImageIndex], game.getPlayer().getxCoord() * game.getTileDimension(),
@@ -428,7 +423,6 @@ public class Main extends Application {
         menuButton.setBackground(Background.fill(Color.TRANSPARENT));
         menuButton.setLayoutX(180);
         menuButton.setLayoutY(300);
-        //exitGameButton.setFocusTraversable(false);
 
         saveGameButton.setGraphic(new ImageView(saveGameImage));
         saveGameButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -453,9 +447,6 @@ public class Main extends Application {
         exitGameButton.setBackground(Background.fill(Color.TRANSPARENT));
         exitGameButton.setLayoutX(180);
         exitGameButton.setLayoutY(300);
-        //exitGameButton.setFocusTraversable(false);
-
-
     }
 
     public static void main(String[] args) { launch(args); }

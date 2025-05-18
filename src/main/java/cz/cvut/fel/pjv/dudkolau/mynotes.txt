@@ -11,6 +11,7 @@ konzultace:
     -interfaces maji mit i variables? a nebo jen metody?
     -jaktoze json nepouziva settery? je to tedy safe je smazat?
     -musi byt v mainu throws exception ?
+    -projet warnings v mainu
 
 
   poznamky:
