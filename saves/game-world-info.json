@@ -1,3 +1,10 @@
 {
-  "totalLevelsNum" : 1
+  "totalLevelsNum" : 2,
+  "playerMaxHealth" : 5,
+  "playerStartX" : 1,
+  "playerStartY" : 1,
+  "playerHeight" : 100,
+  "playerWidth" : 100,
+  "playerXOffset" : 10,
+  "playerYOffset" : 15
 }

@@ -26,7 +26,28 @@ public class GameData {
     private int currPlayerHealth;
     private int maxPlayerHealth;
 
+    private int inviPotionTimer;
+    private int damagePotionTimer;
 
+    public int getTotalLevelNum() {
+        return totalLevelNum;
+    }
+
+    public int getInviPotionTimer() {
+        return inviPotionTimer;
+    }
+
+    public void setInviPotionTimer(int inviPotionTimer) {
+        this.inviPotionTimer = inviPotionTimer;
+    }
+
+    public int getDamagePotionTimer() {
+        return damagePotionTimer;
+    }
+
+    public void setDamagePotionTimer(int damagePotionTimer) {
+        this.damagePotionTimer = damagePotionTimer;
+    }
 
     public List<Level> getLevels() {
         return levels;
@@ -64,13 +85,6 @@ public class GameData {
     }
 
     public GameData() {
-    }
-
-
-
-
-    public int getTotalLevelNum() {
-        return totalLevelNum;
     }
 
     public void setTotalLevelNum(int totalLevelNum) {

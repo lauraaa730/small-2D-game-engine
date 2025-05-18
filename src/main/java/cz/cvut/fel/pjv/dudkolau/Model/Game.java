@@ -17,6 +17,8 @@ public class Game {
     private Player player;
     private Level currLevel;
 
+    private int maxLevelNum;
+
     private int tileDimension;
     private boolean isPaused;
     private boolean running;
@@ -33,11 +35,6 @@ public class Game {
     private int attackTimer = 0;
 
     private List<Level> levels = new ArrayList<>();
-
-
-    public boolean getIsPaused() {
-        return isPaused;
-    }
 
     public void setPaused(boolean paused) {
         isPaused = paused;
@@ -59,11 +56,6 @@ public class Game {
         return tileDimension;
     }
 
-    public List<Level> getLevels() {
-        return levels;
-    }
-
-
     public Game() {
         this.mainMenuOn = true;
         this.running = false;
@@ -71,32 +63,8 @@ public class Game {
     }
 
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public void setCurrLevel(Level currLevel) {
-        this.currLevel = currLevel;
-    }
-
     public boolean isPaused() {
         return isPaused;
-    }
-
-    public int getLevelsNum() {
-        return levelsNum;
-    }
-
-    public void setLevelsNum(int levelsNum) {
-        this.levelsNum = levelsNum;
-    }
-
-    public int getEnemieMoveCounter() {
-        return enemieMoveCounter;
-    }
-
-    public void setEnemieMoveCounter(int enemieMoveCounter) {
-        this.enemieMoveCounter = enemieMoveCounter;
     }
 
     public boolean isMainMenuOn() {
@@ -115,10 +83,6 @@ public class Game {
         return gameOverMenu;
     }
 
-    public void setGameOverMenu(boolean gameOverMenu) {
-        this.gameOverMenu = gameOverMenu;
-    }
-
     public void setMainMenuOn(boolean mainMenuOn) {
         this.mainMenuOn = mainMenuOn;
     }
@@ -135,9 +99,27 @@ public class Game {
         }
     }
 
+    public void startNewGame() {
+
+        this.player = new Player();
+
+        resetGame();
+
+        this.levels = new ArrayList<>();
+        loadAllLevels();
+
+        currLevel = levels.getFirst();
+        if (currLevel==null) {
+            System.out.println("Level1 is null!"); //TODO logger
+            System.exit(1);
+        }
+        setObjects();
+    }
+
     public void update() {
 
         updateTimers();
+
         player.updateAttackHitbox();
 
         GameObject currentObject;
@@ -146,6 +128,8 @@ public class Game {
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
             currentObject = this.currLevel.getBackgroundObjects().get(i);
             if (checkCollisionWithObject(player,currentObject)) {
+                System.out.println(player.getHitBox().getxCoord());
+                System.out.println(currentObject.getHitBox().getxCoord());
                 player.jumpBack(true,width, height);
             }
         }
@@ -166,7 +150,7 @@ public class Game {
 
         //Check and use doors **********************************************************
         Door currDoor;
-        //TODO also up and down doors
+        //TODO dat do funkce
         for (int i = 0; i < currLevel.getDoorsNum() ; i++) {
             currDoor = this.currLevel.getDoors().get(i);
             if (checkCollisionWithObject(player,currDoor)) {
@@ -177,21 +161,7 @@ public class Game {
                 interactingTimer = 1;
                 if (currDoor.getLevel1() == currLevel.getLevelType()) {
                     currLevel = levels.get(currDoor.getLevel2()-1);
-                    for (int j = 0; j < this.currLevel.getBackgroundObjectsNum(); j++) {
-                        this.currLevel.getBackgroundObjects().get(j).setHitBox(bushXOffset, bushYOffset);
-                    }
-                    for (int j = 0; j < this.currLevel.getDoorsNum(); j++) {
-                        this.currLevel.getDoors().get(j).setHitBox(0, 0);
-                    }
-                    for (int j = 0; j < this.currLevel.getEnemiesNum(); j++) {
-                        this.currLevel.getEnemies().get(j).setHitBox(0, 0);
-                    }
-                    for (int j = 0; j < this.currLevel.getPotionsNum(); j++) {
-                        this.currLevel.getPotions().get(j).setHitBox(0, 0);
-                    }
-                    for (int j = 0; j < this.currLevel.getGameButtonsNum(); j++) {
-                        this.currLevel.getGameButtons().get(j).setHitBox(buttonXOffset, buttonYOffset);
-                    }
+                    setObjects();
                     if (currDoor.getDir()==LEFT || currDoor.getDir()==RIGHT) {
                         player.setxCoord(width/tileDimension - currDoor.getxCoord());
                         if (player.getxCoord() >=width/tileDimension-player.getWidth()/tileDimension) {
@@ -204,7 +174,7 @@ public class Game {
                         }
                     }
 
-                    player.setHitBox(playerXOffset,playerYOffset);
+                    player.setHitBox(player.getxOffset(), player.getyOffset());
                     return;
                 }
             }
@@ -215,46 +185,6 @@ public class Game {
         updateEnemies();
     }
 
-    public void setLevels(List<Level> levels) {
-        this.levels = levels;
-    }
-
-    public void startNewGame() {
-        //TODO prvotni menu, az pak se rozrazuje jestli se pokracuje nebo new game, if else..
-
-        this.player = new Player();
-        player.setMaxHealth(8); //TODO pridat do json souboru
-        player.setCurrHealth(4);
-        player.setInteracting(false);
-        player.setxCoord(0);
-        player.setyCoord(0);
-        player.setWidth(playerWidth);
-        player.setHeight(playerHeight);
-        player.setHitBox(playerXOffset, playerYOffset);
-        player.setAttackHitBox();
-        loadAllLevels();
-        currLevel = levels.getFirst();
-        if (currLevel==null) {
-            System.out.println("Level1 is null!");
-            System.exit(1);
-        }
-        for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
-            this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
-        }
-        for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
-            this.currLevel.getDoors().get(i).setHitBox(0, 0);
-        }
-        for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
-            this.currLevel.getEnemies().get(i).setHitBox(0, 0);
-            this.currLevel.getEnemies().get(i).setCurrHealth(this.currLevel.getEnemies().get(i).getMaxHealth());
-        }
-        for (int i = 0; i < this.currLevel.getPotionsNum(); i++) {
-            this.currLevel.getPotions().get(i).setHitBox(0, 0);
-        }
-        for (int i = 0; i < this.currLevel.getGameButtonsNum(); i++) {
-            this.currLevel.getGameButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
-        }
-    }
 
 
     public Level getCurrLevel() {
@@ -310,7 +240,6 @@ public class Game {
             }
         }
 
-
         if (inviPotionCountDown > 0) {
             player.setInvincible(true);
             inviPotionCountDown--;
@@ -322,24 +251,23 @@ public class Game {
             damagePotionCountDown--;
         } else {
             player.setDamage(playerDefaultDamage);
-
         }
     }
 
     public void managePotions(){
         Potion currPotion;
-        //System.out.println("Current health: "+ player.getCurrHealth());
         for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
             currPotion = this.currLevel.getPotions().get(i);
             if (checkCollisionWithObject(player, currPotion)) {
                 player.jumpBack(true, width, height);
             }
-            // Check if player is interacting with an object
+
+            // Check if player is interacting with potion
             if (interactingTimer == 0 && player.isInteracting() && isPlayerFacingObject(currPotion)) {
                 interactingTimer = 1;
                 if (currPotion.getEffect()== Effect.HEALTH) {
                     if (player.getMaxHealth() >= player.getCurrHealth() + currPotion.getHealthAdd()) {
-                        System.out.println("HEALING!");
+                        System.out.println("HEALING!");//TODO logger
                         player.setCurrHealth(player.getCurrHealth() + currPotion.getHealthAdd());
                     }
                 } else if (currPotion.getEffect() == Effect.INVINCIBILITY) {
@@ -353,12 +281,7 @@ public class Game {
 
                 /* Remove the potion from the level*/
                 currLevel.getPotions().remove(i);
-                //TODO zkontrolovat jestli se to nesmaze jen lokalne, is it really pointer? --ale asi dobry
                 currLevel.setPotionsNum(currLevel.getPotions().size());
-
-                //TODO remove potion after consumption
-
-
             }
         }
     }
@@ -368,27 +291,18 @@ public class Game {
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
 
-            if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
-                e.setCurrHealth(e.getCurrHealth()-player.getDamage());
-                System.out.printf("Enemy health : %d\n", e.getCurrHealth());
-                attackTimer = 1;
-                if (e.getCurrHealth()<=0) {
-                    currLevel.getEnemies().remove(i);
-                    currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
-                    continue;
-                }
-            }
+            attack(e,i);
 
             if (checkCollisionWithEntity(player,e)) {
-                //System.out.println(player.isInvincible());
                 //These two invincibility timers are CORRECTLY divided into two, two seperate things (for rendering icons)
                 if (invincibilityTimer == 0 && !player.isInvincible()){
                     invincibilityTimer = 1; //start the counter
 
-                    player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
-                    System.out.println("OUCH!");
+                    //TODO dat do jedne funkce
+                    player.setCurrHealth(player.getCurrHealth()-1);
+                    System.out.println("OUCH!");//TODO logger
                     if (player.getCurrHealth() <=0) {
-                        System.out.println("GAME OVER");
+                        System.out.println("GAME OVER");//TODO logger
                         this.running = false;
                         this.gameOverMenu = true;
                     }
@@ -399,16 +313,7 @@ public class Game {
 
             }
             if (enemieMoveCounter !=2) { //slowing down enemies
-                if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
-                    e.setCurrHealth(e.getCurrHealth()-player.getDamage());
-                    System.out.printf("Enemy health : %d\n", e.getCurrHealth());
-                    attackTimer = 1;
-                    if (e.getCurrHealth()<=0) {
-                        currLevel.getEnemies().remove(i);
-                        currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
-                        continue;
-                    }
-                }
+                attack(e,i);
                 if (e.getSelfMovementPosition()>=enemyMovementLength) {
                     e.setCurrDirection(LEFT);
                 } else if (e.getSelfMovementPosition()<=0) {
@@ -416,14 +321,13 @@ public class Game {
                 }
                 e.updateSelfMovementPosition();
                 e.move(e.getCurrDirection(), width, height, tileDimension);
-                //TODO aby se vcas odrazel od sten? + maybe ruzny damage od enemy
                 if (checkCollisionWithEntity(player,e)) {
                     if (invincibilityTimer == 0 && !player.isInvincible()) {
                         invincibilityTimer = 1; //start the counter
                         player.setCurrHealth(player.getCurrHealth()-1); //popr max(0, get curr health)
-                        System.out.println("OUCH 2!");
+                        System.out.println("OUCH 2!"); //TODO logger
                         if (player.getCurrHealth() <=0) {
-                            System.out.println("GAME OVER");
+                            System.out.println("GAME OVER");//TODO logger
                             this.running = false;
                             this.gameOverMenu = true;
                         }
@@ -438,53 +342,27 @@ public class Game {
                             e.setCurrDirection(LEFT);
                         }
                     }
-
                 }
-                //TODO enemy by se mel pohybovat i vertikalne, pridat do jsonu movement jakej atd
             }
-            enemieMoveCounter = (enemieMoveCounter+1)%3; // for speeding up or slowing down enemy movement
+            enemieMoveCounter = (enemieMoveCounter+1)%3;
+            // for speeding up or slowing down enemy movement
 
         }//*****************************************************************
     }
 
-    // Saving and loading help functions ***********************
-    public void loadSavedGame() {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            GameData gameData = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
-                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/current-game-state.json" ), GameData.class
-            );
-
-            levels = gameData.getLevels();
-            System.out.println(gameData.getCurrPlayerLevel());
-            for (int i = 0; i <levels.size(); i++) {
-                if (levels.get(i).getLevelType()==gameData.getCurrPlayerLevel()) {
-                    currLevel = levels.get(i);
-                    break;
-                }
+    public void attack(Enemy e,int i) {
+        if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
+            e.setCurrHealth(e.getCurrHealth()-player.getDamage());
+            System.out.printf("Enemy health : %d\n", e.getCurrHealth()); //TODO logger
+            attackTimer = 1;
+            if (e.getCurrHealth()<=0) {
+                currLevel.getEnemies().remove(i);
+                currLevel.setEnemiesNum(getCurrLevel().getEnemies().size());
             }
-
-            System.out.println("setting player");
-            this.player = new Player();
-            player.setInteracting(false);
-            player.setMaxHealth(gameData.getMaxPlayerHealth());
-            player.setCurrHealth(gameData.getCurrPlayerHealth());
-            player.setxCoord(gameData.getCurrPlayerX());
-            player.setyCoord(gameData.getCurrPlayerY());
-            System.out.println(player.getxCoord());
-            player.setWidth(playerWidth);
-            player.setHeight(playerHeight);
-            player.setHitBox(playerXOffset, playerYOffset);
-            player.setAttackHitBox();
-            System.out.println("Loaded game succesfully!");
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Something went wrong with json");
         }
+    }
 
-        //TODO tuto cast kodu dat do jedne funkce
+    public void setObjects() {
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
         }
@@ -492,29 +370,107 @@ public class Game {
             this.currLevel.getPotions().get(i).setHitBox(0, 0);
         }
         for (int i = 0; i < this.currLevel.getEnemiesNum(); i++) {
-            System.out.println(currLevel.getEnemies().get(i).getCurrDirection());
-            this.currLevel.getEnemies().get(i).setHitBox(0, 0);
+            Enemy e = this.currLevel.getEnemies().get(i);
+            e.setCurrHealth(e.getMaxHealth());
+            e.setHitBox(0, 0);
         }
         for (int i = 0; i < this.currLevel.getDoorsNum(); i++) {
             this.currLevel.getDoors().get(i).setHitBox(0,0);
         }
         for (int i = 0; i < this.currLevel.getGameButtonsNum(); i++) {
             this.currLevel.getGameButtons().get(i).setHitBox(buttonXOffset, buttonYOffset);
-        }// END of TODO
+        }
+    }
 
+    public void resetGame() {
+
+        this.inviPotionCountDown = 0;
+        this.damagePotionCountDown = 0;
+        this.attackTimer = 0;
+        this.invincibilityTimer = 0;
+        this.interactingTimer = 0;
+
+        this.player = new Player();
+        player.setInteracting(false);
+        player.setFighting(false);
+        player.setInvincible(false);
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            WorldConfig worldConfig = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
+                    new File("saves/game-world-info.json" ), WorldConfig.class
+            );
+
+            this.maxLevelNum = worldConfig.totalLevelsNum;
+            this.levelsNum = 0;
+
+            player.setWidth(worldConfig.playerWidth);
+            player.setHeight(worldConfig.playerHeight);
+            player.setxOffset(worldConfig.playerXOffset);
+            player.setyOffset(worldConfig.playerYOffset);
+            player.setMaxHealth(worldConfig.playerMaxHealth);
+            player.setCurrHealth(player.getMaxHealth());
+            player.setxCoord(worldConfig.playerStartX);
+            player.setyCoord(worldConfig.playerStartY);
+
+            player.setHitBox(worldConfig.playerXOffset, worldConfig.playerYOffset);
+            player.setAttackHitBox();
+
+        } catch (IOException ex) {
+            System.out.println("Something went wrong with json"); //TODO logger
+        }
+    }
+
+    // Saving and loading help functions ***********************
+    public void loadSavedGame() {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            resetGame();
+
+            GameData gameData = objectMapper.readerWithView(Views.SaveGameView.class).readValue(
+                    new File("saves/current-game-state.json" ), GameData.class
+            );
+
+            levels = gameData.getLevels();
+            for (Level level : levels) {
+                if (level.getLevelType() == gameData.getCurrPlayerLevel()) {
+                    currLevel = level;
+                    break;
+                }
+            }
+
+            System.out.println("setting player");//TODO logger
+
+            this.player.setMaxHealth(gameData.getMaxPlayerHealth());
+            this.player.setCurrHealth(gameData.getCurrPlayerHealth());
+            this.player.setxCoord(gameData.getCurrPlayerX());
+            this.player.setyCoord(gameData.getCurrPlayerY());
+            this.player.setHitBox(player.getxOffset(),player.getyOffset());
+            this.player.setAttackHitBox();
+
+            this.inviPotionCountDown = gameData.getInviPotionTimer();
+            this.damagePotionCountDown = gameData.getDamagePotionTimer();
+
+            setObjects();
+            System.out.println("Loaded game succesfully!");//TODO logger
+
+        } catch (IOException ex) {
+            System.out.println("Something went wrong with json");//TODO logger
+        }
     }
 
     private Level loadLevelFromJson(String levelName){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            File jsonFile = new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/" + levelName);
+            File jsonFile = new File("saves/" + levelName);
 
             Level levelToRead = objectMapper.readerWithView(Views.SaveGameView.class).readValue(jsonFile, Level.class);
-            System.out.println("Loaded level");
+            System.out.println("Loaded level" + levelName); //TODO logger
             return levelToRead;
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Something went wrong with json");
+            System.out.println("Something went wrong with json"); //TODO logger
         }
         return null;
     }
@@ -527,35 +483,37 @@ public class Game {
                 levels.add(l);
                 levelsNum++;
             } else {
-                System.out.println("Level number " +(i+1) + " is empty!");
+                System.out.println("Level number " +(i+1) + " is empty!"); //TODO logger
             }
 
         }
     }
 
     public void saveGame() {
+
         GameData gameData = new GameData();
+
         gameData.setCurrPlayerHealth(this.player.getCurrHealth());
         gameData.setMaxPlayerHealth(this.player.getMaxHealth());
         gameData.setCurrPlayerLevel(currLevel.getLevelType());
         gameData.setCurrPlayerX(this.player.getxCoord());
         gameData.setCurrPlayerY(this.player.getyCoord());
         gameData.setTotalLevelNum(levelsNum);
+        gameData.setDamagePotionTimer(damagePotionCountDown);
+        gameData.setInviPotionTimer(inviPotionCountDown);
 
         gameData.setLevels(levels);
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            //objectMapper.addMixIn(java.awt.Rectangle.class, RectangleMixin.class);
-
             objectMapper.writerWithView(Views.SaveGameView.class).writeValue(
-                    new File("C:/Users/laura/Documents/PJV/semestralka/dudkolau/saves/current-game-state.json" ), gameData
+                    new File("saves/current-game-state.json" ), gameData
             );
-            System.out.println("game saved succesfully");
+            System.out.println("game saved succesfully");//TODO logger
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Something went wrong with json");
+            System.out.println("Something went wrong with json");//TODO logger
         }
 
 

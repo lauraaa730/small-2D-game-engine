@@ -12,6 +12,9 @@ public class Player implements Entity {
     private int yCoord;
     private int height;
     private int width;
+
+    private int xOffset;
+    private int yOffset;
     @JsonIgnore
     private boolean interacting; //this does not need to go into json
     @JsonIgnore
@@ -224,5 +227,21 @@ public class Player implements Entity {
             this.attackHitBox.setHeight(height/2);
             this.attackHitBox.setWidth(width+2*attackSideOffset);
         }
+    }
+
+    public int getxOffset() {
+        return xOffset;
+    }
+
+    public void setxOffset(int xOffset) {
+        this.xOffset = xOffset;
+    }
+
+    public int getyOffset() {
+        return yOffset;
+    }
+
+    public void setyOffset(int yOffset) {
+        this.yOffset = yOffset;
     }
 }

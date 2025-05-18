@@ -65,6 +65,9 @@ public class Main extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                try {
+
+
                     if (keyEvent.getCode() == KeyCode.ESCAPE) {
                         game.setPaused(!game.isPaused());
                         game.setRunning(!game.isRunning());
@@ -86,21 +89,28 @@ public class Main extends Application {
                     } else if (keyEvent.getCode() == KeyCode.SPACE) {
                         game.getPlayer().setFighting(true);
                     }
+                } catch (Exception e) {
+                    e.getCause();
+                }
             }
         });
 
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.A ||
-                        keyEvent.getCode() == KeyCode.D ||keyEvent.getCode() == KeyCode.W ||
-                        keyEvent.getCode() == KeyCode.S) {
-                    game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
-                    game.getPlayer().setCurrDirection(Directions.NONE);
-                } else if (keyEvent.getCode() == KeyCode.E) {
-                    game.getPlayer().setInteracting(false);
-                } else if (keyEvent.getCode() == KeyCode.SPACE) {
-                    game.getPlayer().setFighting(false);
+                try {
+                    if (keyEvent.getCode() == KeyCode.A ||
+                            keyEvent.getCode() == KeyCode.D ||keyEvent.getCode() == KeyCode.W ||
+                            keyEvent.getCode() == KeyCode.S) {
+                        game.getPlayer().setLastDirection(game.getPlayer().getCurrDirection());
+                        game.getPlayer().setCurrDirection(Directions.NONE);
+                    } else if (keyEvent.getCode() == KeyCode.E) {
+                        game.getPlayer().setInteracting(false);
+                    } else if (keyEvent.getCode() == KeyCode.SPACE) {
+                        game.getPlayer().setFighting(false);
+                    }
+                } catch (Exception e) {
+                    e.getCause();
                 }
             }
         });
