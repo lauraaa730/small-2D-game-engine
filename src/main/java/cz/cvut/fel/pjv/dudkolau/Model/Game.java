@@ -218,8 +218,6 @@ public class Game {
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
             currentObject = this.currLevel.getBackgroundObjects().get(i);
             if (checkCollisionWithObject(player,currentObject)) {
-                System.out.println(player.getHitBox().getxCoord());
-                System.out.println(currentObject.getHitBox().getxCoord());
                 player.jumpBack(true,width, height);
             }
         }
@@ -393,6 +391,8 @@ public class Game {
                     break;
                 }
             }
+
+            this.levelsNum =gameData.getTotalLevelNum();
 
             System.out.println("setting player");//TODO logger
 

@@ -1,22 +1,23 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
 public interface GameObject {
-    public int getxCoord();
-    public int getyCoord();
-    public String getImageName();
-    public void setImageName(String imageName);
+    int getxCoord();
+    int getyCoord();
+    String getImageName();
 
-    public void setxCoord(int x);
-    public void setyCoord(int y);
+    @SuppressWarnings("unused")
+    void setImageName(String imageName);
 
-    public HitBox getHitBox();
-    public void setHitBox(int xOffset, int yOffset);
+    void setxCoord(int x);
+    void setyCoord(int y);
 
-    public int getWidth();
-    public int getHeight();
+    HitBox getHitBox();
+    void setHitBox(int xOffset, int yOffset);
 
-    public void setWidth(int width);
-    public void setHeight(int height);
+    int getWidth();
+    int getHeight();
 
+    void setWidth(int width);
+    void setHeight(int height);
 
 }

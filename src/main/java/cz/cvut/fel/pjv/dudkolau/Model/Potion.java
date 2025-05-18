@@ -14,8 +14,12 @@ public class Potion implements GameObject {
 
     private int damageModifier;
 
+    @JsonIgnore
+    private HitBox hitBox = new HitBox();
+
     /*How many game cycles will this effect last*/
     private int effectDuration;
+
 
     public Effect getEffect() {
         return effect;
@@ -48,9 +52,6 @@ public class Potion implements GameObject {
     public void setHealthAdd(int healthAdd) {
         this.healthAdd = healthAdd;
     }
-
-    @JsonIgnore
-    private HitBox hitBox = new HitBox();
 
     public String getImageName() {
         return this.imageName;

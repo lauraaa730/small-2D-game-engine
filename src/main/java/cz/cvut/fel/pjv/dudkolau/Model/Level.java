@@ -3,16 +3,11 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused") //level needs all setters and getters for json de/serialization
 public class Level {
 
     private int levelType;
-
-
     private String backgroundName;
-
-
-
-    //@JsonView(Views.SaveGameView.class)
     private int backgroundObjectsNum;
     private int enemiesNum;
     private int doorsNum;
@@ -32,9 +27,7 @@ public class Level {
         return levelType;
     }
 
-    public void setLevelType(int levelType) {
-        this.levelType = levelType;
-    }
+    public void setLevelType(int levelType) { this.levelType = levelType; }
 
     public int getPotionsNum() {
         return potionsNum;

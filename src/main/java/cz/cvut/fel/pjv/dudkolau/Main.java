@@ -23,8 +23,6 @@ import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Graphics.*;
 
 public class Main extends Application {
-    //private Graphics graphics = new Graphics();
-    //private Image playerImage =  new Image("playerImage.png");
 
     private Game game = new Game();
     private Image[] currPlayerImages = animSTAND_RIGHT;
@@ -32,20 +30,19 @@ public class Main extends Application {
     private int animationCounter = 0;
     private boolean pausedMenuButtonsAdded = false;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = false;
+    private boolean showHitBoxes = true;
 
+    //Declaring all buttons ---------------------------
     private Button continueButton = new Button();
     private Button exitGameButton = new Button();
     private Button saveGameButton = new Button();
     private Button loadSavedButton = new Button();
     private Button startNewButton = new Button();
-
     private Button menuButton = new Button();
-    //private Image backgroundImage = new Image("background_wall.png");
-    private Image currBackgroundImage;
+
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
 
         game.setTileDimension(tileDimension);

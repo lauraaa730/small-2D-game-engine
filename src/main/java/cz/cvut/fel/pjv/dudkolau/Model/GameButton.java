@@ -1,7 +1,5 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
-//TODO prejmenovat!!!!
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 /*
  * @SuppressWarnings("unused") for getters and setter

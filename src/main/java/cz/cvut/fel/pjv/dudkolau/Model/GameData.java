@@ -1,11 +1,5 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
-
-import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import cz.cvut.fel.pjv.dudkolau.Model.Views;
 
 
 /*
@@ -18,9 +12,7 @@ public class GameData {
 
 
     private int totalLevelNum;
-    @JsonView(Views.gameView.class)
     private int currPlayerX;
-    @JsonView(Views.gameView.class)
     private int currPlayerY;
     private int currPlayerLevel;
     private int currPlayerHealth;
@@ -28,6 +20,14 @@ public class GameData {
 
     private int inviPotionTimer;
     private int damagePotionTimer;
+
+    private List<Level> levels;
+
+    public GameData() {
+    }
+
+
+    //Getters and setters --------------------------------------------
 
     public int getTotalLevelNum() {
         return totalLevelNum;
@@ -57,9 +57,6 @@ public class GameData {
         this.levels = levels;
     }
 
-    //@JsonView(Views.SaveGameView.class)
-    private List<Level> levels;
-
     public int getCurrPlayerX() {
         return currPlayerX;
     }
@@ -82,9 +79,6 @@ public class GameData {
 
     public void setCurrPlayerLevel(int currPlayerLevel) {
         this.currPlayerLevel = currPlayerLevel;
-    }
-
-    public GameData() {
     }
 
     public void setTotalLevelNum(int totalLevelNum) {

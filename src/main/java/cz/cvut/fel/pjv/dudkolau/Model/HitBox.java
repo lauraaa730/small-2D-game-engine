@@ -1,6 +1,4 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
-
-//import javafx.scene.shape.Rectangle;
 import java.awt.*;
 
 
@@ -82,18 +80,11 @@ public class HitBox {
         this.rectangle.setBounds(this.rectangle);
     }
 
-
     public static boolean checkCollisionWithObject(Entity entity, GameObject object) {
-        if (entity.getHitBox().getRectangle().intersects(object.getHitBox().getRectangle())) {
-            return true;
-        }
-        return false;
+        return entity.getHitBox().getRectangle().intersects(object.getHitBox().getRectangle());
     }
     public static boolean checkCollisionWithEntity(Entity entity1, Entity entity2) {
-        if (entity1.getHitBox().getRectangle().intersects(entity2.getHitBox().getRectangle())) {
-            return true;
-        }
-        return false;
+        return entity1.getHitBox().getRectangle().intersects(entity2.getHitBox().getRectangle());
     }
 
 }

@@ -1,16 +1,11 @@
 package cz.cvut.fel.pjv.dudkolau;
 
-
-import cz.cvut.fel.pjv.dudkolau.Model.GameObject;
-import cz.cvut.fel.pjv.dudkolau.Model.Level;
-import cz.cvut.fel.pjv.dudkolau.Model.Player;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 public class Graphics {
 
     public static Image backgroundPaused = new Image("backgroundPaused.png");
-    public static Image pausedGame = new Image("pausedGame.png");
     public static Image backgroundImage = new Image("background_wall.png");
     public static Image saveGameImage = new Image("saveGameButton.png");
     public static Image exitGameImage = new Image("exitGameButton.png");
