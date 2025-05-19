@@ -3,8 +3,6 @@ package cz.cvut.fel.pjv.dudkolau;
 import cz.cvut.fel.pjv.dudkolau.Model.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -15,7 +13,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -71,82 +68,22 @@ public class Main extends Application {
             @Override
             public void handle(long l) {
                 if ((l - lastCall) >= 25_000_000) {
-                    //GAMEPLAY
+                        //GAMEPLAY
                     if (game.isRunning()) {
-                        //TODO sprinting?sss
-                        game.update();
-                        setCurrPlayerImages();
-                        if (pausedMenuButtonsAdded) {
-                            pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
-                            pausedMenuButtonsAdded = false;
-                            System.out.println("Deleted button");
-                        }
-                        if (mainMenuButtonsAdded) {
-                            pane.getChildren().removeAll(exitGameButton,loadSavedButton,startNewButton);
-                            mainMenuButtonsAdded = false;
-                        }
-                        render(canvas);
-                        if (animationCounter%3==0) {
-                            animate();
-                        }
-                        animationCounter++;
-
+                        updateRunningGame(pane,canvas);
                         // PAUSED MENU
                     } else if (game.isPaused()){
-                        if (!pausedMenuButtonsAdded) {
-                            loadButtons();
-                            pane.getChildren().addAll(menuButton, continueButton, saveGameButton);
-                            pausedMenuButtonsAdded = true;
-                            System.out.println("Added button");
-                        }
-                        render(canvas);
-                        GraphicsContext gc = canvas.getGraphicsContext2D();
-                        gc.drawImage(backgroundPaused,0,0);
-                        gc.drawImage(pausedMenu, 155,110);
-
+                        updatePausedGame(pane, canvas);
                         //MAIN MENU
                     } else if (game.isMainMenuOn()) {
-                        if (pausedMenuButtonsAdded) {
-                            pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
-                            pausedMenuButtonsAdded = false;
-                            System.out.println("Deleted button");
-                        }
-                        if (!mainMenuButtonsAdded) {
-                            loadButtons();
-                            exitGameButton.setLayoutX(578);
-                            exitGameButton.setLayoutY(400);
-                            pane.getChildren().addAll(loadSavedButton, startNewButton, exitGameButton);
-                            mainMenuButtonsAdded = true;
-                            System.out.println("Added button");
-                        }
-                        GraphicsContext gc = canvas.getGraphicsContext2D();
-                        gc.drawImage(mainMenuBackground,0,0);
-                        gc.drawImage(ghostCycle[ghostCycleIndex],90,150);
-                        gc.drawImage(animSTAND_MENU[playerImageIndex], 220,280);
-                        if (animationCounter%3==0) {
-                            animate();
-                        }
-                        animationCounter++;
-
+                        updateMainMenu(pane,canvas);
                         //GAME OVER
                     } else if (game.isGameOverMenu()) {
-                        if (!mainMenuButtonsAdded) {
-                            exitGameButton.setLayoutX(450);
-                            exitGameButton.setLayoutY(400);
-                            startNewButton.setLayoutX(450);
-                            startNewButton.setLayoutY(260);
-                            loadSavedButton.setLayoutX(450);
-                            loadSavedButton.setLayoutY(330);
-                            pane.getChildren().addAll(loadSavedButton, startNewButton, exitGameButton);
-                            mainMenuButtonsAdded = true;
-                            System.out.println("Added button");
-                        }
-                        GraphicsContext gc = canvas.getGraphicsContext2D();
-                        gc.drawImage(gameOverBackground,0,0);
+                        updateGameOverMenu(pane,canvas);
                     }
 
                     lastCall = l;
-                    if (animationCounter>= 2147483600) { //so the counter doesnt overflow
+                    if (animationCounter>= 2147483600) { //so the counter doesn't overflow
                         animationCounter=0;
                     }
                 }
@@ -156,7 +93,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         // -----------------------------------------------------------------------------------------
-
 
         //Event Handlers ----------------------------------------------------
         scene.setOnKeyPressed(keyEvent -> {
@@ -223,6 +159,7 @@ public class Main extends Application {
             System.out.println("Loading saved game...");
             game.startGame(false);
         });
+
         menuButton.setOnAction(event -> {
             game.setPaused(false);
             game.setRunning(false);
@@ -234,6 +171,73 @@ public class Main extends Application {
             game.startGame(true);
         });
 
+    }
+
+    private void updateRunningGame(AnchorPane pane, Canvas canvas) {
+        game.update();
+        setCurrPlayerImages();
+        if (pausedMenuButtonsAdded) {
+            pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
+            pausedMenuButtonsAdded = false;
+        }
+        if (mainMenuButtonsAdded) {
+            pane.getChildren().removeAll(exitGameButton,loadSavedButton,startNewButton);
+            mainMenuButtonsAdded = false;
+        }
+        render(canvas);
+        if (animationCounter%3==0) {
+            animate();
+        }
+        animationCounter++;
+    }
+
+    private void updatePausedGame(AnchorPane pane, Canvas canvas) {
+        if (!pausedMenuButtonsAdded) {
+            loadButtons();
+            pane.getChildren().addAll(menuButton, continueButton, saveGameButton);
+            pausedMenuButtonsAdded = true;
+        }
+        render(canvas);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(backgroundPaused,0,0);
+        gc.drawImage(pausedMenu, 155,110);
+    }
+
+    private void updateMainMenu(AnchorPane pane, Canvas canvas) {
+        if (pausedMenuButtonsAdded) {
+            pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
+            pausedMenuButtonsAdded = false;
+        }
+        if (!mainMenuButtonsAdded) {
+            loadButtons();
+            exitGameButton.setLayoutX(578);
+            exitGameButton.setLayoutY(400);
+            pane.getChildren().addAll(loadSavedButton, startNewButton, exitGameButton);
+            mainMenuButtonsAdded = true;
+        }
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(mainMenuBackground,0,0);
+        gc.drawImage(ghostCycle[ghostCycleIndex],90,150);
+        gc.drawImage(animSTAND_MENU[playerImageIndex], 220,280);
+        if (animationCounter%3==0) {
+            animate();
+        }
+        animationCounter++;
+    }
+
+    private void updateGameOverMenu(AnchorPane pane, Canvas canvas) {
+        if (!mainMenuButtonsAdded) {
+            exitGameButton.setLayoutX(450);
+            exitGameButton.setLayoutY(400);
+            startNewButton.setLayoutX(450);
+            startNewButton.setLayoutY(260);
+            loadSavedButton.setLayoutX(450);
+            loadSavedButton.setLayoutY(330);
+            pane.getChildren().addAll(loadSavedButton, startNewButton, exitGameButton);
+            mainMenuButtonsAdded = true;
+        }
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(gameOverBackground,0,0);
     }
 
     private void setCurrPlayerImages() {
