@@ -14,6 +14,7 @@ import static cz.cvut.fel.pjv.dudkolau.Model.Directions.*;
 
 
 public class Game {
+    private final static System.Logger logger = System.getLogger(Game.class.getName());
     private Player player;
     private Level currLevel;
     private int maxLevelNum;
@@ -54,6 +55,7 @@ public class Game {
     }
 
     public void startNewGame() {
+        logger.log(System.Logger.Level.INFO, "started new game");
         this.player = new Player();
         resetGame();
 
@@ -150,7 +152,9 @@ public class Game {
                 interactingTimer = 1;
                 if (currDoor.getLevel1() == currLevel.getLevelType()) {
                     currLevel = levels.get(currDoor.getLevel2()-1);
+                    logger.log(System.Logger.Level.INFO, "Player is entering level " +currDoor.getLevel2());
                     setObjects();
+
 
                     //Manage player coordination in new level
                     if (currDoor.getDir()==LEFT || currDoor.getDir()==RIGHT) {
@@ -187,24 +191,26 @@ public class Game {
 
                 if (currPotion.getEffect()== Effect.HEALTH) {
                     if (player.getMaxHealth() >= player.getCurrHealth() + currPotion.getHealthAdd()) {
-                        System.out.println("HEALING!");//TODO logger
+                        logger.log(System.Logger.Level.INFO, "Player was healed for " + currPotion.getHealthAdd() + " hearts.");
                         player.setCurrHealth(player.getCurrHealth() + currPotion.getHealthAdd());
                     }
                 } else if (currPotion.getEffect() == Effect.INVINCIBILITY) {
                     if (inviPotionCountDown < currPotion.getEffectDuration()) {
                         inviPotionCountDown = currPotion.getEffectDuration();
                     }
+                    logger.log(System.Logger.Level.INFO, "Player is now invincible");
                     player.setInvincible(true);
                 } else if (currPotion.getEffect() == Effect.DAMAGE) {
                      if (damagePotionCountDown < currPotion.getEffectDuration()) {
                          damagePotionCountDown = currPotion.getEffectDuration();
                      }
                     player.setDamage(player.getDamage()+currPotion.getDamageModifier());
-                    System.out.println("Consumed damagePotion"); //TODO logger
+                    logger.log(System.Logger.Level.INFO, "Player's damage  was increased by: "+currPotion.getDamageModifier());
                 }
 
                 /* Remove the potion from the level*/
                 currLevel.getPotions().remove(i);
+                logger.log(System.Logger.Level.INFO, "Potion was consumed by player.");
                 currLevel.setPotionsNum(currLevel.getPotions().size());
             }
         }
@@ -226,10 +232,12 @@ public class Game {
             currentGameButton = this.currLevel.getGameButtons().get(i);
             if (checkCollisionWithObject(player, currentGameButton)) {
                 currentGameButton.setPressed(true);
-                if (!currentGameButton.isFake()) {
+                if (!currentGameButton.isFake() && !currLevel.isDoorsWereUnlocked()) {
                     for (int j = 0; j<currLevel.getDoorsNum(); j++) {
                         currLevel.getDoors().get(j).setLocked(false);
                     }
+                    currLevel.setDoorsWereUnlocked(true);
+                    logger.log(System.Logger.Level.INFO, "All doors in this level now unlocked!");
                 }
             }
         }
@@ -283,11 +291,12 @@ public class Game {
     private void attack(Enemy e,int i) {
         if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
             e.setCurrHealth(e.getCurrHealth()-player.getDamage());
-            System.out.printf("Enemy health : %d\n", e.getCurrHealth()); //TODO logger
+            logger.log(System.Logger.Level.INFO, "Player hit enemy!");
             attackTimer = 1;
             if (e.getCurrHealth()<=0) {
                 currLevel.getEnemies().remove(i);
                 currLevel.setEnemiesNum(currLevel.getEnemies().size());
+                logger.log(System.Logger.Level.INFO, "Player killed an enemy!");
             }
         }
     }
@@ -296,9 +305,9 @@ public class Game {
         if (invincibilityTimer == 0 && !player.isInvincible()) {
             invincibilityTimer = 1; //start the counter
             player.setCurrHealth(player.getCurrHealth()-1);
-            System.out.println("OUCH!"); //TODO logger
+            logger.log(System.Logger.Level.INFO,"Player got hit by enemy! Current health has decreased.");
             if (player.getCurrHealth() <=0) {
-                System.out.println("GAME OVER");//TODO logger
+                logger.log(System.Logger.Level.INFO, "Player died, game over...");
                 this.running = false;
                 this.gameOverMenu = true;
             }
@@ -328,7 +337,7 @@ public class Game {
     // Saving and loading functions --------------------------------------------------------
 
     private void resetGame() {
-
+        logger.log(System.Logger.Level.INFO, "Resetting cooldowns an player stats");
         this.inviPotionCountDown = 0;
         this.damagePotionCountDown = 0;
         this.attackTimer = 0;
@@ -363,12 +372,13 @@ public class Game {
             player.setAttackHitBox();
 
         } catch (IOException ex) {
-            System.out.println("Something went wrong with json"); //TODO logger
+            logger.log(System.Logger.Level.INFO,"Something went wrong with json");
         }
     }
 
     public void loadSavedGame() {
         try {
+            logger.log(System.Logger.Level.INFO, "Loading saved game...");
             ObjectMapper objectMapper = new ObjectMapper();
 
             resetGame();
@@ -387,8 +397,6 @@ public class Game {
 
             this.levelsNum =gameData.getTotalLevelNum();
 
-            System.out.println("setting player");//TODO logger
-
             this.player.setMaxHealth(gameData.getMaxPlayerHealth());
             this.player.setCurrHealth(gameData.getCurrPlayerHealth());
             this.player.setxCoord(gameData.getCurrPlayerX());
@@ -400,10 +408,10 @@ public class Game {
             this.damagePotionCountDown = gameData.getDamagePotionTimer();
 
             setObjects();
-            System.out.println("Loaded game succesfully!");//TODO logger
+            logger.log(System.Logger.Level.INFO,"Loaded saved game successfully!");
 
         } catch (IOException ex) {
-            System.out.println("Something went wrong with json");//TODO logger
+            logger.log(System.Logger.Level.INFO,"Something went wrong with json");
         }
     }
 
@@ -413,29 +421,31 @@ public class Game {
             File jsonFile = new File("saves/" + levelName);
 
             Level levelToRead = objectMapper.readerWithView(Views.gameView.class).readValue(jsonFile, Level.class);
-            System.out.println("Loaded level" + levelName); //TODO logger
+            logger.log(System.Logger.Level.INFO,"Loaded level" + levelName);
             return levelToRead;
         } catch (IOException ex) {
-            System.out.println("Something went wrong with json"); //TODO logger
+            logger.log(System.Logger.Level.INFO,"Something went wrong with json");
         }
         return null;
     }
 
     private void loadAllLevels() {
+        logger.log(System.Logger.Level.INFO, "Loading all levels for new game!");
         Level l;
         for (int i = 0; i < maxLevelNum; i++) {
             l = loadLevelFromJson("level"+(i+1)+".json");
             if (l!=null) {
                 levels.add(l);
+                l.setDoorsWereUnlocked(false);
                 levelsNum++;
             } else {
-                System.out.println("Level number " +(i+1) + " is empty!"); //TODO logger
+                logger.log(System.Logger.Level.INFO,"Level number " +(i+1) + " is empty!");
             }
         }
     }
 
     public void saveGame() {
-
+        logger.log(System.Logger.Level.INFO, "Saving game...");
         GameData gameData = new GameData();
 
         gameData.setCurrPlayerHealth(this.player.getCurrHealth());
@@ -454,11 +464,11 @@ public class Game {
             objectMapper.writerWithView(Views.gameView.class).writeValue(
                     new File("saves/current-game-state.json" ), gameData
             );
-            System.out.println("game saved succesfully");//TODO logger
+            logger.log(System.Logger.Level.INFO,"game saved succesfully");
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Something went wrong with json");//TODO logger
+            logger.log(System.Logger.Level.INFO,"Something went wrong with json");
         }
     } /* ----------------------------------------------------------------------------- */
 

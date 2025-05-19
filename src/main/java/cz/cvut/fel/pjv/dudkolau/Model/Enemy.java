@@ -7,8 +7,8 @@ public class Enemy extends AbstractEntity{
     private boolean hasCollision;
     private int selfMovementPosition = 0;
 
-    //for JSON
     public Enemy() {
+        //for JSON
     }
 
     public void updateSelfMovementPosition() {

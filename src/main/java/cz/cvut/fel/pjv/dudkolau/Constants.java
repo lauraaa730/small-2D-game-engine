@@ -12,6 +12,7 @@ public class Constants {
     public static final int bushYOffset = 30;
     public static final int buttonXOffset = 2;
     public static final int buttonYOffset = 1;
+    public static final int splashOffset =15;
 
     /** Enemy constants and cooldowns*/
     public static final int enemyMovementLength = 30;

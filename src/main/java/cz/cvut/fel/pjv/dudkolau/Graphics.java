@@ -26,6 +26,10 @@ public class Graphics {
 
     public static Image fightLeftImage = new Image("fightLEFT.png");
     public static  Image splashLeftImage = new Image("splashLEFT.png");
+    public static Image fightRightImage = new Image("fightRIGHT.png");
+    public static  Image splashRightImage = new Image("splashRIGHT.png");
+    public static  Image splashUpImage = new Image("splashUP.png");
+    public static  Image splashDownImage = new Image("splashDOWN.png");
 
     public static Image[] ghostCycle = {
             new Image("ghostCycle-1.png"),

@@ -12,6 +12,7 @@ public class Level {
     private int doorsNum;
     private int potionsNum;
     private int gameButtonsNum;
+    private boolean doorsWereUnlocked;
     private List<Door> doors = new ArrayList<>();
     private List<Potion> potions = new ArrayList<>();
     private  List<GameButton> gameButtons = new ArrayList<>();
@@ -114,4 +115,8 @@ public class Level {
     public void setGameButtons(List<GameButton> gameButtons) {
         this.gameButtons = gameButtons;
     }
+
+    public boolean isDoorsWereUnlocked() { return doorsWereUnlocked; }
+
+    public void setDoorsWereUnlocked(boolean doorsWereUnlocked) { this.doorsWereUnlocked = doorsWereUnlocked; }
 }
