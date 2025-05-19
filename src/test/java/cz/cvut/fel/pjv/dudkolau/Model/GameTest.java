@@ -24,8 +24,8 @@ class GameTest {
     void setHitBox() {
         Enemy testEnemy = new Enemy();
         testEnemy.setHitBox(0,0);
-        assertTrue(testEnemy.getHitBox()!=null);
-        assertTrue(testPlayer.getHitBox()!=null);
+        assertNotNull(testEnemy.getHitBox());
+        assertNotNull(testPlayer.getHitBox());
     }
 
     @Test
