@@ -63,7 +63,7 @@ public class Game {
         loadAllLevels();
         currLevel = levels.getFirst();
         if (currLevel==null) {
-            System.out.println("Level1 is null!"); //TODO logger
+            logger.log(System.Logger.Level.INFO,"Level1 is null!");
             System.exit(1);
         }
 
@@ -81,13 +81,15 @@ public class Game {
 
         //Check collisions and interaction with level objects
         checkBackgroundObjects();
+
         checkGameButtons();
+
         managePotions();
 
         updateEnemies();
     }
 
-    private boolean isPlayerFacingObject(GameObject object) {
+    public boolean isPlayerFacingObject(GameObject object) {
         //Fake movement to check possible collision, then jumpback
         player.move(player.getLastDirection(), width, height, tileDimension);
         if (checkCollisionWithObject(player,object)) {
@@ -537,5 +539,18 @@ public class Game {
         gameObjects.addAll(this.currLevel.getPotions());
         gameObjects.addAll(this.currLevel.getBackgroundObjects());
         return gameObjects;
+    }
+
+    /** For testing*/
+    public void setInteractingTimer(int t) {
+        this.interactingTimer = t;
+    }
+
+    public void setInviPotionCountDown(int inviPotionCountDown) {
+        this.inviPotionCountDown = inviPotionCountDown;
+    }
+
+    public void setDamagePotionCountDown(int damagePotionCountDown) {
+        this.damagePotionCountDown = damagePotionCountDown;
     }
 }
