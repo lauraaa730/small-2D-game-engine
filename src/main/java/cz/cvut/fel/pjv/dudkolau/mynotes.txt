@@ -19,4 +19,9 @@ konzultace:
 
 
   poznamky:
+
+
+  //TODO
+  -rozdelit do mensich funkci render, main loop
+  -mezery vsude konzistentni
   -

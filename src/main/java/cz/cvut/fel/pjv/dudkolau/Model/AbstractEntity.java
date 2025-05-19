@@ -41,6 +41,7 @@ public abstract class AbstractEntity implements Entity {
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
+
     @Override
     public HitBox getHitBox() {
         return hitBox;
@@ -116,6 +117,4 @@ public abstract class AbstractEntity implements Entity {
     public void setyCoord(int y) {
         yCoord=y;
     }
-
-
 }

@@ -1,24 +1,21 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 import java.awt.*;
 
-
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
+
 /**
  * Represents a hitbox used to detect collisions between game entities and objects.
  * The hitbox is based on a rectangle that can be positioned and resized.
  *
  * Created for B0B36PJV
- * See {@link https://gitlab.fel.cvut.cz/B232_B0B36PJV/dudkolau}
  * @author  dudkolau@fel.cvut.cz
  */
 public class HitBox {
-
     private Rectangle  rectangle;
     private int xCoord;
     private int yCoord;
     private int width;
     private int height;
-
 
     public int getxCoord() {
         return xCoord;
@@ -58,7 +55,6 @@ public class HitBox {
         this.height = height;
     }
 
-
     public Rectangle getRectangle() {
         return this.rectangle;
     }
@@ -73,7 +69,6 @@ public class HitBox {
         this.rectangle.setSize(this.width,this.height);
         this.rectangle.setBounds(xCoord*tileDimension,yCoord*tileDimension, this.width, this.height);
     }
-
 
     public void changexCoord(int x) {
         this.xCoord+= x;
@@ -93,5 +88,4 @@ public class HitBox {
     public static boolean checkCollisionWithEntity(Entity entity1, Entity entity2) {
         return entity1.getHitBox().getRectangle().intersects(entity2.getHitBox().getRectangle());
     }
-
 }

@@ -12,16 +12,11 @@ import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 import static cz.cvut.fel.pjv.dudkolau.Model.Directions.*;
 
-import java.util.logging.Logger;
-
-
 
 public class Game {
     private Player player;
     private Level currLevel;
-
     private int maxLevelNum;
-
     private int tileDimension;
     private boolean isPaused;
     private boolean running;
@@ -29,13 +24,14 @@ public class Game {
     private int levelsNum = 0;
     private int enemieMoveCounter = 0;
     private boolean mainMenuOn;
-    private int invincibilityTimer = 0; //counter that provides invincibility for player after getting hit
+
+    /*counter that provides invincibility for player after getting hit*/
+    private int invincibilityTimer = 0;
     private int interactingTimer = 0;
+    private int attackTimer = 0;
 
     private int inviPotionCountDown = 0;
     private int damagePotionCountDown = 0;
-
-    private int attackTimer = 0;
 
     private List<Level> levels = new ArrayList<>();
 
@@ -44,9 +40,6 @@ public class Game {
         this.running = false;
         this.gameOverMenu = false;
     }
-
-
-
 
     public void startGame(boolean newGame) {
         this.running = true;
@@ -76,7 +69,6 @@ public class Game {
     }
 
     public void update() {
-
         updateTimers();
 
         //Move player
@@ -93,7 +85,6 @@ public class Game {
         updateEnemies();
     }
 
-
     private boolean isPlayerFacingObject(GameObject object) {
         //Fake movement to check possible collision, then jumpback
         player.move(player.getLastDirection(), width, height, tileDimension);
@@ -102,7 +93,6 @@ public class Game {
             return true;
         }
         player.jumpBack(false,width, height);
-
         return false;
     }
 
@@ -113,35 +103,30 @@ public class Game {
                 invincibilityTimer=0;
             }
         }
-
         if (interactingTimer > 0) {
             interactingTimer++;
             if (interactingTimer>= interactingCooldown) {
                 interactingTimer=0;
             }
         }
-
         if (attackTimer > 0) {
             attackTimer++;
             if (attackTimer>= attackCooldown) {
                 attackTimer=0;
             }
         }
-
         if (inviPotionCountDown > 0) {
             player.setInvincible(true);
             inviPotionCountDown--;
         } else {
             player.setInvincible(false);
         }
-
         if (damagePotionCountDown > 0) {
             damagePotionCountDown--;
         } else {
             player.setDamage(playerDefaultDamage);
         }
     }
-
 
     /**
      * Check all doors, manage collision, interaction and level change
@@ -187,17 +172,15 @@ public class Game {
         return false;
     }
 
-
     private void managePotions(){
         Potion currPotion;
-
         for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
             currPotion = this.currLevel.getPotions().get(i);
             if (checkCollisionWithObject(player, currPotion)) {
                 player.jumpBack(true, width, height);
             }
 
-            //Check if player is interacting with porion
+            //Check if player is interacting with potion
             if (interactingTimer == 0 && player.isInteracting() && isPlayerFacingObject(currPotion)) {
                 //Start countdown
                 interactingTimer = 1;
@@ -252,10 +235,8 @@ public class Game {
         }
     }
 
-
     private void updateEnemies() {
         Enemy e;
-
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
             e=currLevel.getEnemies().get(i);
             attack(e,i);
@@ -344,7 +325,6 @@ public class Game {
         }
     }
 
-
     // Saving and loading functions --------------------------------------------------------
 
     private void resetGame() {
@@ -386,7 +366,6 @@ public class Game {
             System.out.println("Something went wrong with json"); //TODO logger
         }
     }
-
 
     public void loadSavedGame() {
         try {
@@ -442,7 +421,6 @@ public class Game {
         return null;
     }
 
-
     private void loadAllLevels() {
         Level l;
         for (int i = 0; i < maxLevelNum; i++) {
@@ -453,7 +431,6 @@ public class Game {
             } else {
                 System.out.println("Level number " +(i+1) + " is empty!"); //TODO logger
             }
-
         }
     }
 

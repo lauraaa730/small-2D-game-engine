@@ -2,7 +2,6 @@ package cz.cvut.fel.pjv.dudkolau;
 
 import javafx.scene.image.Image;
 
-
 public class Graphics {
 
     public static Image backgroundPaused = new Image("backgroundPaused.png");
@@ -86,8 +85,6 @@ public class Graphics {
             new Image("animDOWN-8.png")
     };
 
-
-
     public static Image[] animSTAND_RIGHT = {
             new Image("animSTAND_RIGHT-1.png"),
             new Image("animSTAND_RIGHT-2.png"),
@@ -98,6 +95,7 @@ public class Graphics {
             new Image("animSTAND_RIGHT-7.png"),
             new Image("animSTAND_RIGHT-8.png"),
     };
+
     public static Image[] animSTAND_UP = {
             new Image("animSTAND_UP-1.png"),
             new Image("animSTAND_UP-2.png"),
@@ -108,6 +106,7 @@ public class Graphics {
             new Image("animSTAND_UP-7.png"),
             new Image("animSTAND_UP-8.png"),
     };
+
     public static Image[] animSTAND_DOWN = {
             new Image("animSTAND_DOWN-1.png"),
             new Image("animSTAND_DOWN-2.png"),
@@ -129,6 +128,7 @@ public class Graphics {
             new Image("animSTAND_LEFT-7.png"),
             new Image("animSTAND_LEFT-8.png"),
     };
+
     public static Image[] animLEFT = {
             new Image("animLEFT-1.png"),
             new Image("animLEFT-2.png"),
@@ -140,11 +140,6 @@ public class Graphics {
             new Image("animLEFT-8.png"),
     };
 
-
     public static int playerImageIndex = 0; //in animation cycle
     public static int ghostCycleIndex = 0;
-
-
-
-
 }

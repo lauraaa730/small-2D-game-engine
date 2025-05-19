@@ -14,7 +14,6 @@ public class Player extends AbstractEntity {
     private  Directions lastDirection = Directions.NONE;
     private boolean invincible = false;
     private int damage = 1;
-
     @JsonIgnore
     private HitBox attackHitBox = new HitBox();
 
@@ -22,13 +21,10 @@ public class Player extends AbstractEntity {
         //declaration for JSON
     }
 
-
-
     public void setAttackHitBox() {
         this.attackHitBox.setRectangle(xCoord-attackFaceOffset, yCoord-attackSideOffset,
                 this.width/2, this.height*3/2,0,0);
     }
-
 
     public void jumpBack(boolean fromCurrDir,int w, int h) {
         //if we want to check from curr direction, fromCurrDir will be 1,
@@ -54,9 +50,7 @@ public class Player extends AbstractEntity {
                 move(Directions.UP, w, h, tileDimension);
             }
         }
-
     }
-
 
     public void updateAttackHitbox() {
         if (currDirection == Directions.LEFT ||

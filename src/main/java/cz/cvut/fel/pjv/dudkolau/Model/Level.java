@@ -5,7 +5,6 @@ import java.util.List;
 
 @SuppressWarnings("unused") //level needs all setters and getters for json de/serialization
 public class Level {
-
     private int levelType;
     private String backgroundName;
     private int backgroundObjectsNum;
@@ -14,7 +13,6 @@ public class Level {
     private int potionsNum;
     private int gameButtonsNum;
     private List<Door> doors = new ArrayList<>();
-
     private List<Potion> potions = new ArrayList<>();
     private  List<GameButton> gameButtons = new ArrayList<>();
     private List<BackgroundObject> backgroundObjects = new ArrayList<>();
@@ -48,6 +46,7 @@ public class Level {
     public int getBackgroundObjectsNum() {
         return backgroundObjectsNum;
     }
+
     public String getBackgroundName() {
         return backgroundName;
     }
@@ -55,11 +54,10 @@ public class Level {
     public void setBackgroundName(String backgroundName) {
         this.backgroundName = backgroundName;
     }
+
     public void setBackgroundObjectsNum(int backgroundObjectsNum) {
         this.backgroundObjectsNum = backgroundObjectsNum;
     }
-
-
 
     public int getEnemiesNum() {
         return enemiesNum;
@@ -68,7 +66,6 @@ public class Level {
     public void setEnemiesNum(int enemiesNum) {
         this.enemiesNum = enemiesNum;
     }
-
 
     public List<BackgroundObject> getBackgroundObjects() {
         return backgroundObjects;

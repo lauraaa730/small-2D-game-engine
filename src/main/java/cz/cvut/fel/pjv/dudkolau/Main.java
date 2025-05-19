@@ -30,7 +30,7 @@ public class Main extends Application {
     private int animationCounter = 0;
     private boolean pausedMenuButtonsAdded = false;
     private boolean mainMenuButtonsAdded = false;
-    private boolean showHitBoxes = true;
+    private boolean showHitBoxes = false;
 
     //Declaring all buttons ---------------------------
     private Button continueButton = new Button();

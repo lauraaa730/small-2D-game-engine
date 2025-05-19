@@ -18,9 +18,7 @@ public class Door implements GameObject {
     private String lockedImageName;
     private int width;
     private int height;
-
     private boolean locked;
-
     private Directions dir;
 
     @JsonIgnore
@@ -50,7 +48,7 @@ public class Door implements GameObject {
     }
 
     @SuppressWarnings("unused")
-   public void setLevel2(int level2) { this.level2 = level2; }
+    public void setLevel2(int level2) { this.level2 = level2; }
 
     @Override
     public int getxCoord() {
@@ -85,7 +83,6 @@ public class Door implements GameObject {
     public String getLockedImageName() {
         return lockedImageName;
     }
-
 
     @SuppressWarnings("unused")
     public void setLockedImageName(String lockedImageName) {

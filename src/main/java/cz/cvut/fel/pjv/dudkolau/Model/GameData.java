@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 import java.util.List;
 
-
 /*
 * This will save current game data
 * to a json file.
@@ -10,22 +9,18 @@ import java.util.List;
 */
 public class GameData {
 
-
     private int totalLevelNum;
     private int currPlayerX;
     private int currPlayerY;
     private int currPlayerLevel;
     private int currPlayerHealth;
     private int maxPlayerHealth;
-
     private int inviPotionTimer;
     private int damagePotionTimer;
-
     private List<Level> levels;
 
     public GameData() {
     }
-
 
     //Getters and setters --------------------------------------------
 

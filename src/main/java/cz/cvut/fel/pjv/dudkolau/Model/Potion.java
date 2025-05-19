@@ -3,7 +3,6 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Potion implements GameObject {
-
     private int xCoord;
     private int yCoord;
     private String imageName;
@@ -11,15 +10,10 @@ public class Potion implements GameObject {
     private int height;
     private Effect effect;
     private int healthAdd;
-
     private int damageModifier;
-
     @JsonIgnore
     private HitBox hitBox = new HitBox();
-
-    /*How many game cycles will this effect last*/
-    private int effectDuration;
-
+    private int effectDuration; /*How many game cycles will this effect last*/
 
     public Effect getEffect() {
         return effect;
@@ -53,11 +47,12 @@ public class Potion implements GameObject {
         this.healthAdd = healthAdd;
     }
 
+    @Override
     public String getImageName() {
         return this.imageName;
     }
 
-
+    @Override
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }

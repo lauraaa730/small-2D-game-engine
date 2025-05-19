@@ -11,7 +11,6 @@ public class Enemy extends AbstractEntity{
     public Enemy() {
     }
 
-
     public void updateSelfMovementPosition() {
         if (this.currDirection == Directions.LEFT) {
             this.selfMovementPosition--;
@@ -19,7 +18,6 @@ public class Enemy extends AbstractEntity{
             this.selfMovementPosition++;
         }
     }
-
 
     public void jumpBack(int w, int h) {
         if (currDirection == Directions.LEFT) {
@@ -33,7 +31,6 @@ public class Enemy extends AbstractEntity{
         }
     }
 
-
     public boolean isHasCollision() {
         return hasCollision;
     }
@@ -43,15 +40,12 @@ public class Enemy extends AbstractEntity{
         this.hasCollision = hasCollision;
     }
 
-
     public int getSelfMovementPosition() {
         return selfMovementPosition;
     }
 
     public void setSelfMovementPosition(int selfMovementPosition) {
-
         this.selfMovementPosition = selfMovementPosition;
     }
-
 }
 

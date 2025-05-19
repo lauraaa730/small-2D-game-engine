@@ -2,8 +2,6 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
-
 /*
  * This will represent all objects in the game,
  * with which you cannot interact,
@@ -58,6 +56,7 @@ public class BackgroundObject implements GameObject{
     public void setWidth(int width) {
         this.width = width;
     }
+
     @Override
     public int getHeight() {
         return height;

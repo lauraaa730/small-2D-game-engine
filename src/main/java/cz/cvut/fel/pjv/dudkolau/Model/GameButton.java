@@ -14,9 +14,7 @@ public class GameButton implements GameObject {
     private String imageName;
     private int width;
     private int height;
-
     private boolean pressed;
-
     private boolean fake;
     @JsonIgnore
     private HitBox hitBox = new HitBox();
