@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Cleaning up">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Deleted redundant dependencies">
+      <change afterPath="$PROJECT_DIR$/src/test/java/cz/cvut/fel/pjv/dudkolau/Model/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagram2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dudkolau.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/HitBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Model/HitBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sleeping.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sleeping.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,7 @@
         <option value="package-info" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -91,9 +94,11 @@
     &quot;Maven.dudkolau [install].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/laura/Documents/PJV/GUII/semestralka&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/laura/Documents/PJV/GUII/Hangman&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -106,6 +111,14 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="cz.cvut.fel.pjv.dudkolau.Model" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -249,15 +262,10 @@
       <workItem from="1747603124116" duration="260000" />
       <workItem from="1747603396932" duration="48000" />
       <workItem from="1747603455297" duration="60000" />
-      <workItem from="1747603524994" duration="41000" />
-    </task>
-    <task id="LOCAL-00024" summary="fixed vertical bushes. Added loading all levels through a for cycle. Added few methods to class Enemy.">
-      <option name="closed" value="true" />
-      <created>1718833380352</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1718833380352</updated>
+      <workItem from="1747603524994" duration="3525000" />
+      <workItem from="1747608729451" duration="587000" />
+      <workItem from="1747609327887" duration="1337000" />
+      <workItem from="1747610677419" duration="1222000" />
     </task>
     <task id="LOCAL-00025" summary="Implementing enemies.">
       <option name="closed" value="true" />
@@ -643,7 +651,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747601779650</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Deleted redundant dependencies">
+      <option name="closed" value="true" />
+      <created>1747603598179</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1747603598180</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,7 +677,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing level loading" />
     <MESSAGE value="Fixed hitbox of player when level transitioning" />
     <MESSAGE value="Added hearts, rendering correctly" />
     <MESSAGE value="Heart sprites" />
@@ -686,7 +701,8 @@
     <MESSAGE value="Cleaning up code" />
     <MESSAGE value="Created parent class for entities. CLeaned up some more" />
     <MESSAGE value="Cleaning up" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaning up" />
+    <MESSAGE value="Deleted redundant dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted redundant dependencies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

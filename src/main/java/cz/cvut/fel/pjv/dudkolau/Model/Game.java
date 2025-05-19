@@ -12,6 +12,9 @@ import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 import static cz.cvut.fel.pjv.dudkolau.Model.Directions.*;
 
+import java.util.logging.Logger;
+
+
 
 public class Game {
     private Player player;
@@ -139,6 +142,17 @@ public class Game {
         }
     }
 
+
+    /**
+     * Check all doors, manage collision, interaction and level change
+     *
+     * <p>This method checks for collisions between the player and doors. If a collision occurs,
+     * the player is moved back. It then verifies whether the player is interacting with an unlocked door
+     * and is facing it. If the conditions are met, the method changes the current level
+     * based on the door's configuration and adjusts the player's coordinates accordingly.
+     *
+     * @return true if the level change happened, false otherwise.
+     */
     private boolean enterNewLevel() {
         Door currDoor;
         for (int i = 0; i < currLevel.getDoorsNum() ; i++) {

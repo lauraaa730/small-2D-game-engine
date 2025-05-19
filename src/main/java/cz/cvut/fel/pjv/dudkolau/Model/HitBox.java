@@ -3,7 +3,14 @@ import java.awt.*;
 
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
-
+/**
+ * Represents a hitbox used to detect collisions between game entities and objects.
+ * The hitbox is based on a rectangle that can be positioned and resized.
+ *
+ * Created for B0B36PJV
+ * See {@link https://gitlab.fel.cvut.cz/B232_B0B36PJV/dudkolau}
+ * @author  dudkolau@fel.cvut.cz
+ */
 public class HitBox {
 
     private Rectangle  rectangle;

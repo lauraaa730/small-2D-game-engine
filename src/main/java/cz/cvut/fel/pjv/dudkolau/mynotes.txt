@@ -12,6 +12,10 @@ konzultace:
     -jaktoze json nepouziva settery? je to tedy safe je smazat?
     -musi byt v mainu throws exception ?
     -projet warnings v mainu
+    -zeptat se na instalaci v manualu
+    -ma byt logger oddelene? nebo staci vzdy deklarace v tech funkcich
+    -staci jeden class stestama?
+    -k cemu je since v javadoc?
 
 
   poznamky:
