@@ -2,11 +2,13 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/*
- * This will represent all objects in the game,
- * with which you cannot interact,
- * meaning that they are just background objects.
- * Bushes, grass, trees..
+/**
+ * Represents object in the game, with which you cannot interact,
+ * but can collide with (Bush, grass, tree...)
+ *
+ * Implements interface GameObject
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
  */
 public class BackgroundObject implements GameObject{
     private int xCoord;

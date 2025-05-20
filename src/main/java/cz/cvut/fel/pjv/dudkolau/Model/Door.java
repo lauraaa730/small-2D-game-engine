@@ -1,14 +1,20 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/*
-* @SuppressWarnings("unused") for getters and setter
-* marked as "unused", because they are needed for json de/serialization.
-*
-*
-* */
+/**
+ * Door is an interactbale object, which holds the
+ * information needed for level transfer.
+ * Interaction allows player to enter different level.
+ *
+ * @SuppressWarnings("unused") for
+ * getters and setter marked as
+ * "unused", because they are
+ * needed for json de/serialization.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
 public class Door implements GameObject {
     private int level1;
     private int level2;

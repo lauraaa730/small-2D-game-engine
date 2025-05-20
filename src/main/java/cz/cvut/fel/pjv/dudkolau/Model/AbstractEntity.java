@@ -2,6 +2,14 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Parent entity for player and enemy,
+ * has basic methods for movement, collisions,
+ * getters and setters.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
 public abstract class AbstractEntity implements Entity {
 
     public int maxHealth;

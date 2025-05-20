@@ -12,7 +12,14 @@ import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithEntity;
 import static cz.cvut.fel.pjv.dudkolau.Model.HitBox.checkCollisionWithObject;
 import static cz.cvut.fel.pjv.dudkolau.Model.Directions.*;
 
-
+/**
+ * Stores and manages all game logic and model.
+ * Manages levels, objects in levels,player, loading and saving.
+ * Can work independently of GUI.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
 public class Game {
     private final static System.Logger logger = System.getLogger(Game.class.getName());
     private Player player;

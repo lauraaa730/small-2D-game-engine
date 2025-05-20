@@ -2,6 +2,14 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.tileDimension;
 
+/**
+ * Class for non-playable entity.
+ * Moves itself back and forth.
+ * Can have collision.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
 public class Enemy extends AbstractEntity{
 
     private boolean hasCollision;
