@@ -1,3 +1,0 @@
--vytvoreni hitboxu (zobrazi se hitboxy)
--jestli funguji kolize (testuje se spravne predavani rectagle infa napric nekolika tridami)
--testovani pozice hrace pred save game a po loadsavegame
