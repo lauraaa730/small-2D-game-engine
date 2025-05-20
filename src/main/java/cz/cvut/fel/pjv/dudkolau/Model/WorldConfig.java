@@ -1,5 +1,8 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 
+/**
+ * Class for loading game world info from editable json file.
+ */
 public class WorldConfig {
     public int totalLevelsNum;
     public int playerMaxHealth;

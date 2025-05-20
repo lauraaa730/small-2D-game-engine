@@ -33,7 +33,9 @@ public class Game {
     private int enemieMoveCounter = 0;
     private boolean mainMenuOn;
 
-    /*counter that provides invincibility for player after getting hit*/
+    /**
+     * counter that provides invincibility for player after getting hit
+     */
     private int invincibilityTimer = 0;
     private int interactingTimer = 0;
     private int attackTimer = 0;
@@ -49,6 +51,11 @@ public class Game {
         this.gameOverMenu = false;
     }
 
+    /**
+     * Starts the game by either initializing a new game or loading a saved one.
+     *
+     * @param newGame true if a new game should be started; false to load from saved state.
+     */
     public void startGame(boolean newGame) {
         this.running = true;
         this.mainMenuOn = false;
@@ -61,6 +68,9 @@ public class Game {
         }
     }
 
+    /**
+     * Initializes a new game state, including player creation and level loading.
+     */
     public void startNewGame() {
         logger.log(System.Logger.Level.INFO, "started new game");
         this.player = new Player();
@@ -77,6 +87,11 @@ public class Game {
         setObjects();
     }
 
+    /**
+     * Updates the game state each cycle.
+     * This includes player movement,updating stats,
+     * interaction checks, enemy updates, and cooldowns.
+     */
     public void update() {
         updateTimers();
 
@@ -96,6 +111,14 @@ public class Game {
         updateEnemies();
     }
 
+    /**
+     * Checks if the player is directly facing a specified object.
+     *
+     * <p>Simulates a step in the last direction and checks for collision.
+     *
+     * @param object The game object to check against.
+     * @return true if the player is facing and touching the object; false otherwise.
+     */
     public boolean isPlayerFacingObject(GameObject object) {
         //Fake movement to check possible collision, then jumpback
         player.move(player.getLastDirection(), width, height, tileDimension);
@@ -107,6 +130,10 @@ public class Game {
         return false;
     }
 
+    /**
+     * Updates internal cooldown timers for invincibility, interactions, and attacks.
+     * Also manages potion effects over time.
+     */
     private void updateTimers() {
         if (invincibilityTimer > 0) {
             invincibilityTimer++;
@@ -185,6 +212,11 @@ public class Game {
         return false;
     }
 
+    /**
+     * Manages potion interaction and consumption logic.
+     * Handles player healing, invincibility, and damage boost effects.
+     * If a potion is consumed, method removes it from the level.
+     */
     private void managePotions(){
         Potion currPotion;
         for (int i = 0; i < currLevel.getPotionsNum() ; i++) {
@@ -225,6 +257,11 @@ public class Game {
         }
     }
 
+    /**
+     * Checks for collisions between player and background objects.
+     *
+     * <p>If a collision is detected, the player is pushed back.
+     */
     private void checkBackgroundObjects() {
         GameObject currentObject;
         for (int i = 0; i < currLevel.getBackgroundObjectsNum() ; i++) {
@@ -235,6 +272,10 @@ public class Game {
         }
     }
 
+    /**
+     * Checks for interactions with game buttons and handles door unlocking logic.
+     * If the player and button hit box intersect, button is set to 'pressed'
+     */
     private void checkGameButtons() {
         GameButton currentGameButton;
         for (int i = 0; i < currLevel.getGameButtonsNum() ; i++) {
@@ -252,6 +293,9 @@ public class Game {
         }
     }
 
+    /**
+     * Updates enemy states, including movement, collision detection, and combat.
+     */
     private void updateEnemies() {
         Enemy e;
         for (int i = 0; i < currLevel.getEnemiesNum() ; i++) {
@@ -297,6 +341,12 @@ public class Game {
         }
     }
 
+    /**
+     * Handles attacking logic between player and a specific enemy.
+     *
+     * @param e The enemy being attacked.
+     * @param i Index of the enemy in the list (used for removal if defeated).
+     */
     private void attack(Enemy e,int i) {
         if ( player.isFighting() && attackTimer <= 0 && player.getAttackHitBox().getRectangle().intersects(e.getHitBox().getRectangle())) {
             e.setCurrHealth(e.getCurrHealth()-player.getDamage());
@@ -310,6 +360,9 @@ public class Game {
         }
     }
 
+    /**
+     * Applies damage to the player when hit by an enemy, and checks for game over.
+     */
     private void checkEnemyAttack() {
         if (invincibilityTimer == 0 && !player.isInvincible()) {
             invincibilityTimer = 1; //start the counter
@@ -323,6 +376,9 @@ public class Game {
         }
     }
 
+    /**
+     * Sets hitboxes and default states for all level entities (objects, potions, enemies, etc).
+     */
     private void setObjects() {
         for (int i = 0; i < this.currLevel.getBackgroundObjectsNum(); i++) {
             this.currLevel.getBackgroundObjects().get(i).setHitBox(bushXOffset, bushYOffset);
@@ -345,6 +401,11 @@ public class Game {
 
     // Saving and loading functions --------------------------------------------------------
 
+    /**
+     * Resets player stats and cooldowns.
+     * Reads the world configuration file to prepare for game initialization.
+     * Used both when starting new or loading a saved game.
+     */
     private void resetGame() {
         logger.log(System.Logger.Level.INFO, "Resetting cooldowns an player stats");
         this.inviPotionCountDown = 0;
@@ -385,6 +446,9 @@ public class Game {
         }
     }
 
+    /**
+     * Loads saved game state from save json file.
+     */
     public void loadSavedGame() {
         try {
             logger.log(System.Logger.Level.INFO, "Loading saved game...");
@@ -438,6 +502,10 @@ public class Game {
         return null;
     }
 
+    /**
+     * Load all levels from configurations files.
+     * Used for initializing new game.
+     */
     private void loadAllLevels() {
         logger.log(System.Logger.Level.INFO, "Loading all levels for new game!");
         Level l;
@@ -453,6 +521,9 @@ public class Game {
         }
     }
 
+    /**
+     * Save current game state to a save json file.
+     */
     public void saveGame() {
         logger.log(System.Logger.Level.INFO, "Saving game...");
         GameData gameData = new GameData();

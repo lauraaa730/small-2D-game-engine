@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 
+/**
+ * Playable entity. There is only one instance in a game.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
 public class Player extends AbstractEntity {
     private int xOffset;
     private int yOffset;

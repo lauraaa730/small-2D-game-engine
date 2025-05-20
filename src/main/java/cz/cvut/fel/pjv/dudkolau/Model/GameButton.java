@@ -1,12 +1,20 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/*
- * @SuppressWarnings("unused") for getters and setter
- * marked as "unused", because they are needed for json de/serialization.
+/**
+ * Button is an interactbale object, which the
+ * player can step on to activate it.
+ * Pressing a button can either unlock all doors
+ * in level, or do nothing if boolean fake is true.
  *
+ * @SuppressWarnings("unused") for
+ * getters and setter marked as
+ * "unused", because they are
+ * needed for json de/serialization.
  *
- * */
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
 public class GameButton implements GameObject {
 
     private int xCoord;

@@ -23,6 +23,18 @@ public abstract class AbstractEntity implements Entity {
     public HitBox hitBox = new HitBox();
     public Directions currDirection;
 
+    /**
+     * Moves the entity in the specified direction if the move stays within the given boundaries.
+     *
+     * <p>This method updates both the logical coordinates ({@code xCoord}, {@code yCoord}) and
+     * the position of the entity's hitbox. It checks boundary conditions based on the provided
+     * world width and height, along with tile dimensions.</p>
+     *
+     * @param d the direction to move (LEFT, RIGHT, UP, or DOWN)
+     * @param w the total width of the world in pixels
+     * @param h the total height of the world in pixels
+     * @param tileDimension the dimension (both width and height) of one tile in pixels
+     */
     @Override
     public void move(Directions d, int w, int h, int tileDimension){
         if (d==Directions.LEFT && this.hitBox.getxCoord()*tileDimension>0) {
@@ -55,6 +67,15 @@ public abstract class AbstractEntity implements Entity {
         return hitBox;
     }
 
+    /**
+     * Sets the position and size of the entity's hitbox with the specified offsets.
+     *
+     * <p>The hitbox is updated based on the entity's current coordinates and dimensions,
+     * along with additional x and y offsets. The bigger the offsets are, the smaller the hitbox is</p>
+     *
+     * @param xOffset the horizontal offset to apply to the hitbox
+     * @param yOffset the vertical offset to apply to the hitbox
+     */
     @Override
     public void setHitBox(int xOffset, int yOffset) {
         this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);

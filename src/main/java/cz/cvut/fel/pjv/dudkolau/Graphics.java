@@ -2,6 +2,9 @@ package cz.cvut.fel.pjv.dudkolau;
 
 import javafx.scene.image.Image;
 
+/**
+ * All images used in GUI
+ */
 public class Graphics {
 
     public static Image backgroundPaused = new Image("backgroundPaused.png");

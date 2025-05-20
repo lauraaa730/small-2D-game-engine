@@ -3,7 +3,18 @@ package cz.cvut.fel.pjv.dudkolau.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unused") //level needs all setters and getters for json de/serialization
+/**
+ * Holds all objects and entities within that level, but not player.
+ *
+ * @SuppressWarnings("unused") for
+ * getters and setter marked as
+ * "unused", because they are
+ * needed for json de/serialization.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
+ */
+@SuppressWarnings("unused")
 public class Level {
     private int levelType;
     private String backgroundName;

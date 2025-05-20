@@ -1,11 +1,12 @@
 package cz.cvut.fel.pjv.dudkolau.Model;
 import java.util.List;
 
-/*
-* This will save current game data
-* to a json file.
-* For example: current position,
-* puzzles completed etc..
+/**
+ * This will save current game data to a json file.
+ * Used for saving game and loading saved game.
+ *
+ * Created for B0B36PJV
+ * @author  dudkolau@fel.cvut.cz
 */
 public class GameData {
 
