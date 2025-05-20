@@ -40,19 +40,35 @@ public class Door implements GameObject {
         this.hitBox.setRectangle(xCoord, yCoord, this.width, this.height, xOffset, yOffset);
     }
 
+    /**
+     * Get enter level.
+     * @return level1 - enter level
+     */
     public int getLevel1() {
         return level1;
     }
 
+    /**
+     * Set enter level.
+     * @param  level1 - enter level
+     */
     @SuppressWarnings("unused")
     public void setLevel1(int level1) {
         this.level1 = level1;
     }
 
+    /**
+     * Get destination level.
+     * @return level2 - exit level.
+     */
     public int getLevel2() {
         return level2;
     }
 
+    /**
+     * Set destination level.
+     * @param  level2  - exit level.
+     */
     @SuppressWarnings("unused")
     public void setLevel2(int level2) { this.level2 = level2; }
 
@@ -86,10 +102,18 @@ public class Door implements GameObject {
         this.imageName = imageName;
     }
 
+    /**
+     * Get name of image of locked doors.
+     * @return lockedImageName
+     */
     public String getLockedImageName() {
         return lockedImageName;
     }
 
+    /**
+     * Set name of image of locked doors.
+     * @param lockedImageName
+     */
     @SuppressWarnings("unused")
     public void setLockedImageName(String lockedImageName) {
         this.lockedImageName = lockedImageName;

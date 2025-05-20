@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * Potion has one enum type Effect. It can be interacted
  * with by the player, to intervene with player stats.
  *
- * @SuppressWarnings("unused") for
+ * "@SuppressWarnings("unused")" for
  * getters and setter marked as
  * "unused", because they are
  * needed for json de/serialization.

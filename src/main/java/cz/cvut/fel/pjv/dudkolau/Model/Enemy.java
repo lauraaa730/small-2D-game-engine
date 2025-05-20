@@ -19,6 +19,11 @@ public class Enemy extends AbstractEntity{
         //for JSON
     }
 
+    /**
+     * Updates the internal position tracker for self-movement based on the current direction.
+     * <p>If moving left, the position is decremented. If moving right, it is incremented.
+     * Other directions are ignored.</p>
+     */
     public void updateSelfMovementPosition() {
         if (this.currDirection == Directions.LEFT) {
             this.selfMovementPosition--;
@@ -27,6 +32,15 @@ public class Enemy extends AbstractEntity{
         }
     }
 
+    /**
+     * Moves the entity one step in the opposite direction of its current movement.
+     *
+     * <p>This simulates a "jump back" or recoil behavior by calling the {@code move} method
+     * with the opposite direction of {@code currDirection}.</p>
+     *
+     * @param w the width of the game map in pixels
+     * @param h the height of the game map in pixels
+     */
     public void jumpBack(int w, int h) {
         if (currDirection == Directions.LEFT) {
             move(Directions.RIGHT, w, h, tileDimension);

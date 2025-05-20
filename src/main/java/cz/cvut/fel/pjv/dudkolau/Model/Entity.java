@@ -31,6 +31,16 @@ public interface Entity {
     void setxCoord(int x);
     void setyCoord(int y);
     HitBox getHitBox();
+
+    /**
+     * Sets the position and size of the entity's hitbox with the specified offsets.
+     *
+     * <p>The hitbox is updated based on the entity's current coordinates and dimensions,
+     * along with additional x and y offsets. The bigger the offsets are, the smaller the hitbox is</p>
+     *
+     * @param xOffset the horizontal offset to apply to the hitbox
+     * @param yOffset the vertical offset to apply to the hitbox
+     */
     void setHitBox(int xOffset, int yOffset);
     int getWidth();
     int getHeight();

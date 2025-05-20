@@ -42,6 +42,21 @@ public class Main extends Application {
     private Button menuButton = new Button();
 
 
+    /**
+     * Initializes and starts the JavaFX application stage.
+     * <p>
+     * This method sets up the main game window, including the scene, canvas,
+     * and UI controls. It also configures the main game loop using an
+     * AnimationTimer to update the game state and rendering based on the
+     * current game mode (running, paused, main menu, or game over).
+     * <p>
+     * Event handlers for keyboard input and button actions are registered
+     * to control game behavior such as player movement, interaction,
+     * pausing, saving/loading, and exiting.
+     *
+     * @param stage the primary stage for this application, onto which
+     *              the scene is set and displayed
+     */
     @Override
     public void start(Stage stage) {
         logger.log(System.Logger.Level.INFO, "starting game...");
@@ -168,6 +183,16 @@ public class Main extends Application {
         startNewButton.setOnAction(event -> game.startGame(true));
     }
 
+    /**
+     * Updates the game state and rendering when the game is running.
+     * <p>
+     * This method updates the game logic, player animation frames,
+     * removes paused or main menu buttons if present, renders the game canvas,
+     * and performs animation frame updates periodically.
+     *
+     * @param pane   the AnchorPane containing UI elements and game canvas
+     * @param canvas the Canvas on which the game is rendered
+     */
     private void updateRunningGame(AnchorPane pane, Canvas canvas) {
         game.update();
         setCurrPlayerImages();
@@ -188,6 +213,15 @@ public class Main extends Application {
         animationCounter++;
     }
 
+    /**
+     * Updates the display and UI when the game is paused.
+     * <p>
+     * Adds pause menu buttons if not already added, renders the paused background
+     * and menu overlay on the canvas.
+     *
+     * @param pane   the AnchorPane containing UI elements and game canvas
+     * @param canvas the Canvas on which the paused menu is drawn
+     */
     private void updatePausedGame(AnchorPane pane, Canvas canvas) {
         if (!pausedMenuButtonsAdded) {
             loadButtons();
@@ -201,6 +235,15 @@ public class Main extends Application {
         gc.drawImage(pausedMenu, 155,110);
     }
 
+    /**
+     * Updates the main menu display and UI elements.
+     * <p>
+     * Removes pause menu buttons if present, adds main menu buttons if not added,
+     * draws main menu background and animations on the canvas, and updates animations.
+     *
+     * @param pane   the AnchorPane containing UI elements and game canvas
+     * @param canvas the Canvas on which the main menu is rendered
+     */
     private void updateMainMenu(AnchorPane pane, Canvas canvas) {
         if (pausedMenuButtonsAdded) {
             pane.getChildren().removeAll(menuButton, continueButton, saveGameButton);
@@ -224,6 +267,14 @@ public class Main extends Application {
         animationCounter++;
     }
 
+    /**
+     * Updates the game over menu display and UI elements.
+     * <p>
+     * Adds game over menu buttons if not already added and draws the game over background.
+     *
+     * @param pane   the AnchorPane containing UI elements and game canvas
+     * @param canvas the Canvas on which the game over screen is rendered
+     */
     private void updateGameOverMenu(AnchorPane pane, Canvas canvas) {
         if (!mainMenuButtonsAdded) {
             exitGameButton.setLayoutX(450);
@@ -239,6 +290,15 @@ public class Main extends Application {
         gc.drawImage(gameOverBackground,0,0);
     }
 
+    /**
+     * Updates the current player animation images based on the player's current and last movement directions.
+     * <p>
+     * If the player is not moving (direction NONE), the method sets standing images
+     * corresponding to the last direction faced. If the player is moving, it sets the
+     * walking or fighting animation frames for the current direction.
+     * <p>
+     * This method also updates the `lastDirection` to track the player's facing direction.
+     */
     private void setCurrPlayerImages() {
         Directions currDir = game.getPlayer().getCurrDirection();
         if (currDir==Directions.NONE && lastDirection == Directions.RIGHT) {
@@ -291,6 +351,15 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Renders the entire game frame onto the provided canvas.
+     * <p>
+     * This method draws the background, game buttons, doors, potions,
+     * player character (with layering based on vertical position), enemies,
+     * health indicators, visual effects, and hitboxes.
+     *
+     * @param canvas the Canvas object on which the game frame will be drawn
+     */
     private void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -343,10 +412,15 @@ public class Main extends Application {
     }
 
     /**
-     * Render player
-     * - Manage rendering order of visual objects
-     * based on player location, makes player to
-     * appear either infront of or behind the object.
+     * Renders background objects and the player with correct layering based on player position.
+     * <p>
+     * This method ensures that the player is drawn either behind or in front of background objects
+     * depending on their vertical (Y) position, creating a proper depth effect in the scene.
+     * It iterates through all background objects and draws them and the player in the correct order.
+     *
+     * @param playerY   the Y-coordinate of the player’s hitbox (used for layering)
+     * @param gc        the GraphicsContext used for rendering images on the canvas
+     * @param drewPlayer a flag indicating whether the player has already been drawn
      */
     private void renderBackgroundAndPlayer(int playerY, GraphicsContext gc, boolean drewPlayer) {
         int objectX;
@@ -396,6 +470,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Render game buttons used for unlocking doors
+     * @param gc the GraphicsContext used for rendering images on the canvas
+     */
     private void renderButtons(GraphicsContext gc) {
         GameButton b;
         for (int i = 0; i < game.getCurrLevel().getGameButtonsNum(); i++) {
@@ -408,6 +486,12 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Advances animation frames for the player and main menu ghost cycling.
+     * <p>
+     * Updates the player's animation frame index to loop through current player images.
+     * If the main menu is active, also cycles through the ghost animation frames.
+     */
     public void animate() {
         playerImageIndex = (playerImageIndex + 1) % currPlayerImages.length;
         if (game.isMainMenuOn()) {
@@ -415,6 +499,15 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Draws a red rectangle on the canvas at the specified grid position and size.
+     *
+     * @param gc the GraphicsContext used for drawing
+     * @param x the x-coordinate in tile units
+     * @param y the y-coordinate in tile units
+     * @param w the width of the rectangle in pixels
+     * @param h the height of the rectangle in pixels
+     */
     private void drawRectangle(GraphicsContext gc, int x, int y, int w, int h){
         gc.setStroke(Color.RED);
         Rectangle rect = new Rectangle();
@@ -424,6 +517,13 @@ public class Main extends Application {
         gc.strokeRect(x*tileDimension, y*tileDimension, w, h);
     }
 
+    /**
+     * Renders the player character on the canvas, including attack splash effects if fighting.
+     * <p>
+     * Adjusts splash image offsets based on player direction.
+     *
+     * @param gc the GraphicsContext used for drawing
+     */
     private void renderPlayer(GraphicsContext gc) {
         Player player = game.getPlayer();
         if (currPlayerImages == animDOWN || currPlayerImages == animSTAND_DOWN) {
@@ -451,6 +551,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Renders red hitbox outlines around game objects and enemies if hitbox display is enabled.
+     *
+     * @param gc the GraphicsContext used for drawing
+     */
     private void renderHitboxes(GraphicsContext gc) {
         //Render hitboxes if needed
         if (showHitBoxes) {
@@ -465,6 +570,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Initializes and sets up the graphical appearance and layout of all menu buttons.
+     * <p>
+     * Each button is assigned an image, made transparent, and positioned on the pane.
+     */
     private void loadButtons() {
         continueButton.setGraphic(new ImageView(continueImage));
         continueButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -503,5 +613,10 @@ public class Main extends Application {
         exitGameButton.setLayoutY(300);
     }
 
+    /**
+     * Launches the JavaFX application.
+     *
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) { launch(args); }
 }

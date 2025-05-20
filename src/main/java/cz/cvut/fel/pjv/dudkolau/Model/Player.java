@@ -27,14 +27,23 @@ public class Player extends AbstractEntity {
         //declaration for JSON
     }
 
+    /**
+     * Sets the attack hitbox relative to the current entity position.
+     * The hitbox is placed in front of the entity based on predefined offsets.
+     */
     public void setAttackHitBox() {
         this.attackHitBox.setRectangle(xCoord-attackFaceOffset, yCoord-attackSideOffset,
                 this.width/2, this.height*3/2,0,0);
     }
 
+    /**
+     * Moves the entity one tile in the opposite direction based on either the current or last direction.
+     *
+     * @param fromCurrDir if {@code true}, use the current direction; otherwise, use the last direction
+     * @param w the width of the game area (in pixels)
+     * @param h the height of the game area (in pixels)
+     */
     public void jumpBack(boolean fromCurrDir,int w, int h) {
-        //if we want to check from curr direction, fromCurrDir will be 1,
-        //if from last dir, it will be 0
         if (fromCurrDir) {
             if (currDirection == Directions.LEFT) {
                 move(Directions.RIGHT, w, h, tileDimension);
@@ -58,6 +67,10 @@ public class Player extends AbstractEntity {
         }
     }
 
+    /**
+     * Updates the position and size of the attack hitbox according to the entity’s current or last direction.
+     * This ensures the hitbox is always placed in the appropriate orientation for attacks.
+     */
     public void updateAttackHitbox() {
         if (currDirection == Directions.LEFT ||
                 (currDirection == Directions.NONE && lastDirection==Directions.LEFT)) {
