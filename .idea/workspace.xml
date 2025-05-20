@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Finished JavaDOC">
+    <list default="true" id="30b62acc-6adc-478e-be5c-a27c5f7b3245" name="Changes" comment="Final push!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/current-game-state.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves/current-game-state.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/mynotes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/unittesty.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cz/cvut/fel/pjv/dudkolau/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,15 +270,7 @@
       <workItem from="1747682772143" duration="6940000" />
       <workItem from="1747741810899" duration="1106000" />
       <workItem from="1747748975530" duration="1614000" />
-      <workItem from="1747761429516" duration="6218000" />
-    </task>
-    <task id="LOCAL-00034" summary="SetHitBox for player fixed. It was multiplied by tile dimension twice, now only once. Player can now start wherever. Also divided starGame method into two, depending on whether we are loading saved game or new game.">
-      <option name="closed" value="true" />
-      <created>1739446310090</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1739446310090</updated>
+      <workItem from="1747761429516" duration="7021000" />
     </task>
     <task id="LOCAL-00035" summary="Added more sprites">
       <option name="closed" value="true" />
@@ -666,7 +656,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747768202883</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Final push!">
+      <option name="closed" value="true" />
+      <created>1747768502037</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1747768502037</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -684,7 +682,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added interaction timeout." />
     <MESSAGE value="Fixed interaction timer for potions." />
     <MESSAGE value="Working on more potions" />
     <MESSAGE value="Invincibility potion now working fully." />
@@ -709,7 +706,8 @@
     <MESSAGE value="Finished unit tests" />
     <MESSAGE value="More javaDOC" />
     <MESSAGE value="Finished JavaDOC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished JavaDOC" />
+    <MESSAGE value="Final push!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final push!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

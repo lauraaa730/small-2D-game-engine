@@ -19,6 +19,26 @@ import javafx.scene.Scene;
 import static cz.cvut.fel.pjv.dudkolau.Constants.*;
 import static cz.cvut.fel.pjv.dudkolau.Graphics.*;
 
+/**
+ * The {@code Main} class serves as the entry point for the JavaFX-based game application
+ * "Beyond the Forest". It extends the {@link javafx.application.Application} class
+ * and sets up the game scene, UI components, and main game loop using an {@link javafx.animation.AnimationTimer}.
+ *
+ * <p>This class is responsible for:
+ * <ul>
+ *   <li>Initializing the game window and setting up the game canvas</li>
+ *   <li>Handling keyboard input for controlling the player</li>
+ *   <li>Managing game states including running, paused, main menu, and game over</li>
+ *   <li>Rendering the appropriate screen based on the current state</li>
+ *   <li>Attaching event handlers to UI buttons for game control</li>
+ * </ul>
+ *
+ * <p>The class uses a {@code System.Logger} to provide runtime logs and feedback,
+ * and interacts with the {@link cz.cvut.fel.pjv.dudkolau.Model.Game} model for all game logic.
+ *
+ * @author dudkolau@fel.cvut.cz
+ */
+
 public class Main extends Application {
     private final static System.Logger logger = System.getLogger(Game.class.getName());
     private final Game game = new Game();
